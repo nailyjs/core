@@ -1,0 +1,15 @@
+{
+  "name": "@nailyjs/core",
+  "version": "0.27.0",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/types/index.d.ts",
+  "repository": {
+    "url": "https://github.com/nailyjs/core.git"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "author": "Zero <gczgroup@qq.com>",
+  "license": "MIT"
+}
