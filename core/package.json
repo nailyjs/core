@@ -11,5 +11,11 @@
     "build": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
   },
   "author": "Zero <gczgroup@qq.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/jexl": "^2.3.4",
+    "@types/md5": "^2.3.5",
+    "jexl": "^2.3.0",
+    "md5": "^2.3.0"
+  }
 }
