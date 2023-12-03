@@ -1,0 +1,11 @@
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "pnpm build && node .naily/cjs/main",
+    "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "dependencies": {
+    "@nailyjs/core": "workspace:*"
+  }
+}

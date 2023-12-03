@@ -1,0 +1,19 @@
+{
+  "name": "@nailyjs/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/types/index.d.ts",
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/md5": "^2.3.5",
+    "is-class": "^0.0.9",
+    "md5": "^2.3.0"
+  }
+}
