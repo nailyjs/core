@@ -1,7 +1,9 @@
 import { Type } from "../typings";
+import { Jexl } from "jexl";
 
 export class NailyBeanRegistry {
   protected static readonly registry: Map<string | symbol, NIOC.BeanElement> = new Map();
+  public static readonly jexl = new Jexl();
 
   public static getRegistry() {
     return this.registry;

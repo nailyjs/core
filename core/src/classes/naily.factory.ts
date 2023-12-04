@@ -33,7 +33,15 @@ export class NailyBeanFactory<Instance extends Object> {
   public createInstance(registerOnly?: true, proxy?: boolean): undefined;
   public createInstance(registerOnly = false, proxy = true): Instance | undefined {
     const metadata = this.getBeanMetadataOrThrow();
-    NailyBeanRegistry.deleteByTargetIfToken(this.target, metadata.Token);
+    const hasTarget = NailyBeanRegistry.hasTarget(this.target);
+    if (hasTarget) {
+      const [token] = hasTarget;
+      if (token !== metadata.Token) {
+        NailyBeanRegistry.delete(token);
+      }
+    } else {
+      if (this.target["main"]) this.target["main"](process.argv);
+    }
 
     if (metadata.Scope === ScopeEnum.SINGLETON && NailyBeanRegistry.has(metadata.Token)) {
       const beanElement = NailyBeanRegistry.resolve(metadata.Token);

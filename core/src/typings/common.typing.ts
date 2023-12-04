@@ -1,5 +1,6 @@
 import { NailyBeanFactory } from "../classes";
 import { ScopeEnum } from "../constants";
+import Jexl from "jexl";
 
 export interface Type<T = any> extends Function {
   new (...args: any[]): T;
@@ -15,6 +16,10 @@ declare global {
     export interface BeanElement<T = any> {
       target: Type<T>;
       instance: T | undefined;
+    }
+
+    export interface Configure {
+      getConfigure(builder: typeof Jexl): any;
     }
   }
 

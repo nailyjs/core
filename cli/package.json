@@ -1,14 +1,18 @@
 {
-  "name": "@nailyjs/core",
+  "name": "@nailyjs/cli",
   "version": "0.28.0",
-  "description": "Naily Core",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
-  "types": "lib/types/index.d.ts",
+  "bin": {
+    "naily": "./bin/naily"
+  },
   "scripts": {
     "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "prepublishOnly": "npm run build"
   },
+  "keywords": [
+    "naily",
+    "cli",
+    "nailyjs"
+  ],
   "author": "Zero <gczgroup@qq.com>",
   "repository": {
     "type": "git",
@@ -19,11 +23,16 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "license": "UNLICENSED",
+  "license": "LGPL-3.0-only",
   "dependencies": {
-    "is-class": "^0.0.9",
-    "jexl": "^2.3.0",
-    "@types/jexl": "^2.3.4",
-    "yaml": "^2.3.4"
+    "@nailyjs/core": "workspace:*",
+    "commander": "^11.1.0",
+    "inquirer": "^8",
+    "@types/inquirer": "^8",
+    "rollup": "^4.6.1",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "glob": "^10.3.10",
+    "@types/glob": "^8.1.0"
   }
 }

@@ -3,6 +3,7 @@
   "scripts": {
     "dev": "pnpm -F sample dev",
     "build:core": "pnpm -F @nailyjs/core build",
+    "build:cli": "pnpm -F @nailyjs/cli build",
     "format": "prettier --write ./",
     "lint": "eslint \"./**/*.ts\" --fix",
     "prepare": "husky install",

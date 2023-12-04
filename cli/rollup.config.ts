@@ -33,13 +33,13 @@ export default defineConfig({
     {
       format: "commonjs",
       sourcemap: "inline",
-      dir: ".naily/cjs",
+      dir: "lib/cjs",
       strict: false,
     },
     {
       format: "module",
       sourcemap: "inline",
-      dir: ".naily/esm",
+      dir: "lib/esm",
       strict: false,
     },
   ],
