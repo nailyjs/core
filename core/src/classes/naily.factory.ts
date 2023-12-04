@@ -54,7 +54,9 @@ export class NailyBeanFactory<Instance extends Object> {
       }
     })();
 
-    NailyBeanRegistry.register(metadata.Token, { target: this.target, instance });
+    if (instance !== undefined) {
+      NailyBeanRegistry.register(metadata.Token, { target: this.target, instance });
+    }
     return instance;
   }
 
