@@ -1,4 +1,4 @@
-import { Autowired, Bean } from "@nailyjs/core";
+import { Autowired, Bean, NailyBeanRegistry } from "@nailyjs/core";
 
 export class AAAService {
   @Bean()
@@ -24,8 +24,8 @@ export class AppService {
 
   constructor() {
     console.log("AppService被创建");
-    this.testService;
   }
 }
 
 new AppService();
+console.log(NailyBeanRegistry.getRegistry());
