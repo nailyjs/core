@@ -5,9 +5,8 @@ import { Bean } from "./bean.decorator";
 
 export function Inject<T>(val: Type<T>, extraBeanOptions?: Partial<NIOC.BeanMetadata>) {
   return (target: Object, propertyKey: string | symbol) => {
-    Bean(extraBeanOptions)(target, propertyKey);
+    Bean(extraBeanOptions)(target.constructor);
     Reflect.defineMetadata(NailyWatermark.INJECT, val, target, propertyKey);
-
     Object.defineProperty(target, propertyKey, {
       get() {
         return new NailyBeanFactory(val).createInstance();

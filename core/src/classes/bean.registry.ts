@@ -1,6 +1,10 @@
 export class NailyBeanRegistry {
   protected static readonly registry: Map<string | symbol, NIOC.BeanElement> = new Map();
 
+  public static getRegistry() {
+    return this.registry;
+  }
+
   public static register(key: string | symbol, bean: NIOC.BeanElement) {
     this.registry.set(key, bean);
     return this;
