@@ -43,7 +43,7 @@ export class NailyBeanRegistry {
     const hasTarget = this.hasTarget(target);
     if (!hasTarget) return false;
     const [oldToken] = hasTarget;
-    if (oldToken !== token) {
+    if (oldToken === token) {
       return this.delete(token);
     } else {
       return false;
