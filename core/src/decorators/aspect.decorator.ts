@@ -17,14 +17,20 @@ export function UseAspect(...advices: NAOP.Advice[]) {
     const originalMethod = descriptor.value;
     const factory = new NailyBeanFactory(target.constructor as Type);
     descriptor.value = async (...args: any[]) => {
-      for (const advice of advices) {
-        await advice.nailyBeforeExecute?.(target, factory, args);
+      try {
+        for (const advice of advices) {
+          await advice.nailyBeforeExecute?.(target, factory, args);
+        }
+        const value = await originalMethod.call(target, ...args);
+        for (const advice of advices) {
+          await advice.nailyAfterExecute?.(target, factory, value);
+        }
+        return value;
+      } catch (error) {
+        for (const advice of advices) {
+          await advice.nailyAfterThrowing?.(target, factory, error);
+        }
       }
-      const value = await originalMethod.call(target, ...args);
-      for (const advice of advices) {
-        await advice.nailyAfterExecute?.(target, factory, value);
-      }
-      return value;
     };
   };
 }

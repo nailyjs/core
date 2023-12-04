@@ -22,6 +22,7 @@ declare global {
     export interface Advice {
       nailyBeforeExecute?<Instance extends Object>(target: Instance, factory: NailyBeanFactory<Instance>, args: any[]): void | Promise<void>;
       nailyAfterExecute?<Instance extends Object>(target: Instance, factory: NailyBeanFactory<Instance>, returnValue: any): void | Promise<void>;
+      nailyAfterThrowing?<Instance extends Object>(target: Instance, factory: NailyBeanFactory<Instance>, error: Error): void | Promise<void>;
     }
   }
 }
