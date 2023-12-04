@@ -1,25 +1,30 @@
-import { Bean, Inject } from "@nailyjs/core";
+import { Autowired, Bean } from "@nailyjs/core";
 
 export class AAAService {
   @Bean()
   readonly init = "Hello world";
+
+  constructor() {
+    console.log("AAAService被创建");
+  }
 }
 
 export class TestService {
-  @Inject(AAAService)
+  @Autowired()
   private aaaService: AAAService;
 
   constructor() {
-    console.log(this.aaaService);
+    console.log("TestService被创建");
   }
 }
 
 export class AppService {
-  @Inject(TestService)
+  @Autowired()
   private readonly testService: TestService;
 
   constructor() {
-    console.log(this.testService);
+    console.log("AppService被创建");
+    this.testService;
   }
 }
 
