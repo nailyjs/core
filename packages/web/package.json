@@ -1,12 +1,31 @@
 {
-  "name": "web",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@nailyjs/web",
+  "version": "0.28.0",
+  "description": "Naily Web Support",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/types/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "naily build lib"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "naily",
+    "cli",
+    "nailyjs"
+  ],
+  "author": "Zero <gczgroup@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nailyjs/core.git"
+  },
+  "homepage": "https://github.com/nailyjs/core",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "license": "LGPL-3.0-only",
+  "dependencies": {
+    "@nailyjs/core": "workspace:*",
+    "@nailyjs/cli": "workspace:*"
+  }
 }
