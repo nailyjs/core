@@ -6,7 +6,10 @@
     "skipLibCheck": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "declarationDir": "lib/types"
+    "declarationDir": "lib/types",
+    "target": "ES2021",
+    "moduleResolution": "Node",
+    "module": "ES6"
   },
   "include": ["src"]
 }

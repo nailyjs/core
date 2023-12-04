@@ -1,3 +1,5 @@
+import { Type } from "../typings";
+
 export class NailyBeanRegistry {
   protected static readonly registry: Map<string | symbol, NIOC.BeanElement> = new Map();
 
@@ -22,6 +24,30 @@ export class NailyBeanRegistry {
 
   public static has(key: string | symbol): boolean {
     return this.registry.has(key);
+  }
+
+  public static hasTarget<T>(target: Type<T>): false | [string | symbol, NIOC.BeanElement<T>] {
+    for (const [key, value] of this.registry) {
+      if (value.target === target || value.target instanceof target) {
+        return [key, value];
+      }
+    }
+    return false;
+  }
+
+  public static delete(token: string | symbol): boolean {
+    return this.registry.delete(token);
+  }
+
+  public static deleteByTargetIfToken<T>(target: Type<T>, token: string | symbol): boolean {
+    const hasTarget = this.hasTarget(target);
+    if (!hasTarget) return false;
+    const [oldToken] = hasTarget;
+    if (oldToken !== token) {
+      return this.delete(token);
+    } else {
+      return false;
+    }
   }
 
   public static clear(): void {
