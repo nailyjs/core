@@ -2,11 +2,13 @@ import { existsSync, readFileSync } from "fs";
 import { Injectable } from "../decorators";
 import { join } from "path";
 import { parse } from "yaml";
+import Jexl from "jexl";
 
 @Injectable()
 export class NailyConfiguration implements NIOC.Configure {
-  public getConfigure() {
-    if (!existsSync(join(process.cwd(), "naily.yml"))) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public getConfigure(_builder: typeof Jexl, isOptional: boolean) {
+    if (!existsSync(join(process.cwd(), "naily.yml")) && !isOptional) {
       throw new Error(`Cannot find naily.yml`);
     }
     const file = readFileSync(join(process.cwd(), "naily.yml")).toString();

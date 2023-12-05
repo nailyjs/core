@@ -8,7 +8,7 @@ import { rollup } from "rollup";
 
 @Service()
 export class BuilderService {
-  @Value("naily.cli.outDir")
+  @Value("naily.cli.outDir", true)
   private readonly outDir: string;
 
   private getExternal() {

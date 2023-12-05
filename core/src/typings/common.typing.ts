@@ -19,7 +19,7 @@ declare global {
     }
 
     export interface Configure {
-      getConfigure(builder: typeof Jexl): any;
+      getConfigure(builder: typeof Jexl, isOptional: boolean): any;
     }
   }
 

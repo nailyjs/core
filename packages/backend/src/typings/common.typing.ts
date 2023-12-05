@@ -12,15 +12,22 @@ declare global {
       path: string;
       method: IHttpMethod | "all";
     }
-    export interface PipeParamMetadata {
+    export type SinglePipe = Type<NBackend.Pipe> | NBackend.Pipe;
+    interface PipeParamMetadata {
       type: "param" | "query" | "body" | "headers";
       id: string;
-      pipes: Type[];
+      pipes: SinglePipe[];
+      paramtype?: any;
     }
-    export interface DefaultParamMetadata {
+    interface DefaultParamMetadata {
       type: "req" | "res" | "ctx" | "ip";
+      paramtype?: any;
     }
     export type ParamMetadata = PipeParamMetadata | DefaultParamMetadata;
+
+    export interface Pipe {
+      transform(value: any, metadata: PipeParamMetadata): any;
+    }
   }
 }
 
