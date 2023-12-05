@@ -1,4 +1,4 @@
-import { Bean, Configuration, Injectable } from "@nailyjs/core";
+import { Bean, Configuration, Injectable, NailyBeanRegistry } from "@nailyjs/core";
 import { Get, Query, RestController } from "@nailyjs/backend";
 import { ExpressApp } from "@nailyjs/backend-express";
 
@@ -23,5 +23,6 @@ export class TestController {
 export class BootStrap {
   public static async main() {
     new ExpressApp().run();
+    console.log(NailyBeanRegistry.getRegistry());
   }
 }

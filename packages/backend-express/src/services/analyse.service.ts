@@ -1,85 +1,14 @@
 import { INailyControllerRegistry } from "@nailyjs/backend";
-import { Autowired, NailyBeanFactory, NailyBeanRegistry, Service } from "@nailyjs/core";
-import { Request, Router } from "express";
+import { Autowired, Bean, NailyBeanFactory, NailyBeanRegistry, Service } from "@nailyjs/core";
+import { Router } from "express";
+import { ExpressMethodAnalyseService } from "./methodAnalyse.service";
 
 @Service()
-export class MethodAnalyseService {
-  private async initVariablePipe<T>(req: Request, param: NBackend.PipeParamMetadata, type: "params" | "query" | "body" | "headers"): Promise<T> {
-    if (param.id) {
-      for (let pipe of param.pipes) {
-        if (typeof pipe === "function") pipe = new NailyBeanFactory(pipe).createInstance();
-        req[type][param.id] = await pipe.transform(req[type][param.id], param);
-      }
-      return req[type][param.id];
-    } else {
-      for (let pipe of param.pipes) {
-        if (typeof pipe === "function") pipe = new NailyBeanFactory(pipe).createInstance();
-        req[type] = await pipe.transform(req[type], param);
-      }
-      return req[type];
-    }
-  }
-
-  public route(router: Router, controller: INailyControllerRegistry, propertyKey: string | symbol, instance: any) {
-    for (const i in controller.methods[propertyKey].methods) {
-      const { method, path } = controller.methods[propertyKey].methods[i];
-
-      // 注册路由
-      router[method](path, async (req, res) => {
-        const params = controller.methods[propertyKey].params;
-        const parameters = [];
-        for (const k in params) {
-          const param = params[k];
-
-          switch (param.type) {
-            case "param":
-              const analysedParams = await this.initVariablePipe(req, param, "params");
-              parameters.push(analysedParams);
-              break;
-
-            case "query":
-              const analysedQuery = await this.initVariablePipe(req, param, "query");
-              parameters.push(analysedQuery);
-              break;
-
-            case "body":
-              const analysedBody = await this.initVariablePipe(req, param, "body");
-              parameters.push(analysedBody);
-              break;
-
-            case "headers":
-              const analysedHeaders = await this.initVariablePipe(req, param, "headers");
-              parameters.push(analysedHeaders);
-              break;
-
-            case "ip":
-              parameters.push(req.ip);
-              break;
-
-            case "req":
-              parameters.push(req);
-              break;
-
-            case "res":
-              parameters.push(res);
-              break;
-          }
-        }
-
-        const value = await instance[propertyKey](...parameters);
-        res.send(value).end();
-      });
-    }
-  }
-}
-
-@Service()
-export class AnalyseService {
-  constructor(private readonly mapper: INailyControllerRegistry[]) {}
-
+export class ExpressAnalyseService {
   @Autowired()
-  private readonly methodAnalyseService: MethodAnalyseService;
+  private readonly methodAnalyseService: ExpressMethodAnalyseService;
 
+  @Bean()
   private controllerAnalyse(controller: INailyControllerRegistry): Router {
     // 创建express router
     const router = Router();
@@ -91,16 +20,21 @@ export class AnalyseService {
     const instance = factory.createInstance();
     // 遍历controller的方法们
     for (const propertyKey in controller.methods) {
+      // 分析方法
       this.methodAnalyseService.route(router, controller, propertyKey, instance);
     }
     return router;
   }
 
-  public analyse(): Router[] {
+  @Bean()
+  public analyse(mapper: INailyControllerRegistry[]): Router[] {
+    // routers存放
     const results: Router[] = [];
     // 遍历controller们
-    for (const controller of this.mapper) {
+    for (const controller of mapper) {
+      // 分析controller 得到router
       const router = this.controllerAnalyse(controller);
+      // 添加router到results数组中
       results.push(router);
     }
     return results;
