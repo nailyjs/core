@@ -1,5 +1,5 @@
 import { Bean, Configuration, Injectable } from "@nailyjs/core";
-import { Get, RestController } from "@nailyjs/backend";
+import { Get, Query, RestController } from "@nailyjs/backend";
 import { ExpressApp } from "@nailyjs/backend-express";
 
 @Injectable()
@@ -14,8 +14,8 @@ export class IntPipe implements NBackend.Pipe {
 @RestController()
 export class TestController {
   @Get()
-  public test() {
-    return "Hell";
+  public test(@Query("a", IntPipe) query: any) {
+    return query;
   }
 }
 
