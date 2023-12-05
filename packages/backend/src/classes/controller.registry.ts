@@ -9,14 +9,15 @@ export interface INailyControllerMethodsMetadata {
 export interface INailyControllerRegistry {
   controllerMetadata: NBackend.ControllerMetadata;
   methods: Record<string | symbol, INailyControllerMethodsMetadata>;
+  beanToken: string | symbol;
 }
 
 export class NailyControllerRegistry {
   public static getMapper() {
-    const allValues = NailyBeanRegistry.getRegistry().values();
+    const allValues = NailyBeanRegistry.getRegistry();
     const results: INailyControllerRegistry[] = [];
 
-    Mapper: for (const item of allValues) {
+    Mapper: for (const [token, item] of allValues) {
       const controllerMetadata: NBackend.ControllerMetadata | undefined = Reflect.getMetadata(NailyBackendWatermark.CONTROLLER, item.target);
       if (!controllerMetadata) continue Mapper;
       const methods: Record<string | symbol, INailyControllerMethodsMetadata> = {};
@@ -35,7 +36,7 @@ export class NailyControllerRegistry {
         };
       }
 
-      results.push({ controllerMetadata, methods });
+      results.push({ controllerMetadata, methods, beanToken: token });
     }
 
     return results;

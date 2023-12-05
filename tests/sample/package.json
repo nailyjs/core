@@ -9,6 +9,7 @@
     "@nailyjs/core": "workspace:*",
     "@nailyjs/cli": "workspace:*",
     "@nailyjs/web": "workspace:*",
-    "@nailyjs/backend": "workspace:*"
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/backend-express": "workspace:*"
   }
 }

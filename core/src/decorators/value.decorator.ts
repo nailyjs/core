@@ -7,7 +7,7 @@ export function Value(jexl: string = "", configureOrOptional?: boolean | NIOC.Co
     target[propertyKey] = NailyBeanRegistry.jexl.evalSync(
       jexl,
       (() => {
-        if (typeof configureOrOptional !== "boolean") {
+        if (!configureOrOptional && typeof configureOrOptional === "object") {
           return configureOrOptional.getConfigure(NailyBeanRegistry.jexl as any, false);
         } else {
           if (!configure) configure = new NailyConfiguration();

@@ -1,30 +1,27 @@
-import { Bean, Configuration } from "@nailyjs/core";
-import { Get, NailyControllerRegistry, Query, RestController } from "@nailyjs/backend";
+import { Bean, Configuration, Injectable } from "@nailyjs/core";
+import { Get, RestController } from "@nailyjs/backend";
+import { ExpressApp } from "@nailyjs/backend-express";
 
+@Injectable()
 export class IntPipe implements NBackend.Pipe {
-  constructor(private readonly aaa: string) {}
-
   @Bean()
   public transform(value: any, metadata: NBackend.PipeParamMetadata) {
     console.log(metadata);
-    return Number(value);
+    return value;
   }
 }
 
 @RestController()
 export class TestController {
   @Get()
-  public test(@Query("id", new IntPipe("aaa")) query: string) {
-    return query;
+  public test() {
+    return "Hell";
   }
 }
 
 @Configuration()
 export class BootStrap {
-  public static main() {
-    const mapper = NailyControllerRegistry.getMapper();
-    console.dir(mapper, {
-      depth: null,
-    });
+  public static async main() {
+    new ExpressApp().run();
   }
 }

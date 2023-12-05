@@ -1,5 +1,6 @@
 import { Type } from "@nailyjs/core";
 import { IHttpMethod } from "@nailyjs/web";
+import { Server } from "http";
 
 declare global {
   export namespace NBackend {
@@ -27,6 +28,12 @@ declare global {
 
     export interface Pipe {
       transform(value: any, metadata: PipeParamMetadata): any;
+    }
+    export namespace Pipe {}
+    export namespace Adapter {
+      export interface BootStrap {
+        run(): Promise<Server>;
+      }
     }
   }
 }

@@ -6,6 +6,7 @@
     "build:cli": "pnpm -F @nailyjs/cli build",
     "build:web": "pnpm -F @nailyjs/web build",
     "build:backend": "pnpm -F @nailyjs/backend build",
+    "build:express": "pnpm -F @nailyjs/backend-express build",
     "format": "prettier --write ./",
     "lint": "eslint \"./**/*.ts\" --fix",
     "prepare": "husky install",
