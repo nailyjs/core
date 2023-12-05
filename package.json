@@ -4,6 +4,8 @@
     "dev": "pnpm -F sample dev",
     "build:core": "pnpm -F @nailyjs/core build",
     "build:cli": "pnpm -F @nailyjs/cli build",
+    "build:web": "pnpm -F @nailyjs/web build",
+    "build:backend": "pnpm -F @nailyjs/backend build",
     "format": "prettier --write ./",
     "lint": "eslint \"./**/*.ts\" --fix",
     "prepare": "husky install",

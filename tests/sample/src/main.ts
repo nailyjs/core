@@ -1,6 +1,18 @@
-import { Bean } from "@nailyjs/core";
+import { Configuration } from "@nailyjs/core";
+import { Get, NailyControllerRegistry, RestController } from "@nailyjs/backend";
 
-@Bean()
+@RestController()
+export class TestController {
+  @Get()
+  public test() {}
+}
+
+@Configuration()
 export class BootStrap {
-  public static main() {}
+  public static main() {
+    const mapper = NailyControllerRegistry.getMapper();
+    console.dir(mapper, {
+      depth: null,
+    });
+  }
 }

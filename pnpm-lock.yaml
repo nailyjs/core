@@ -118,6 +118,18 @@ importers:
         specifier: ^2.3.4
         version: 2.3.4
 
+  packages/backend:
+    dependencies:
+      '@nailyjs/cli':
+        specifier: workspace:*
+        version: link:../../cli
+      '@nailyjs/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@nailyjs/web':
+        specifier: workspace:*
+        version: link:../web
+
   packages/web:
     dependencies:
       '@nailyjs/cli':
@@ -129,6 +141,9 @@ importers:
 
   tests/sample:
     dependencies:
+      '@nailyjs/backend':
+        specifier: workspace:*
+        version: link:../../packages/backend
       '@nailyjs/cli':
         specifier: workspace:*
         version: link:../../cli

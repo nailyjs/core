@@ -8,6 +8,7 @@
   "dependencies": {
     "@nailyjs/core": "workspace:*",
     "@nailyjs/cli": "workspace:*",
-    "@nailyjs/web": "workspace:*"
+    "@nailyjs/web": "workspace:*",
+    "@nailyjs/backend": "workspace:*"
   }
 }
