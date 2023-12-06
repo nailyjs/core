@@ -1,5 +1,12 @@
-import { Bean } from "@nailyjs/core/common";
+import { Autowired, Bean } from "@nailyjs/core/common";
 import { TestService } from "./test.service";
 
-console.log(Bean);
-console.log(TestService);
+@Bean()
+export class T {
+  @Autowired()
+  private readonly testService: TestService;
+
+  constructor() {
+    console.log(this.testService);
+  }
+}
