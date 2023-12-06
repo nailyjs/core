@@ -1,6 +1,7 @@
 {
   "name": "sample",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "private": true,
   "scripts": {
     "dev": "npm run build && node .naily/cjs/main",
     "build": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
