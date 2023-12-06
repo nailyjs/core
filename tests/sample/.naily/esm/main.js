@@ -1,0 +1,6 @@
+import { Bean } from "@nailyjs/core/common";
+import { TestService } from "./test.service";
+
+console.log(Bean);
+console.log(TestService);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOlsiLi4vLi4vc3JjL21haW4udHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQmVhbiB9IGZyb20gXCJAbmFpbHlqcy9jb3JlL2NvbW1vblwiO1xuaW1wb3J0IHsgVGVzdFNlcnZpY2UgfSBmcm9tIFwiLi90ZXN0LnNlcnZpY2VcIjtcblxuY29uc29sZS5sb2coQmVhbik7XG5jb25zb2xlLmxvZyhUZXN0U2VydmljZSk7XG4iXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7O0FBR0EsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNsQixPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQyJ9
