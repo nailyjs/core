@@ -1,10 +1,13 @@
-import { Autowired, Configuration } from "@nailyjs/core";
+import { Autowired, Injectable, NailyBeanRegistry } from "@nailyjs/core";
 import { TestService } from "./test.service";
 
-@Configuration()
+@Injectable()
 export class T {
   @Autowired()
   private readonly testService: TestService;
 
-  constructor() {}
+  @Autowired()
+  private readonly testService2: TestService;
 }
+
+console.log(NailyBeanRegistry.getRegistry());

@@ -11,6 +11,7 @@ declare global {
     export interface BeanMetadata {
       Token: string | symbol;
       Scope: ScopeEnum;
+      ReBind: boolean;
     }
 
     export interface BeanElement<T = any> {
