@@ -1,0 +1,12 @@
+var tslib = require("tslib");
+var core = require("@nailyjs/core");
+var test_service = require("./test.service");
+
+exports.T = class T {
+  constructor() {
+    console.log(this.testService.test());
+  }
+};
+tslib.__decorate([core.Autowired(), tslib.__metadata("design:type", test_service.TestService)], exports.T.prototype, "testService", void 0);
+exports.T = tslib.__decorate([core.Configuration(), tslib.__metadata("design:paramtypes", [])], exports.T);
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi5qcyIsInNvdXJjZXMiOlsiLi4vc3JjL21haW4udHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQXV0b3dpcmVkLCBDb25maWd1cmF0aW9uIH0gZnJvbSBcIkBuYWlseWpzL2NvcmVcIjtcbmltcG9ydCB7IFRlc3RTZXJ2aWNlIH0gZnJvbSBcIi4vdGVzdC5zZXJ2aWNlXCI7XG5cbkBDb25maWd1cmF0aW9uKClcbmV4cG9ydCBjbGFzcyBUIHtcbiAgQEF1dG93aXJlZCgpXG4gIHByaXZhdGUgcmVhZG9ubHkgdGVzdFNlcnZpY2U6IFRlc3RTZXJ2aWNlO1xuXG4gIGNvbnN0cnVjdG9yKCkge1xuICAgIGNvbnNvbGUubG9nKHRoaXMudGVzdFNlcnZpY2UudGVzdCgpKTtcbiAgfVxufVxuIl0sIm5hbWVzIjpbIlQiLCJfX2RlY29yYXRlIiwiQXV0b3dpcmVkIiwiVGVzdFNlcnZpY2UiLCJDb25maWd1cmF0aW9uIl0sIm1hcHBpbmdzIjoiOzs7O0FBSWFBLFNBQUMsR0FBUCxNQUFNLENBQUMsQ0FBQTtBQUlaLElBQUEsV0FBQSxHQUFBO1FBQ0UsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsV0FBVyxDQUFDLElBQUksRUFBRSxDQUFDLENBQUM7S0FDdEM7RUFDRjtBQUxrQkMsZ0JBQUEsQ0FBQTtBQURoQixJQUFBQyxjQUFTLEVBQUU7b0NBQ2tCQyx3QkFBVyxDQUFBO0FBQUMsQ0FBQSxFQUFBSCxTQUFBLENBQUEsU0FBQSxFQUFBLGFBQUEsRUFBQSxLQUFBLENBQUEsQ0FBQSxDQUFBO0FBRi9CQSxTQUFDLEdBQUFDLGdCQUFBLENBQUE7QUFEYixJQUFBRyxrQkFBYSxFQUFFOztBQUNILENBQUEsRUFBQUosU0FBQyxDQU9iOzsifQ==
