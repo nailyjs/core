@@ -1,0 +1,24 @@
+{
+  "name": "@nailyjs/vue",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/index.js",
+      "types": "./lib/types/index.d.ts",
+      "node": "./lib/cjs/index.js",
+      "import": "./lib/esm/index.js"
+    },
+    "./*": [
+      "./*",
+      "./*.d.ts"
+    ]
+  },
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "keywords": [],
+  "author": "Zero <gczgroup@qq.com>",
+  "dependencies": {
+    "vue": "^3",
+    "@nailyjs/core": "workspace:*"
+  }
+}

@@ -1,6 +1,6 @@
 import { NailyDecoratorFactory } from "../../common/classes/decorator.factory.js";
 import { NailyBeanRegistry } from "../../common/classes/index.js";
-import { NailyConfiguration } from "../vendors";
+import { NailyConfiguration } from "../vendors/index.js";
 
 export function Value(jexl: string = "", configureOrOptional?: boolean | NIOC.Configure, configure: NIOC.Configure = new NailyConfiguration()) {
   return NailyDecoratorFactory.createPropertyDecorator({

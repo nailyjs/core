@@ -71,27 +71,27 @@ export class NailyDecoratorFactory {
   public static createPropertyDecorator(factory?: NailyDecoratorFactory.PropertyDecoratorFactory): PropertyDecorator;
   public static createPropertyDecorator(factory: Partial<NailyDecoratorFactory.PropertyDecoratorFactory> = {}) {
     return (target: Object, propertyKey: string | symbol) => {
-      const options = factory?.before(target, propertyKey) || {};
+      const options = factory.before ? factory.before(target, propertyKey) : {};
       Bean(options)(target, propertyKey);
-      factory?.after(target, propertyKey, options);
+      factory.after ? factory.after(target, propertyKey, options) : undefined;
     };
   }
 
   public static createClassDecorator(factory?: NailyDecoratorFactory.ClassDecoratorFactory): ClassDecorator;
   public static createClassDecorator(factory: Partial<NailyDecoratorFactory.ClassDecoratorFactory> = {}) {
     return (target: Type) => {
-      const options = factory?.before(target) || {};
+      const options = factory.before ? factory.before(target) : {};
       Bean(options)(target);
-      factory?.after(target, options);
+      factory.after ? factory.after(target, options) : undefined;
     };
   }
 
   public static createMethodDecorator(factory?: NailyDecoratorFactory.MethodDecoratorFactory): MethodDecorator;
   public static createMethodDecorator(factory: Partial<NailyDecoratorFactory.MethodDecoratorFactory> = {}) {
     return (target: Object, propertyKey: string | symbol, descriptor: TypedPropertyDescriptor<(...args: any[]) => any>) => {
-      const options = factory?.before(target, propertyKey, descriptor) || {};
+      const options = factory.before ? factory.before(target, propertyKey, descriptor) : {};
       Bean(options)(target, propertyKey);
-      factory?.after(target, propertyKey, descriptor, options);
+      factory.after ? factory.after(target, propertyKey, descriptor, options) : undefined;
     };
   }
 }

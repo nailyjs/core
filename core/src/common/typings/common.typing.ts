@@ -1,4 +1,4 @@
-import { NailyBeanFactory } from "../classes/index.js";
+import { NailyBeanFactory } from "@/common/classes/index.js";
 import { ScopeEnum } from "../constants/index.js";
 import Jexl from "jexl";
 
