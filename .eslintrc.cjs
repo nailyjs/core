@@ -12,7 +12,7 @@ module.exports = {
   env: {
     node: true,
   },
-  ignorePatterns: [".eslintrc.cjs", "dist", "lib"],
+  ignorePatterns: [".eslintrc.cjs", "dist", "lib", "bin"],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/ban-types": "off",

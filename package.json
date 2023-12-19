@@ -2,6 +2,7 @@
   "name": "v29",
   "scripts": {
     "build:core": "pnpm -F @nailyjs/core build",
+    "build:cli": "pnpm -F @nailyjs/cli build",
     "build:vue": "pnpm -F @nailyjs/vue build",
     "dev": "pnpm -F sample dev",
     "dev:vue": "pnpm -F example-vue dev",
@@ -46,6 +47,9 @@
     "prettier": "^3.1.0",
     "prettier-eslint": "^16.1.2",
     "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "@nailyjs/cli": "workspace:*"
   },
   "dependencies": {
     "@rollup/plugin-alias": "^5.1.0",

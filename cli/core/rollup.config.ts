@@ -1,6 +1,7 @@
 import { defineConfig } from "rollup";
 import typescript from "@rollup/plugin-typescript";
 import nodeResolve from "@rollup/plugin-node-resolve";
+import commonjs from "@rollup/plugin-commonjs";
 import { extname, relative } from "path";
 import { sync } from "glob";
 
@@ -20,7 +21,7 @@ const input = Object.fromEntries(
 );
 
 export default defineConfig({
-  plugins: [nodeResolve(), typescript()],
+  plugins: [nodeResolve(), typescript(), commonjs()],
   external(id) {
     if (paths.includes(id)) return false;
     return true;

@@ -1,16 +1,8 @@
-import { Autowired, Injectable, NailyBeanFactory, Value } from "@nailyjs/core/backend";
-import { TestService } from "./test.service";
+import { Service } from "@nailyjs/core/common";
 
-@Injectable()
-export class T {
-  @Autowired()
-  private readonly testService: TestService;
-
-  @Autowired()
-  private readonly testService2: TestService;
-
-  @Value("test")
-  readonly test: string;
+@Service()
+export class SampleService {
+  public test() {
+    return "test";
+  }
 }
-
-console.log(new NailyBeanFactory(T).createInstance().test);
