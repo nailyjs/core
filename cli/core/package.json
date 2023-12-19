@@ -61,7 +61,7 @@
   },
   "license": "UNLICENSED",
   "devDependencies": {
-    "@nailyjs/core": "^0.29.2",
+    "@nailyjs/core": "workspace:*",
     "commander": "^11.1.0",
     "inquirer": "^8",
     "@rollup/plugin-typescript": "^11.1.5",

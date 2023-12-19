@@ -1,5 +1,6 @@
 {
   "name": "@nailyjs/vue",
+  "version": "0.30.2",
   "exports": {
     ".": {
       "require": "./lib/cjs/index.js",
@@ -13,9 +14,28 @@
     ]
   },
   "scripts": {
-    "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
+    "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "prepublishOnly": "npm run build"
   },
-  "keywords": [],
+  "keywords": [
+    "vue",
+    "naily",
+    "nailyjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nailyjs/core.git"
+  },
+  "homepage": "https://github.com/nailyjs/core",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {
+    "email": "gczgroup@qq.com",
+    "url": "https://www.naily.cc"
+  },
+  "license": "UNLICENSED",
   "author": "Zero <gczgroup@qq.com>",
   "dependencies": {
     "vue": "^3",
