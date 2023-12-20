@@ -1,5 +1,12 @@
 # sample
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [6239400]
+  - @nailyjs/core@0.30.6
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # example-vue
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [6239400]
+  - @nailyjs/core@0.30.6
+  - @nailyjs/vue@0.30.6
+
 ## 0.0.3
 
 ### Patch Changes

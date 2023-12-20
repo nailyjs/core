@@ -1,5 +1,12 @@
 # @nailyjs/vue
 
+## 0.30.6
+
+### Patch Changes
+
+- Updated dependencies [6239400]
+  - @nailyjs/core@0.30.6
+
 ## 0.30.5
 
 ### Patch Changes

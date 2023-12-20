@@ -1,5 +1,11 @@
 # @nailyjs/core
 
+## 0.30.6
+
+### Patch Changes
+
+- 6239400: fix: vendor
+
 ## 0.30.5
 
 ### Patch Changes
