@@ -1,5 +1,11 @@
 # create-naily
 
+## 1.0.15
+
+### Patch Changes
+
+- c30a3a6: feat: update
+
 ## 1.0.14
 
 ### Patch Changes

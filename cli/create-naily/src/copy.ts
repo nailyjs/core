@@ -1,3 +1,4 @@
+import { Logger } from "@nailyjs/core/common";
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from "fs";
 import { join } from "path";
 
@@ -15,10 +16,10 @@ export function copyFolderRecursiveSync(source: string, target: string) {
     const stat = statSync(sourcePath);
     if (stat.isFile()) {
       copyFileSync(sourcePath, targetPath);
-      console.log(`CREATE ${targetPath.replace(`${process.cwd()}/`, "")}`);
+      new Logger().log(`FILE   ${targetPath.replace(`${process.cwd()}/`, "")}`);
     } else if (stat.isDirectory()) {
       copyFolderRecursiveSync(sourcePath, targetPath);
-      console.log(`CREATE ${targetPath.replace(`${process.cwd()}/`, "")}`);
+      new Logger().log(`FOLDER ${targetPath.replace(`${process.cwd()}/`, "")}`);
     }
   });
 }
