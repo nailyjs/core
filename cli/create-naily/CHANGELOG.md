@@ -1,5 +1,11 @@
 # create-naily
 
+## 1.0.7
+
+### Patch Changes
+
+- 355db46: chore: change chinese
+
 ## 1.0.6
 
 ### Patch Changes
