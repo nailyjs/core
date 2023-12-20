@@ -1,0 +1,41 @@
+{
+  "name": "create-naily",
+  "version": "0.30.3",
+  "description": "Naily Creator",
+  "bin": {
+    "create-naily": "bin/create-naily"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "templates",
+    "naily.yml"
+  ],
+  "scripts": {
+    "build": "naily build",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Zero <gczgroup@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nailyjs/core.git"
+  },
+  "homepage": "https://github.com/nailyjs/core",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org",
+    "tag": "v30"
+  },
+  "bugs": {
+    "email": "gczgroup@qq.com",
+    "url": "https://www.naily.cc"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@nailyjs/core": "workspace:*",
+    "inquirer": "^8"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^8"
+  }
+}

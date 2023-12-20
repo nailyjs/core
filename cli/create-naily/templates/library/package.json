@@ -1,0 +1,39 @@
+{
+  "name": "my-naily-library",
+  "version": "0.0.0",
+  "description": "",
+  "files": [
+    "lib",
+    "bin",
+    "naily.yml"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json && naily build",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {},
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@nailyjs/core": "*"
+  },
+  "devDependencies": {
+    "@nailyjs/cli": "*",
+    "prettier": "*",
+    "eslint": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-prettier": "*",
+    "prettier-eslint": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "typescript": "^5"
+  }
+}

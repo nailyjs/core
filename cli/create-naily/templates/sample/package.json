@@ -1,0 +1,22 @@
+{
+  "name": "my-naily-sample",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run build && node .naily/main",
+    "build": "naily build"
+  },
+  "dependencies": {
+    "@nailyjs/core": "*"
+  },
+  "devDependencies": {
+    "@nailyjs/cli": "*",
+    "prettier": "*",
+    "eslint": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-prettier": "*",
+    "prettier-eslint": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "typescript": "^5"
+  }
+}

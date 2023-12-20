@@ -1,6 +1,6 @@
 {
   "name": "@nailyjs/cli",
-  "version": "0.30.2",
+  "version": "0.30.3",
   "description": "Naily CLI",
   "bin": {
     "naily": "./bin/naily"
@@ -39,7 +39,8 @@
     }
   },
   "files": [
-    "lib"
+    "lib",
+    "naily.yml"
   ],
   "scripts": {
     "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",

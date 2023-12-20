@@ -3,6 +3,7 @@
   "scripts": {
     "build:core": "pnpm -F @nailyjs/core build",
     "build:cli": "pnpm -F @nailyjs/cli build",
+    "build:create": "pnpm -F create-naily build",
     "build:vue": "pnpm -F @nailyjs/vue build",
     "dev": "pnpm -F sample dev",
     "dev:vue": "pnpm -F example-vue dev",
@@ -49,7 +50,8 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@nailyjs/cli": "workspace:*"
+    "@nailyjs/cli": "workspace:*",
+    "create-naily": "workspace:*"
   },
   "dependencies": {
     "@rollup/plugin-alias": "^5.1.0",

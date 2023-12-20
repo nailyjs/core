@@ -1,4 +1,4 @@
-import { Autowired, Configuration } from "@nailyjs/core/common";
+import { Autowired, Configuration } from "@nailyjs/core/backend";
 import { Command } from "commander";
 import { logo } from "./logo";
 import { BuildCommand } from "./commands/build.command";

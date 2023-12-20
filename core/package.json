@@ -1,9 +1,15 @@
 {
   "name": "@nailyjs/core",
-  "version": "0.30.2",
+  "version": "0.30.3",
   "description": "Naily Core",
   "exports": {
     ".": {
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts",
+      "node": "./lib/cjs/common/index.js",
+      "import": "./lib/esm/common/index.js"
+    },
+    "./common": {
       "require": "./lib/cjs/common/index.js",
       "types": "./lib/types/common/index.d.ts",
       "node": "./lib/cjs/common/index.js",
@@ -36,11 +42,12 @@
     }
   },
   "files": [
-    "lib"
+    "lib",
+    "naily.yml"
   ],
   "scripts": {
     "build": "tsc -b tsconfig.build.json && naily build",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
   },
   "author": "Zero <gczgroup@qq.com>",
   "repository": {
