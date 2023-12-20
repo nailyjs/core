@@ -5,6 +5,7 @@
     "build:cli": "pnpm -F @nailyjs/cli build",
     "build:create": "pnpm -F create-naily-beta build",
     "build:vue": "pnpm -F @nailyjs/vue build",
+    "build:web": "pnpm -F @nailyjs/web build",
     "dev": "pnpm -F sample dev",
     "dev:vue": "pnpm -F example-vue dev",
     "format": "prettier --write ./",

@@ -1,5 +1,11 @@
 # @nailyjs/core
 
+## 0.30.7
+
+### Patch Changes
+
+- 54558da: feat: commit
+
 ## 0.30.6
 
 ### Patch Changes

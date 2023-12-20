@@ -171,6 +171,37 @@ importers:
         specifier: ^3
         version: 3.3.11(typescript@5.3.3)
 
+  packages/web:
+    dependencies:
+      '@nailyjs/core':
+        specifier: '*'
+        version: link:../../core
+    devDependencies:
+      '@nailyjs/cli':
+        specifier: '*'
+        version: link:../../cli/core
+      '@typescript-eslint/eslint-plugin':
+        specifier: '*'
+        version: 6.13.1(@typescript-eslint/parser@6.13.1)(eslint@8.54.0)(typescript@5.3.3)
+      eslint:
+        specifier: '*'
+        version: 8.54.0
+      eslint-config-prettier:
+        specifier: '*'
+        version: 9.1.0(eslint@8.54.0)
+      eslint-plugin-prettier:
+        specifier: '*'
+        version: 5.0.1(eslint-config-prettier@9.1.0)(eslint@8.54.0)(prettier@3.1.0)
+      prettier:
+        specifier: '*'
+        version: 3.1.0
+      prettier-eslint:
+        specifier: '*'
+        version: 16.1.2
+      typescript:
+        specifier: ^5
+        version: 5.3.3
+
   tests/sample:
     dependencies:
       '@nailyjs/core':

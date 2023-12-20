@@ -7,5 +7,5 @@
   "access": "restricted",
   "baseBranch": "v0.30",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": ["sample", "example-vue"]
 }
