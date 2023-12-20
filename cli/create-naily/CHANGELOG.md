@@ -1,5 +1,11 @@
 # create-naily
 
+## 1.0.9
+
+### Patch Changes
+
+- 9d50fbd: fix: fix
+
 ## 1.0.8
 
 ### Patch Changes
