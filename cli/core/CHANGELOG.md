@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 0.30.7
+
+### Patch Changes
+
+- 55c3e0d: chore: update cli dependencies
+
 ## 0.30.6
 
 ### Patch Changes
