@@ -15,8 +15,10 @@ export function copyFolderRecursiveSync(source: string, target: string) {
     const stat = statSync(sourcePath);
     if (stat.isFile()) {
       copyFileSync(sourcePath, targetPath);
+      console.log(`CREATE ${targetPath.replace(`${process.cwd()}/`, "")}`);
     } else if (stat.isDirectory()) {
       copyFolderRecursiveSync(sourcePath, targetPath);
+      console.log(`CREATE ${targetPath.replace(`${process.cwd()}/`, "")}`);
     }
   });
 }
