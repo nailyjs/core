@@ -1,5 +1,12 @@
 # create-naily
 
+## 1.0.11
+
+### Patch Changes
+
+- Updated dependencies [d25d072]
+  - @nailyjs/core@0.30.4
+
 ## 1.0.10
 
 ### Patch Changes

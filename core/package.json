@@ -1,6 +1,6 @@
 {
   "name": "@nailyjs/core",
-  "version": "0.30.3",
+  "version": "0.30.4",
   "description": "Naily Core",
   "exports": {
     ".": {
@@ -70,6 +70,7 @@
     "@types/jexl": "^2.3.4",
     "yaml": "^2.3.4",
     "md5": "^2.3.0",
-    "@types/md5": "^2.3.0"
+    "@types/md5": "^2.3.0",
+    "chalk": "^4"
   }
 }

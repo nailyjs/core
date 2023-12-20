@@ -1,5 +1,12 @@
 # @nailyjs/cli
 
+## 0.30.5
+
+### Patch Changes
+
+- d25d072: feat: create command & change @nailyjs/vue 's scripts
+  - create-naily-beta@1.0.11
+
 ## 0.30.4
 
 ### Patch Changes

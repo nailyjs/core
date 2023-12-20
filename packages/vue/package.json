@@ -1,6 +1,6 @@
 {
   "name": "@nailyjs/vue",
-  "version": "0.30.3",
+  "version": "0.30.4",
   "exports": {
     ".": {
       "require": "./lib/cjs/index.js",
@@ -14,7 +14,7 @@
     ]
   },
   "scripts": {
-    "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "build": "tsc -b tsconfig.build.json && naily build",
     "prepublishOnly": "npm run build"
   },
   "keywords": [

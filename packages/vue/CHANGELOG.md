@@ -1,5 +1,13 @@
 # @nailyjs/vue
 
+## 0.30.4
+
+### Patch Changes
+
+- d25d072: feat: create command & change @nailyjs/vue 's scripts
+- Updated dependencies [d25d072]
+  - @nailyjs/core@0.30.4
+
 ## 0.30.3
 
 ### Patch Changes

@@ -1,4 +1,4 @@
-import { Injectable, Value } from "@nailyjs/core/backend";
+import { Autowired, Injectable, Logger, Value } from "@nailyjs/core/backend";
 import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
@@ -26,11 +26,16 @@ export class BuildCommand {
   @Value("naily.cli.debug", true)
   private readonly debug?: "debug" | "rollup";
 
+  @Autowired()
+  private readonly logger: Logger;
+
   public checkProjectConfiguration(projectConfiguration: CheckProjectConfiguration) {
     if (!projectConfiguration.src || !projectConfiguration.output) {
+      this.logger.error("src and output must be specified");
       throw new Error("src and output must be specified");
     }
     if (projectConfiguration.src.startsWith(".") || projectConfiguration.src.startsWith("/")) {
+      this.logger.error("src must be a relative path, and cannot start with `.` or `/`");
       throw new Error("src must be a relative path, and cannot start with `.` or `/`");
     }
   }
@@ -65,7 +70,7 @@ export class BuildCommand {
         if (this.debug && this.debug === "rollup") {
           return defaultHandler(level, log);
         } else if (this.debug && this.debug === "debug") {
-          return console.log(log);
+          return this.logger.log(log);
         }
 
         if (log.code !== "EMPTY_BUNDLE") {
@@ -86,7 +91,7 @@ export class BuildCommand {
 
     return Promise.all([
       new Promise(async (resolve) => {
-        console.log("Starting build cjs...");
+        this.logger.log("Starting build cjs...");
         const writer = await bundle.write({
           format: "commonjs",
           sourcemap: "inline",
@@ -94,11 +99,11 @@ export class BuildCommand {
           strict: false,
           exports: "auto",
         });
-        console.log("Build cjs success");
+        this.logger.log("Build cjs success");
         resolve(writer);
       }),
       new Promise(async (resolve) => {
-        console.log("Starting build esm...");
+        this.logger.log("Starting build esm...");
         const writer = await bundle.write({
           format: "module",
           sourcemap: "inline",
@@ -106,15 +111,15 @@ export class BuildCommand {
           strict: false,
           exports: "named",
         });
-        console.log("Build esm success");
+        this.logger.log("Build esm success");
         resolve(writer);
       }),
     ])
       .then(() => {
-        console.log("build success");
+        this.logger.log("build success");
       })
       .catch((err) => {
-        console.error("build failed");
+        this.logger.error("build failed");
         console.error(err);
       });
   }

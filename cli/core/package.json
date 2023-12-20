@@ -1,6 +1,6 @@
 {
   "name": "@nailyjs/cli",
-  "version": "0.30.4",
+  "version": "0.30.5",
   "description": "Naily CLI",
   "bin": {
     "naily": "./bin/naily"
@@ -61,6 +61,10 @@
     "url": "https://www.naily.cc"
   },
   "license": "UNLICENSED",
+  "dependencies": {
+    "create-naily-beta": "workspace:*",
+    "inquirer": "^9.2.12"
+  },
   "devDependencies": {
     "@nailyjs/core": "workspace:*",
     "commander": "^11.1.0",
@@ -69,6 +73,7 @@
     "rollup": "^4.7.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-commonjs": "^25.0.7",
-    "glob": "^10.3.10"
+    "glob": "^10.3.10",
+    "@types/inquirer": "9.0.7"
   }
 }
