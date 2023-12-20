@@ -2,4 +2,4 @@
 "@nailyjs/cli": patch
 ---
 
-chore: update dependencies
+chore: update cli dependencies
