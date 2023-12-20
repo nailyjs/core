@@ -1,6 +1,6 @@
 {
   "name": "create-naily-beta",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Naily Creator",
   "bin": {
     "create-naily": "bin/create-naily"

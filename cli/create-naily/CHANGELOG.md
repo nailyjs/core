@@ -1,5 +1,11 @@
 # create-naily
 
+## 1.0.8
+
+### Patch Changes
+
+- 5eb7dc5: feat: try fix bug
+
 ## 1.0.7
 
 ### Patch Changes
