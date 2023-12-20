@@ -92,6 +92,7 @@ export class BuildCommand {
           sourcemap: "inline",
           dir: "lib/cjs",
           strict: false,
+          exports: "auto",
         });
         console.log("Build cjs success");
         resolve(writer);
@@ -103,6 +104,7 @@ export class BuildCommand {
           sourcemap: "inline",
           dir: "lib/esm",
           strict: false,
+          exports: "named",
         });
         console.log("Build esm success");
         resolve(writer);

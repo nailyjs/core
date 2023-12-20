@@ -1,4 +1,0 @@
-naily:
-  cli:
-    src: src/
-    output: lib
