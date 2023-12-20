@@ -2,6 +2,7 @@
   "name": "sample",
   "version": "1.0.1",
   "type": "module",
+  "private": true,
   "scripts": {
     "dev": "npm run build && node .naily/main",
     "build": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
