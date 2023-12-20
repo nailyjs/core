@@ -1,5 +1,13 @@
 # @nailyjs/cli
 
+## 0.30.8
+
+### Patch Changes
+
+- Updated dependencies [e811f0f]
+  - @nailyjs/core@0.30.5
+  - create-naily-beta@1.0.12
+
 ## 0.30.7
 
 ### Patch Changes

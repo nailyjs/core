@@ -1,5 +1,11 @@
 # @nailyjs/core
 
+## 0.30.5
+
+### Patch Changes
+
+- e811f0f: fix: fix backend vendor
+
 ## 0.30.4
 
 ### Patch Changes
