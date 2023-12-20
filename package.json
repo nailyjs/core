@@ -51,7 +51,7 @@
   },
   "peerDependencies": {
     "@nailyjs/cli": "workspace:*",
-    "create-naily": "workspace:*"
+    "create-naily-beta": "workspace:*"
   },
   "dependencies": {
     "@rollup/plugin-alias": "^5.1.0",

@@ -5,6 +5,7 @@ import { copyFolderRecursiveSync } from "./copy";
 import { join } from "path";
 import { existsSync } from "fs";
 import { execSync } from "child_process";
+import i18n from "./i18n";
 
 interface Result {
   projectName: string;
@@ -15,6 +16,8 @@ interface Result {
 
 @Configuration()
 export class NailyCreator {
+  private $t = i18n();
+
   constructor() {
     console.log(logo);
     this.start();
@@ -25,10 +28,10 @@ export class NailyCreator {
       {
         type: "input",
         name: "projectName",
-        message: "Please enter the project name:",
-        validate(input) {
+        message: this.$t.projectName,
+        validate: (input) => {
           if (existsSync(join(process.cwd(), input))) {
-            return "The file or folder already exists! Please enter another name, we don't want to overwrite anything!";
+            return this.$t.projectNameFileOrFolderExists;
           } else {
             return true;
           }
@@ -37,7 +40,7 @@ export class NailyCreator {
       {
         type: "list",
         name: "template",
-        message: "Please select a template:",
+        message: this.$t.template,
         choices: [
           {
             name: "Sample Application",
@@ -54,16 +57,16 @@ export class NailyCreator {
       {
         type: "confirm",
         name: "git",
-        message: "Initialize a git repository?",
+        message: this.$t.git,
         default: true,
       },
       {
         type: "list",
         name: "packageManager",
-        message: "Please select a package manager to install dependencies:",
+        message: this.$t.packageManager,
         choices: [
           {
-            name: "I will install dependencies myself",
+            name: this.$t.installMyself,
             value: "none",
           },
           {
