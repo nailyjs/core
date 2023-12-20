@@ -1,6 +1,6 @@
 {
-  "name": "create-naily",
-  "version": "0.30.3",
+  "name": "create-naily-beta",
+  "version": "1.0.4",
   "description": "Naily Creator",
   "bin": {
     "create-naily": "bin/create-naily"
@@ -23,8 +23,7 @@
   "homepage": "https://github.com/nailyjs/core",
   "publishConfig": {
     "access": "public",
-    "registry": "https://registry.npmjs.org",
-    "tag": "v30"
+    "registry": "https://registry.npmjs.org"
   },
   "bugs": {
     "email": "gczgroup@qq.com",
@@ -33,7 +32,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@nailyjs/core": "workspace:*",
-    "inquirer": "^8"
+    "inquirer": "^8",
+    "reflect-metadata": "^0.2.1"
   },
   "devDependencies": {
     "@types/inquirer": "^8"

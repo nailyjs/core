@@ -1,5 +1,41 @@
 # create-naily
 
+## 1.0.4
+
+### Patch Changes
+
+- fix: inquirer
+
+## 1.0.3
+
+### Patch Changes
+
+- chore: add
+
+## 1.0.2
+
+### Patch Changes
+
+- change: tag
+
+## 1.0.1
+
+### Patch Changes
+
+- chore: Change package.json
+
+## 1.0.0
+
+### Major Changes
+
+- chore: today change, tomorrow will reset
+
+## 0.30.4
+
+### Patch Changes
+
+- Publish
+
 ## 0.30.3
 
 ### Patch Changes

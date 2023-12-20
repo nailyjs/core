@@ -1,0 +1,4 @@
+naily:
+  cli:
+    src: src/
+    output: .naily
