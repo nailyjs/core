@@ -1,0 +1,70 @@
+{
+  "name": "@nailyjs/mvc",
+  "version": "0.30.0",
+  "description": "Naily MVC Support",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts",
+      "node": "./lib/cjs/common/index.js",
+      "import": "./lib/esm/common/index.js"
+    },
+    "./common": {
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts",
+      "node": "./lib/cjs/common/index.js",
+      "import": "./lib/esm/common/index.js"
+    },
+    "./backend": {
+      "require": "./lib/cjs/backend/index.js",
+      "types": "./lib/types/backend/index.d.ts",
+      "node": "./lib/cjs/backend/index.js",
+      "import": "./lib/esm/backend/index.js"
+    },
+    "./frontend": {
+      "require": "./lib/cjs/frontend/index.js",
+      "types": "./lib/types/frontend/index.d.ts",
+      "node": "./lib/cjs/frontend/index.js",
+      "import": "./lib/esm/frontend/index.js"
+    },
+    "./*": [
+      "./*",
+      "./*.d.ts"
+    ]
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./lib/types/*",
+        "./lib/types/common/",
+        "./"
+      ]
+    }
+  },
+  "files": [
+    "lib",
+    "naily.yml"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json && naily build",
+    "prepublishOnly": "npm run build"
+  },
+  "author": "Zero <gczgroup@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nailyjs/core.git"
+  },
+  "homepage": "https://github.com/nailyjs/core",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {
+    "email": "gczgroup@qq.com",
+    "url": "https://www.naily.cc"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@nailyjs/core": "workspace:*"
+  }
+}
