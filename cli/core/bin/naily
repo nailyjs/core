@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-require("../lib/cjs/index.js")
+require("../lib/cjs/index.js");
