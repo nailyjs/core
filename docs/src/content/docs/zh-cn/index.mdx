@@ -1,0 +1,45 @@
+---
+title: The Naily project
+description: 一个轻量的企业级Web框架
+template: splash
+hero:
+  tagline: 一个轻量的企业级Web框架
+  image:
+    file: ../../../assets/logo_minmal.png
+  actions:
+    - text: 快速上手
+      link: /guides/example/
+      icon: right-arrow
+      variant: primary
+    - text: API 参考
+      link: /reference/example/
+      icon: external
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## 一些功能
+
+<CardGrid stagger>
+  <Card title="Progressive" icon="pencil">
+    逐步学习[指南](/guides/example/)来学习如何使用Naily。
+  </Card>
+  <Card title="容器化管理" icon="bars">
+    所有的类都可以加入到`naily container`管理。
+  </Card>
+  <Card title="自动扫描" icon="setting">
+    自动扫描你的代码并且自动注册到`naily container`。
+  </Card>
+  <Card title="后端框架适配器" icon="open-book">
+    使用你喜欢的后端框架，如[Express](https://expressjs.com/)、[Koa](https://koajs.com/)或[Fastify](https://www.fastify.io/)。
+  </Card>
+  <Card title="切面编程" icon="open-book">
+    使用切面进行编程，掌握类的方方面面。
+  </Card>
+  <Card title="一站式全局配置" icon="list-format">
+    使用`naily.yml`进行全局配置。
+  </Card>
+  <Card title="依赖注入" icon="rocket">
+    使用依赖注入来链接和自由组合你的类。
+  </Card>
+</CardGrid>

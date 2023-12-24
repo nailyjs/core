@@ -6,7 +6,7 @@
     "build:create": "pnpm -F create-naily build",
     "build:vue": "pnpm -F @nailyjs/vue build",
     "build:web": "pnpm -F @nailyjs/web build",
-    "build:docs": "pnpm -F docs docs:build",
+    "build:docs": "pnpm -F docs build",
     "dev": "pnpm -F sample dev",
     "dev:vue": "pnpm -F example-vue dev",
     "dev:docs": "pnpm -F docs dev",

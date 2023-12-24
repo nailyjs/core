@@ -11,3 +11,9 @@ yarn.lock
 
 .umi-production
 .umi-test
+
+# generated types
+.astro/
+
+# macOS-specific files
+.DS_Store

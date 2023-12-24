@@ -1,0 +1,45 @@
+---
+title: The Naily project
+description: A light Web enterprise framework for node.js
+template: splash
+hero:
+  tagline: A light Web enterprise framework for node.js
+  image:
+    file: ../../assets/logo_minmal.png
+  actions:
+    - text: Guide
+      link: /guides/example/
+      icon: right-arrow
+      variant: primary
+    - text: API Reference
+      link: /reference/example/
+      icon: external
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+## Features
+
+<CardGrid stagger>
+  <Card title="Progressive" icon="pencil">
+    Study progressively the [guide](/guides/example/) to learn how to use Naily.
+  </Card>
+  <Card title="Container" icon="bars">
+    All classes work with the `naily container` to write your code.
+  </Card>
+  <Card title="Auto scan" icon="setting">
+    Auto scan your code to find all `@Injectable` classes and register them.
+  </Card>
+  <Card title="Backend adapter" icon="open-book">
+    Use your favorite backend framework such as [Express](https://expressjs.com/), [Koa](https://koajs.com/) or [Fastify](https://www.fastify.io/).
+  </Card>
+  <Card title="Aspect programming" icon="open-book">
+    Aspect programming support with injectable classes.
+  </Card>
+  <Card title="Global Configuration" icon="list-format">
+    Use the `naily.yml` to configure across your application.
+  </Card>
+  <Card title="Dependency injection" icon="rocket">
+    Use the dependency injection to inject your classes.
+  </Card>
+</CardGrid>
