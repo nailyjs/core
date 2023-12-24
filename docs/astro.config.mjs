@@ -12,24 +12,27 @@ export default defineConfig({
       defaultLocale: "root",
       locales: {
         root: {
-          label: "English",
-          lang: "en",
-        },
-        "zh-cn": {
           label: "简体中文",
           lang: "zh-CN",
+        },
+        en: {
+          label: "English",
+          lang: "en",
         },
       },
       sidebar: [
         {
-          label: "Guides",
+          label: "指南",
           translations: {
-            "zh-CN": "指南",
+            en: "Guides",
           },
           autogenerate: { directory: "guides" },
         },
         {
-          label: "Reference",
+          label: "API参考",
+          translations: {
+            en: "API Reference",
+          },
           autogenerate: { directory: "reference" },
         },
       ],
