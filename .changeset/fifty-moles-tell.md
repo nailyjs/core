@@ -3,4 +3,4 @@
 "@nailyjs/cli": patch
 ---
 
-feat: change create-naily-beta to create-naily
+feat: add watch command

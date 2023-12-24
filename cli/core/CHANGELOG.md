@@ -1,5 +1,13 @@
 # @nailyjs/cli
 
+## 0.30.12
+
+### Patch Changes
+
+- cb9f716: feat: change create-naily-beta to create-naily
+- Updated dependencies [cb9f716]
+  - create-naily@0.30.1
+
 ## 0.30.11
 
 ### Patch Changes

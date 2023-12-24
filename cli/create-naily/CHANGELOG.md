@@ -1,5 +1,11 @@
 # create-naily
 
+## 0.30.1
+
+### Patch Changes
+
+- cb9f716: feat: change create-naily-beta to create-naily
+
 ## 1.0.15
 
 ### Patch Changes
