@@ -1,0 +1,10 @@
+{
+  "name": "my-naily-sample",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "npm run build && node .naily/main",
+    "build": "naily build"
+  }
+}

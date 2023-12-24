@@ -1,6 +1,6 @@
 {
   "name": "@nailyjs/cli",
-  "version": "0.30.12",
+  "version": "0.30.13",
   "description": "Naily CLI",
   "bin": {
     "naily": "./bin/naily"
@@ -44,7 +44,8 @@
   ],
   "scripts": {
     "build": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build"
   },
   "author": "Zero <gczgroup@qq.com>",
   "repository": {

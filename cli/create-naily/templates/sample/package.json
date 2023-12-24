@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "npm run build && node .naily/main",
+    "format": "prettier --write ./",
     "build": "naily build"
   },
   "dependencies": {

@@ -7,10 +7,7 @@
     "moduleResolution": "Node",
     "module": "ES6",
     "esModuleInterop": true,
-    "strict": false,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "strict": false
   },
   "include": ["src/**/*", "rollup.config.ts"]
 }

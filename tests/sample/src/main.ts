@@ -1,6 +1,6 @@
-import { Service } from "@nailyjs/core/common";
+import { Configuration } from "@nailyjs/core/commons";
 
-@Service()
+@Configuration()
 export class SampleService {
   public test() {
     return "test";

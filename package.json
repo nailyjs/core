@@ -3,7 +3,7 @@
   "scripts": {
     "build:core": "pnpm -F @nailyjs/core build",
     "build:cli": "pnpm -F @nailyjs/cli build",
-    "build:create": "pnpm -F create-naily-beta build",
+    "build:create": "pnpm -F create-naily build",
     "build:vue": "pnpm -F @nailyjs/vue build",
     "build:web": "pnpm -F @nailyjs/web build",
     "build:docs": "pnpm -F docs docs:build",
@@ -50,11 +50,11 @@
     "lint-staged": "^15.1.0",
     "prettier": "^3.1.0",
     "prettier-eslint": "^16.1.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5"
   },
   "peerDependencies": {
     "@nailyjs/cli": "workspace:*",
-    "create-naily-beta": "workspace:*"
+    "create-naily": "workspace:*"
   },
   "dependencies": {
     "@rollup/plugin-alias": "^5.1.0",

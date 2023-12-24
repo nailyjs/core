@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "tsc -b tsconfig.build.json && naily build",
+    "format": "prettier --write ./",
     "prepublishOnly": "npm run build"
   },
   "author": "",

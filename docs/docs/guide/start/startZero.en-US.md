@@ -1,21 +1,88 @@
 ---
 order: 2
+title: Create a project
 group:
   title: Start
 ---
 
-# Getting Started
+# Create a project
 
-This article will start from scratch to build a Node.js project with only the Naily core.
+This article will guide you to create a Node.js project with only Naily core.
 
-Windows open cmd or powershell, MacOS open terminal, let's start together~
+Open cmd or powershell on Windows, or terminal on MacOS, let's get started~
 
-创建一个空白文件夹
-cd 到该文件夹中，使用命令：
+Create an empty folder and cd to it, then run:
+
+```bash
 pnpm init
-创建一个 package.json 文件。我们推荐使用 pnpm 来安装和管理依赖。
-再在目录下创建一个 src 文件夹，src 文件夹下创建一个 main.ts 文件。
-再在文件夹根目录创建一个 tsconfig.json 文件和一个 naily.yaml 文件。
+```
 
-- naily.yaml 文件是整个 Naily 项目的配置文件，必须要有（哪怕内容是空的）；
-- tsconfig.json 文件是 TypeScript 的配置文件，文件内容可参考下面的示例：
+to create a package.json file. We recommend using `pnpm` to install and manage dependencies.
+
+Then create a src folder under the directory, and create a `main.ts` file under the src folder. Our application will start executing with this file as the entry point.
+
+Then create a `tsconfig.json` file and a naily.yaml file in the root directory of the folder.
+
+- naily.yaml is the configuration file of the entire Naily project, which must exist (even if the content is empty);
+- tsconfig.json is the configuration file of TypeScript, the file content can refer to the following example:
+
+```json
+{
+  "compilerOptions": {
+    // Experimental decorator options must be turned on
+    "experimentalDecorators": true,
+    // Reflection Metadata type, must be turned on
+    "emitDecoratorMetadata": true,
+    // Define the file output directory
+    "outDir": "dist",
+    // Note: target must be ES2021 or below, ES2022 and above cannot use Naily
+    "target": "ES2021",
+    "module": "CommonJS",
+    "declaration": true,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"]
+}
+```
+
+## Install dependencies
+
+```bash
+# TypeScript, must be installed
+pnpm install -D typescript
+# Node.js type package, installed to have intelligent prompts
+pnpm install -D @types/node
+# Naily core package, must be installed
+pnpm install @nailyjs/core
+# Naily CLI package, installed to use the `naily` command
+pnpm install -D @nailyjs/cli
+```
+
+After installation, you can modify the `scripts` field of `package.json` as follows:
+
+```json
+{
+  "scripts": {
+    "start": "naily build && node .naily/cjs/main.js"
+  }
+}
+```
+
+Then we create a `naily.yml` file in the root directory, the content is as follows:
+
+```yml
+naily:
+  cli:
+    src: src/
+    output: .naily
+```
+
+We will start writing our code with src/main.ts as the entry point. At runtime, just execute:
+
+```bash
+pnpm start
+```
+
+All done!

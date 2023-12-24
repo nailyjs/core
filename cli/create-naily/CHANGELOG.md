@@ -1,5 +1,11 @@
 # create-naily
 
+## 0.30.2
+
+### Patch Changes
+
+- 76521cf: feat: add watch command
+
 ## 0.30.1
 
 ### Patch Changes

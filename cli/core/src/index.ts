@@ -3,6 +3,7 @@ import { Command } from "commander";
 import { logo } from "./logo";
 import { BuildCommand } from "./commands/build.command";
 import { CreateCommand } from "./commands/create.command";
+import { WatchCommand } from "./commands/watch.command";
 
 @Configuration()
 export class CLIConfiguration {
@@ -17,6 +18,9 @@ export class CLIConfiguration {
 
   @Autowired()
   private readonly createCommand: CreateCommand;
+
+  @Autowired()
+  private readonly watchCommand: WatchCommand;
 
   constructor() {
     this.program.name(this.name).version(this.version).description(this.description).addHelpText("beforeAll", logo);
@@ -35,6 +39,12 @@ export class CLIConfiguration {
       .description("Create a new project")
       .option("-p --package-manager <packageManager>", "Package manager to use (npm or yarn)", "npm")
       .action((dir: string, options: { packageManager: string }) => this.createCommand.create(dir, options));
+
+    this.program
+      .command("watch")
+      .alias("w")
+      .description("Watch the project. Will rebuild on file change.")
+      .action(() => this.watchCommand.watch());
     this.program.parse(process.argv);
   }
 }

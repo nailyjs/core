@@ -1,1 +1,8 @@
-test: aaa
+naily:
+  cli:
+    src: src/
+    output: .naily
+    watch:
+      folder: "src"
+      entry: "./.naily/esm/main.js"
+      showBuilderLog: false

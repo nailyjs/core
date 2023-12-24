@@ -2,8 +2,8 @@ import { defineConfig } from "dumi";
 
 export default defineConfig({
   title: "Naily",
-  favicon: "logo_minmal.png",
-  logo: "logo_minmal.png",
+  favicon: "/logo_minmal.png",
+  logo: "/logo_minmal.png",
   outputPath: "docs-dist",
   mode: "site",
   ssr: {},
@@ -18,14 +18,25 @@ export default defineConfig({
   ],
   navs: {
     "zh-CN": [
-      {
-        title: "指南",
-        path: "/guide",
-      },
-      {
-        title: "参考",
-        path: "/reference",
-      },
+      null,
+      // {
+      //   title: "指南",
+      //   path: "/guide",
+      // },
+      // {
+      //   title: "参考",
+      //   path: "/reference",
+      //   children: [
+      //     {
+      //       title: "核心",
+      //       path: "/reference/core",
+      //     },
+      //     {
+      //       title: "Web",
+      //       path: "/reference/web",
+      //     },
+      //   ],
+      // },
     ],
     "en-US": [
       {

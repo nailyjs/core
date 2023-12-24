@@ -1,18 +1,18 @@
+import { CheckProjectConfiguration, Input } from "../typings";
+import { CheckUtilService } from "../utils/check.util";
 import { Autowired, Injectable, Logger, Value } from "@nailyjs/core/backend";
 import commonjs from "@rollup/plugin-commonjs";
 import nodeResolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import { sync } from "glob";
-import { extname, relative } from "path";
-import { rollup, RollupLog, LogLevel, LogOrStringHandler } from "rollup";
+import { extname, join, relative } from "path";
+import { rollup, RollupLog, LogLevel, LogOrStringHandler, RollupOutput } from "rollup";
 
-interface CheckProjectConfiguration {
-  src: string;
-  output: string;
-}
-
-interface Input {
-  [k: string]: string;
+interface Builder {
+  beforeCjsBuild?(): Promise<void> | void;
+  beforeEsmBuild?(): Promise<void> | void;
+  afterCjsBuild?(): Promise<void> | void;
+  afterEsmBuild?(): Promise<void> | void;
 }
 
 @Injectable()
@@ -27,17 +27,14 @@ export class BuildCommand {
   private readonly debug?: "debug" | "rollup";
 
   @Autowired()
-  private readonly logger: Logger;
+  private readonly checkUtilService: CheckUtilService;
 
   public checkProjectConfiguration(projectConfiguration: CheckProjectConfiguration) {
     if (!projectConfiguration.src || !projectConfiguration.output) {
-      this.logger.error("src and output must be specified");
+      new Logger().error("src and output must be specified");
       throw new Error("src and output must be specified");
     }
-    if (projectConfiguration.src.startsWith(".") || projectConfiguration.src.startsWith("/")) {
-      this.logger.error("src must be a relative path, and cannot start with `.` or `/`");
-      throw new Error("src must be a relative path, and cannot start with `.` or `/`");
-    }
+    this.checkUtilService.checkStringIfRelativePath(projectConfiguration.src);
   }
 
   public getInputs(projectConfiguration: CheckProjectConfiguration): [string[], Input] {
@@ -70,7 +67,7 @@ export class BuildCommand {
         if (this.debug && this.debug === "rollup") {
           return defaultHandler(level, log);
         } else if (this.debug && this.debug === "debug") {
-          return this.logger.log(log);
+          return new Logger().log(log);
         }
 
         if (log.code !== "EMPTY_BUNDLE") {
@@ -80,7 +77,7 @@ export class BuildCommand {
     });
   }
 
-  public async build() {
+  public async builder(options: Builder = {}): Promise<[RollupOutput, RollupOutput]> {
     const projectConfiguration: CheckProjectConfiguration = {
       src: this.src,
       output: this.output || "lib",
@@ -90,36 +87,53 @@ export class BuildCommand {
     const bundle = await this.getBundle(paths, input);
 
     return Promise.all([
-      new Promise(async (resolve) => {
-        this.logger.log("Starting build cjs...");
+      new Promise<RollupOutput>(async (resolve) => {
+        if (options.beforeCjsBuild) await options.beforeCjsBuild();
         const writer = await bundle.write({
           format: "commonjs",
           sourcemap: "inline",
-          dir: "lib/cjs",
+          dir: join(projectConfiguration.output, "cjs"),
           strict: false,
           exports: "auto",
         });
-        this.logger.log("Build cjs success");
+        if (options.afterCjsBuild) await options.afterCjsBuild();
         resolve(writer);
       }),
-      new Promise(async (resolve) => {
-        this.logger.log("Starting build esm...");
+      new Promise<RollupOutput>(async (resolve) => {
+        if (options.beforeEsmBuild) await options.beforeEsmBuild();
         const writer = await bundle.write({
           format: "module",
           sourcemap: "inline",
-          dir: "lib/esm",
+          dir: join(projectConfiguration.output, "esm"),
           strict: false,
           exports: "named",
         });
-        this.logger.log("Build esm success");
+        if (options.afterEsmBuild) await options.afterEsmBuild();
         resolve(writer);
       }),
-    ])
+    ]);
+  }
+
+  public async build() {
+    this.builder({
+      beforeCjsBuild() {
+        new Logger().log("Starting build cjs...");
+      },
+      afterCjsBuild() {
+        new Logger().log("Build cjs success");
+      },
+      beforeEsmBuild() {
+        new Logger().log("Starting build esm...");
+      },
+      afterEsmBuild() {
+        new Logger().log("Build esm success");
+      },
+    })
       .then(() => {
-        this.logger.log("build success");
+        new Logger().log("build success");
       })
       .catch((err) => {
-        this.logger.error("build failed");
+        new Logger().error("build failed");
         console.error(err);
       });
   }

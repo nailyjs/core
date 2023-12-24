@@ -1,5 +1,13 @@
 # @nailyjs/cli
 
+## 0.30.13
+
+### Patch Changes
+
+- 76521cf: feat: add watch command
+- Updated dependencies [76521cf]
+  - create-naily@0.30.2
+
 ## 0.30.12
 
 ### Patch Changes

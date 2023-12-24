@@ -1,15 +1,17 @@
-import { Configuration } from "@nailyjs/core/common";
+import { Autowired, Configuration, Logger } from "@nailyjs/core";
 import { prompt } from "inquirer";
 import { logo } from "./logo";
-import { copyFolderRecursiveSync } from "./copy";
 import { join } from "path";
 import { existsSync } from "fs";
-import { execSync } from "child_process";
 import i18n from "./i18n";
+import { ChangePackageNameHook } from "./hook/changePackageName.hook";
+import { CopyHook } from "./hook/copy.hook";
+import { GitHook } from "./hook/git.hook";
+import { PackageManagerHook } from "./hook/packageManager.hook";
 
-interface Result {
+export interface Result {
   projectName: string;
-  template: "sample" | "library";
+  template: "sample" | "library" | "monorepo";
   git: boolean;
   packageManager: "none" | "npm" | "yarn" | "pnpm";
 }
@@ -23,14 +25,32 @@ export class NailyCreator {
     this.start();
   }
 
+  @Autowired()
+  private readonly logger: Logger;
+
+  @Autowired()
+  private readonly changePackageNameHook: ChangePackageNameHook;
+
+  @Autowired()
+  private readonly copyHook: CopyHook;
+
+  @Autowired()
+  private readonly gitHook: GitHook;
+
+  @Autowired()
+  private readonly packageManagerHook: PackageManagerHook;
+
   async start() {
     const result = await prompt<Result>([
       {
         type: "input",
         name: "projectName",
         message: this.$t.projectName,
-        validate: (input) => {
-          if (existsSync(join(process.cwd(), input))) {
+        validate: (input: string) => {
+          const regex = /^[a-zA-Z0-9_]+$/;
+          if (!regex.test(input)) {
+            return this.$t.projectNameTestFailed;
+          } else if (existsSync(join(process.cwd(), input))) {
             return this.$t.projectNameFileOrFolderExists;
           } else {
             return true;
@@ -51,6 +71,11 @@ export class NailyCreator {
             name: "Sample Library",
             short: "Library",
             value: "library",
+          },
+          {
+            name: "Sample Monorepo",
+            short: "Monorepo",
+            value: "monorepo",
           },
         ],
       },
@@ -92,18 +117,16 @@ export class NailyCreator {
         ],
       },
     ]);
-    copyFolderRecursiveSync(join(__dirname, "..", "..", "templates", result.template), join(process.cwd(), result.projectName));
-    if (result.git) {
-      execSync("git init", {
-        cwd: join(process.cwd(), result.projectName),
-        stdio: "inherit",
-      });
-    }
-    if (result.packageManager !== "none") {
-      execSync(`${result.packageManager} install`, {
-        cwd: join(process.cwd(), result.projectName),
-        stdio: "inherit",
-      });
-    }
+    // project path
+    const basePath = join(process.cwd(), result.projectName);
+    // copy template
+    this.copyHook.run(join(__dirname, "..", "..", "templates", result.template), basePath);
+    // git init
+    this.gitHook.run(basePath, result);
+    // install dependencies
+    this.packageManagerHook.run(basePath, result);
+    // change package name
+    this.changePackageNameHook.run(basePath, result);
+    this.logger.log(this.$t.done);
   }
 }

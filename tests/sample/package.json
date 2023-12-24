@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "npm run build && node .naily/main",
+    "dev": "naily watch",
     "build": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
   },
   "dependencies": {

@@ -21,7 +21,13 @@ const input = Object.fromEntries(
 );
 
 export default defineConfig({
-  plugins: [nodeResolve(), typescript(), commonjs()],
+  plugins: [
+    nodeResolve({
+      extensions: [".js", ".ts"],
+    }),
+    typescript(),
+    commonjs(),
+  ],
   external(id) {
     if (paths.includes(id)) return false;
     return true;
