@@ -1,0 +1,103 @@
+---
+title: 使用CLI创建
+sidebar:
+  order: 2
+  badge:
+    text: 推荐
+    variant: caution
+---
+
+首先得有`node`，如果没有的话，可以去[官网](https://nodejs.org)下载安装。
+
+包管理器推荐使用[pnpm](https://pnpm.io)，它的速度比`npm`和`yarn`都要快，而且占用的磁盘空间也更少。
+
+## 通过create-naily创建项目
+
+Naily 提供了一个脚手架工具，可以帮助你快速创建一个项目。只要执行如下命令即可：
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+<Tabs>
+  <TabItem label="pnpm">
+
+```bash
+pnpm create naily
+```
+
+  </TabItem>
+  <TabItem label="npm">
+```bash
+npm create naily
+```
+  </TabItem>
+  <TabItem label="yarn">
+```bash
+yarn create naily
+```
+  </TabItem>
+</Tabs>
+
+## 通过@nailyjs/cli创建项目
+
+Naily 自身提供了一个命令行工具，可以帮助你快速创建一个项目。可以将其安装到全局，然后通过`naily`命令来创建项目。
+
+<Tabs>
+  <TabItem label="pnpm">
+```bash
+pnpm create @nailyjs/cli
+```
+  </TabItem>
+  <TabItem label="npm">
+```bash
+npm create @nailyjs/cli
+```
+  </TabItem>
+  <TabItem label="yarn">
+```bash
+yarn create @nailyjs/cli
+```
+  </TabItem>
+
+</Tabs>
+
+安装完成后，在命令行输入`naily`，你会看到类似如下的输出:
+
+```
+❯ naily
+
+███╗   ██╗ █████╗ ██╗
+████╗  ██║██╔══██╗██║
+██╔██╗ ██║███████║██║
+██║╚██╗██║██╔══██║██║
+██║ ╚████║██║  ██║██║
+╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝
+        Naily
+
+Usage: naily [options] [command]
+
+Naily CLI
+
+Options:
+  -V, --version             output the version number
+  -h, --help                display help for command
+
+Commands:
+  build|b                   Build the project
+  create|c [options] [dir]  Create a new project
+  watch|w                   Watch the project. Will rebuild on file change.
+  help [command]            display help for command
+```
+
+正如你所看到的，`naily`命令行目前提供了三个命令，分别是`create`、`build`和`watch`。
+
+## 创建项目
+
+使用`naily create`命令可以创建一个新的项目，命令如下：
+
+```bash
+naily create [project-basepath]
+```
+
+`[project-basepath]`是可选参数，如果不指定的话，会在当前目录下创建项目。
+
+此命令调用后和`create-naily`的效果是一样的，此命令仅多了一个`project-basepath`参数，可以指定项目的创建目录。这个参数在`monorepo`项目中尤为有用。

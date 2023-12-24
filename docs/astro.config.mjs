@@ -6,6 +6,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Naily",
+      customCss: ["./src/styles/global.less"],
       social: {
         github: "https://github.com/nailyjs",
       },
