@@ -30,11 +30,11 @@ export default defineConfig({
           autogenerate: { directory: "guides" },
         },
         {
-          label: "API参考",
+          label: "核心",
           translations: {
             en: "API Reference",
           },
-          autogenerate: { directory: "reference" },
+          autogenerate: { directory: "reference/core" },
         },
       ],
     }),

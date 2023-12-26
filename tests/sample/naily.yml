@@ -3,6 +3,5 @@ naily:
     src: src/
     output: .naily
     watch:
-      folder: "src"
       entry: "./.naily/esm/main.js"
       showBuilderLog: false

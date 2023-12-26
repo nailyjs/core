@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 0.30.14
+
+### Patch Changes
+
+- 8498de7: feat: update watcher
+
 ## 0.30.13
 
 ### Patch Changes

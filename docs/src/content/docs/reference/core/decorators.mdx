@@ -1,0 +1,50 @@
+---
+title: 装饰器注解
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+## @Bean
+
+### 概述
+
+`@Bean` 装饰器用于标记一个类可以被依赖注入系统实例化。只有被此装饰器标记的类才能被依赖注入系统实例化，并且可以通过`@Autowired`注解注入到其他类中。
+
+### 用法
+
+```typescript
+@Bean()
+class MyClass {}
+```
+
+## @Injectable
+
+### 概述
+
+`@Injectable` 装饰器用于标记一个类可以被依赖注入系统实例化。只有被此装饰器标记的类才能被依赖注入系统实例化，并且可以通过`@Autowired`注解注入到其他类中。
+
+此装饰器基于`@Bean`装饰器，所以`@Injectable`装饰器的参数和`@Bean`装饰器的参数一致。
+
+### 用法
+
+<Tabs>
+  <TabItem label="直接使用">
+```typescript
+@Injectable()
+class MyClass {}
+```
+  </TabItem>
+  <TabItem label="自定义参数">
+```typescript
+@Injectable({
+  // 作用域 默认为 Scope.SINGLETON
+  Scope: Scope.SINGLETON,
+  // 依赖注入的名称 默认为类名
+  Token: "myClass",
+  // 是否允许被重复绑定 默认为 false
+  Rebind: true,
+})
+class MyClass {}
+```
+  </TabItem>
+</Tabs>

@@ -1,4 +1,4 @@
-import { Configuration } from "@nailyjs/core/commons";
+import { Configuration } from "@nailyjs/core";
 
 @Configuration()
 export class SampleService {

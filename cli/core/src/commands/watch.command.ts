@@ -1,17 +1,15 @@
 import { Autowired, Injectable, Logger } from "@nailyjs/core";
 import { BuildCommand } from "./build.command";
 import { Value } from "@nailyjs/core/backend";
-import { CheckUtilService } from "../utils/check.util";
-import { watch } from "fs";
 import { ChildProcess, fork } from "child_process";
+import chokidar from "chokidar";
+import { join, relative } from "path";
+import { logo } from "../logo";
 
 @Injectable()
 export class WatchCommand {
   @Autowired()
   private readonly buildCommand: BuildCommand;
-
-  @Autowired()
-  private readonly checkUtilService: CheckUtilService;
 
   @Value("naily.cli.watch.entry", true)
   private readonly watchEntry?: string;
@@ -21,6 +19,9 @@ export class WatchCommand {
 
   @Value("naily.cli.watch.showBuilderLog", true)
   private readonly showBuilderLog?: boolean;
+
+  @Value("naily.cli.watch.ignore", true)
+  private readonly ignore?: string[];
 
   private getBuilder() {
     return this.buildCommand.builder({
@@ -49,22 +50,35 @@ export class WatchCommand {
     });
   }
 
+  private exit(newProcess?: ChildProcess) {
+    console.log();
+    new Logger().log("Exiting...");
+    if (newProcess) newProcess.kill();
+    process.exit();
+  }
+
   public async watch() {
-    const isString = this.checkUtilService.checkStringIfRelativePath(this.folder);
-    if (!isString) throw new Error("naily.cli.watch.folder must be a string");
+    const folder = this.folder ? join(process.cwd(), relative(process.cwd(), this.folder)) : ".";
 
     await this.getBuilder();
     let newProcess: ChildProcess | undefined = this.watchEntry ? this.getDevelopmentForkProcess() : undefined;
 
-    watch(this.folder, { recursive: true }, async (event, filename) => {
-      console.clear();
-      new Logger().log(`${event.toUpperCase()} File ${filename} changed`);
-      await this.getBuilder();
-
-      if (newProcess) {
-        newProcess.kill();
-        newProcess = this.getDevelopmentForkProcess();
-      }
-    });
+    console.log(logo);
+    new Logger().log(`Watching path "${folder}"...`);
+    process.on("SIGINT", () => this.exit(newProcess));
+    process.on("SIGTERM", () => this.exit(newProcess));
+    chokidar
+      .watch(folder, {
+        ignored: ["**/node_modules/**", "**/.git/**", "**/.naily/**", ...(this.ignore ? this.ignore : [])],
+      })
+      .on("change", async (path) => {
+        console.clear();
+        new Logger().log(`${relative(process.cwd(), path)} File ${path} changed`);
+        await this.getBuilder();
+        if (newProcess) {
+          newProcess.kill();
+          newProcess = this.getDevelopmentForkProcess();
+        }
+      });
   }
 }
