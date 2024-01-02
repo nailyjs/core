@@ -1,0 +1,64 @@
+{
+  "name": "@nailyjs/core",
+  "version": "0.31.0",
+  "description": "Naily Core",
+  "exports": {
+    ".": {
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts",
+      "node": "./lib/cjs/common/index.js",
+      "import": "./lib/esm/common/index.js"
+    },
+    "./common": {
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts",
+      "node": "./lib/cjs/common/index.js",
+      "import": "./lib/esm/common/index.js"
+    },
+    "./*": [
+      "./*",
+      "./*.d.ts"
+    ]
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./lib/types/*",
+        "./lib/types/common/",
+        "./"
+      ]
+    }
+  },
+  "files": [
+    "lib",
+    "naily.yml"
+  ],
+  "scripts": {
+    "build": "tsc -b tsconfig.build.json && tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "prepublishOnly": "tsc -b tsconfig.build.json && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript"
+  },
+  "author": "Zero <gczgroup@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nailyjs/core.git"
+  },
+  "homepage": "https://github.com/nailyjs/core",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {
+    "email": "gczgroup@qq.com",
+    "url": "https://www.naily.cc"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "is-class": "^0.0.9",
+    "jexl": "^2.3.0",
+    "@types/jexl": "^2.3.4",
+    "yaml": "^2.3.4",
+    "md5": "^2.3.0",
+    "@types/md5": "^2.3.0",
+    "chalk": "^4"
+  }
+}
