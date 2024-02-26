@@ -5,8 +5,8 @@ import { InitFactory } from "./init.class";
 
 export abstract class AbstractBootstrap<T> {
   constructor(private readonly rootService: Type<T>) {}
-  private readonly nailyContainer = new NailyContainer();
-  private readonly plugins: ImplNailyPlugin[] = [];
+  private nailyContainer: NailyContainer;
+  protected readonly plugins: ImplNailyPlugin[] = [];
 
   /**
    * ### Get Naily Container
@@ -64,7 +64,8 @@ export abstract class AbstractBootstrap<T> {
    * @return {T}
    * @memberof AbstractBootstrap
    */
-  public run(): T {
+  public run(): any {
+    this.nailyContainer = new NailyContainer(this.plugins);
     return new InitFactory<T>(this.rootService, this.nailyContainer, this.plugins).getInstance();
   }
 }

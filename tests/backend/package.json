@@ -8,6 +8,7 @@
     "dev": "pnpm build && node .naily/cjs/main.cjs"
   },
   "dependencies": {
-    "@nailyjs/core": "workspace:*"
+    "@nailyjs/core": "workspace:*",
+    "@nailyjs/backend-express": "workspace:*"
   }
 }

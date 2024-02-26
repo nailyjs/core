@@ -20,8 +20,8 @@ export function Injectable(options: Partial<IInjectableOptions> = { scope: Scope
   };
 }
 
-export function Inject(token?: IToken): PropertyDecorator;
-export function Inject(token?: IToken) {
+export function Autowired(token?: IToken): PropertyDecorator;
+export function Autowired(token?: IToken) {
   return (target: Object, propertyKey: string | symbol) => {
     const type = Reflect.getMetadata("design:type", target, propertyKey);
     const metadata: IInjectMetadata = { token: token || type, type };

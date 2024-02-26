@@ -2,6 +2,7 @@
   "name": "v29",
   "scripts": {
     "build:core": "pnpm -F @nailyjs/core build",
+    "build:express": "pnpm -F @nailyjs/backend-express build",
     "dev": "pnpm -F test-backend dev",
     "format": "prettier --write ./",
     "lint": "eslint \"./**/*.ts\" --fix",

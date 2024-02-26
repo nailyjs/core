@@ -1,31 +1,16 @@
-import { AbstractBootstrap, Inject, Injectable, ImplNailyService, ScopeEnum } from "@nailyjs/core";
+import { Controller, ExpressBootStrap, Get } from "@nailyjs/backend-express";
 
-@Injectable({ scope: ScopeEnum.Transient })
-export class ChildService implements ImplNailyService {
-  onReady() {
-    console.log("ChildService is ready");
-  }
-
-  helloWorld() {}
-}
-
-@Injectable()
-export class MainService implements ImplNailyService {
-  @Inject()
-  private readonly childService: ChildService;
-
-  onReady() {
-    console.log("MainService is ready");
-    this.childService.helloWorld();
+@Controller()
+export class TestController {
+  @Get()
+  public async test() {
+    return "Hello World";
   }
 }
-
-class BootStrap<T> extends AbstractBootstrap<T> {}
 
 async function main() {
-  const app = new BootStrap(MainService);
-  app.enableInternalPlugin();
+  const app = new ExpressBootStrap();
   app.run();
-  console.log(app.getNailyContainer());
+  console.log(app.getNailyContainer().getAll());
 }
 main();

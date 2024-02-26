@@ -1,4 +1,4 @@
-import { IToken, Type } from "../typings";
+import { IToken, ImplNailyPlugin, Type } from "../typings";
 
 export interface INailyContainerMapValue {
   target: Type;
@@ -31,9 +31,15 @@ export class NailyContainer {
    */
   public static readonly preDefineInjectables: IPreDefineInjectables[] = [];
 
-  constructor() {
+  constructor(private readonly plugins: ImplNailyPlugin[]) {
     NailyContainer.preDefineInjectables.forEach((injectable) => {
-      this.add(injectable.token, { target: injectable.target });
+      let v: INailyContainerMapValue = { target: injectable.target };
+      for (const plugin of this.plugins) {
+        if (plugin.preDefineCreateInjectable) {
+          v = plugin.preDefineCreateInjectable(injectable.target, this);
+        }
+      }
+      this.add(injectable.token, v);
     });
   }
 
