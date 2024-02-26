@@ -1,0 +1,13 @@
+{
+  "name": "test-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "scripts": {
+    "build": "rollup -c rollup.config.mjs",
+    "dev": "pnpm build && node .naily/cjs/main.cjs"
+  },
+  "dependencies": {
+    "@nailyjs/core": "workspace:*"
+  }
+}
