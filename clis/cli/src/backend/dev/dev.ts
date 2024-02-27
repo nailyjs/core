@@ -27,12 +27,13 @@ function exit(process?: ChildProcess) {
   });
 }
 
-let newProcess: ChildProcess | undefined = getDevelopmentForkProcess();
+let newProcess: ChildProcess | undefined;
 
-process.on("exit", () => {
-  exit(newProcess);
-});
 export default function () {
+  process.on("exit", () => {
+    exit(newProcess);
+  });
+  newProcess = getDevelopmentForkProcess();
   watch(".", {
     ignored: ["**/node_modules/**", "**/.git/**", "**/.naily/**"],
   }).on("change", async (path) => {

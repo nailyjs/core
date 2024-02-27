@@ -1,2 +1,2 @@
-export * from "./bootstrap";
-export * from "./plugins";
+export * from "./bootstrap/index";
+export * from "./plugins/index";

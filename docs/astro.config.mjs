@@ -18,7 +18,7 @@ export default defineConfig({
       sidebar: [
         {
           label: "快速上手",
-          items: [{ label: "示例", autogenerate: { directory: "guides/examples" } }],
+          autogenerate: { directory: "guides" },
         },
         {
           label: "插件与启动器",

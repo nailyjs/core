@@ -1,8 +1,47 @@
 ---
-title: 最小化的后端示例
+title: 创建项目
+sidebar:
+  order: 2
 ---
 
-我们将从一个空白的文件夹开始，然后添加一个简单的 `Hello, World!` 程序。
+## 通过CLI创建项目
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+建议通过`create-naily`工具来创建项目，这样可以更快地创建一个新的项目。
+
+首先得有`node`，然后在终端中运行以下命令：
+
+<Tabs>
+  <TabItem label="pnpm">
+
+```bash
+pnpm create naily
+```
+
+  </TabItem>
+  <TabItem label="npm">
+  
+```bash
+npm create naily
+```
+  
+  </TabItem>
+
+  <TabItem label="yarn">
+
+```bash
+yarn create naily
+```
+
+  </TabItem>
+</Tabs>
+
+然后按照提示操作，就可以创建一个新的项目了。
+
+## 手动创建项目
+
+在这个例子里，我们将从一个空白的文件夹开始，然后创建一个简单的、基于`Express`的 `Hello World!` 程序。
 
 首先得有`node`和`pnpm`，然后在你认为合适的位置创建一个文件夹，然后在终端中进入该文件夹，然后运行以下命令：
 
@@ -21,9 +60,8 @@ pnpm i typescript express @types/express
 # 安装核心包
 pnpm i @nailyjs/core @nailyjs/backend @nailyjs/backend-express
 
-# 可以安装`tsx`来直接运行ts文件，或者您可以结合其他打包工具来使用
-# 我们这边方便演示，直接使用`tsx`来运行
-pnpm i tsx
+# 安装CLI
+pnpm i @nailyjs/cli
 ```
 
 然后我们创建一个 `src` 文件夹，然后在里面创建一个 `main.ts` 文件，然后添加以下代码：
@@ -36,6 +74,7 @@ import { AddressInfo } from "net";
 
 @Controller()
 export class NailyApplication extends ExpressBootStrap {
+  // 声明一个路由
   @Get()
   public test() {
     return "Hello World!!!";
@@ -57,7 +96,7 @@ new NailyApplication()
 ```json
 {
   "scripts": {
-    "start": "tsx src/main.ts"
+    "start": "naily dev"
   }
 }
 ```

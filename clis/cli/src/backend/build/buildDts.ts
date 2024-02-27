@@ -7,7 +7,7 @@ export default function (outDir: string = "lib/types", forceNoEmit = false) {
     const cwd = process.cwd();
     if (existsSync(join(cwd, "tsconfig.build.json"))) {
       try {
-        execSync(forceNoEmit ? "tsc --noEmit" : `tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --outDir ${outDir}}`, {
+        execSync(forceNoEmit ? "tsc --noEmit" : `tsc -p tsconfig.build.json --declaration --emitDeclarationOnly --outDir ${outDir}`, {
           cwd,
           stdio: "inherit",
         });

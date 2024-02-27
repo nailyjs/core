@@ -1,5 +1,5 @@
 import { Command } from "commander";
-import { logo } from "../common";
+import { logo } from "../common/index";
 import { t } from "../common/i18n";
 import buildLib from "./build/buildLib";
 import buildApp from "./build/buildApp";
