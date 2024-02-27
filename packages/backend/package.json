@@ -12,7 +12,7 @@
     "naily-component"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json && rollup -c rollup.config.mjs",
+    "build": "naily build --type lib",
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {

@@ -4,8 +4,8 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "rollup -c rollup.config.mjs",
-    "dev": "pnpm build && cross-env NODE_ENV=development node .naily/cjs/main.cjs"
+    "build": "naily build",
+    "dev": "naily dev"
   },
   "dependencies": {
     "@nailyjs/core": "workspace:*",

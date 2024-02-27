@@ -4,8 +4,12 @@
     "build:core": "pnpm -F @nailyjs/core build",
     "build:express": "pnpm -F @nailyjs/backend-express build",
     "build:backend": "pnpm -F @nailyjs/backend build",
+    "build:commander": "pnpm -F @nailyjs/commander build",
+    "build:cli": "pnpm -F @nailyjs/cli build",
     "dev": "pnpm -F test-backend dev",
+    "build": "pnpm -F test-backend build",
     "dev:docs": "pnpm -F docs dev",
+    "naily": "naily",
     "format": "prettier --write ./",
     "lint": "eslint \"./**/*.ts\" --fix",
     "prepare": "husky install",
@@ -57,5 +61,8 @@
   },
   "dependencies": {
     "cross-env": "^7.0.3"
+  },
+  "peerDependencies": {
+    "@nailyjs/cli": "^0.33.0"
   }
 }
