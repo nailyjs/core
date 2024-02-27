@@ -43,7 +43,8 @@ export class NailyApplication extends ExpressBootStrap {
 }
 
 new NailyApplication()
-  .enableInternalPlugin()
+  // 启用注入值插件 必须
+  // ExpressBootStrap会读取配置文件内的数据 比如端口号等
   .usePlugin(new InjectValuePlugin())
   .run()
   .then((server) => {
