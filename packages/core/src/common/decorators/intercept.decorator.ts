@@ -1,4 +1,4 @@
-import { NailyContainerConstant } from "..";
+import { NailyContainerConstant } from "../constants";
 import { ImplNailyInterceptor, Type } from "../typings";
 
 export function Intercept(injectableOrPlainClass?: Type<ImplNailyInterceptor> | ImplNailyInterceptor): MethodDecorator;

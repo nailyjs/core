@@ -1,7 +1,7 @@
 import { INailyContainerMapValue, ImplNailyPlugin, InitFactory, NailyContainer, Type } from "@nailyjs/core";
-import { NailyExpressConstant } from "../constants";
 import { Request, Response, Router } from "express";
-import { IExpressMapping } from "../typings/metadata.typing";
+import { INailyControllerMetadata, INailyControllerMapping, NailyBackendConstant } from "@nailyjs/backend";
+import { join } from "path";
 
 export class NailyExpressPlugin implements ImplNailyPlugin {
   constructor(
@@ -9,8 +9,12 @@ export class NailyExpressPlugin implements ImplNailyPlugin {
     private readonly app: Router,
   ) {}
 
+  private urlPath(controllerPath: string, mapping: string): string {
+    return join("/" + controllerPath, mapping).replace(/\\/g, "/");
+  }
+
   preDefineCreateInjectable<T>(target: Type<T>, container: NailyContainer): INailyContainerMapValue {
-    const router = Reflect.getMetadata(NailyExpressConstant.CONTROLLER, target);
+    const router = Reflect.getMetadata(NailyBackendConstant.CONTROLLER, target);
     if (router) {
       return { target, instance: new InitFactory(target, container, this.pluginCtx).getInstance() };
     } else {
@@ -19,22 +23,25 @@ export class NailyExpressPlugin implements ImplNailyPlugin {
   }
 
   afterCreateInjectable<T>(target: Type<T>, instance: T): Object {
-    const router: Router = Reflect.getMetadata(NailyExpressConstant.CONTROLLER, target);
-    if (!router) return instance;
+    const controller: INailyControllerMetadata = Reflect.getMetadata(NailyBackendConstant.CONTROLLER, target);
+    if (!controller || !controller.path) return instance;
     const methodKeys = Reflect.ownKeys(target.prototype).filter((key) => key !== "constructor");
+    const router = Router();
+
     for (const methodKey of methodKeys) {
-      const mappings: IExpressMapping[] = Reflect.getMetadata(NailyExpressConstant.MAPPING, target.prototype, methodKey);
+      const mappings: INailyControllerMapping[] = Reflect.getMetadata(NailyBackendConstant.MAPPING, target.prototype, methodKey);
       if (!mappings) continue;
       if (!Array.isArray(mappings)) continue;
 
       for (const mapping of mappings) {
         const method = mapping.method.toLowerCase();
-        router[method](mapping.path, async (req: Request, res: Response) => {
+        router[method](this.urlPath(controller.path, mapping.path), async (req: Request, res: Response) => {
           const result = await instance[methodKey]();
           res.send(result);
         });
       }
     }
+
     this.app.use(router);
     return instance;
   }

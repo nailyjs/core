@@ -1,16 +1,20 @@
-import { Controller, ExpressBootStrap, Get } from "@nailyjs/backend-express";
+import { ExpressBootStrap } from "@nailyjs/backend-express";
+import { Controller, Get } from "@nailyjs/backend";
+import { InjectValuePlugin } from "@nailyjs/core/backend";
+import { AddressInfo } from "net";
 
 @Controller()
-export class TestController {
+export class NailyApplication extends ExpressBootStrap {
   @Get()
-  public async test() {
-    return "Hello World";
+  public test() {
+    return "Hello World!!!";
   }
 }
 
-async function main() {
-  const app = new ExpressBootStrap();
-  app.run();
-  console.log(app.getNailyContainer().getAll());
-}
-main();
+new NailyApplication()
+  .enableInternalPlugin()
+  .usePlugin(new InjectValuePlugin())
+  .run()
+  .then((server) => {
+    console.log(`Server is running on port ${(server.address() as AddressInfo).port}`);
+  });

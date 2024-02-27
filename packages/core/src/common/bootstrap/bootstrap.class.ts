@@ -1,4 +1,4 @@
-import { InternalPlugin } from "../plugins";
+import { InjectPropertyPlugin, InterceptMethodPlugin } from "../plugins";
 import { ImplNailyPlugin, Type } from "../typings";
 import { NailyContainer } from "./container.class";
 import { InitFactory } from "./init.class";
@@ -51,7 +51,7 @@ export abstract class AbstractBootstrap<T> {
    * @memberof AbstractBootstrap
    */
   public enableInternalPlugin(): this {
-    return this.usePlugin(InternalPlugin);
+    return this.usePlugin(new InjectPropertyPlugin(), new InterceptMethodPlugin());
   }
 
   /**

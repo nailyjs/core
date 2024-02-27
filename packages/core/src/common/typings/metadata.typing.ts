@@ -8,3 +8,8 @@ export interface IInjectableClassMetadata {
   options: Partial<IInjectableOptions>;
   paramTypes: any[];
 }
+
+export interface IValueMetadata {
+  jexl: string;
+  propertyKey: string | symbol;
+}

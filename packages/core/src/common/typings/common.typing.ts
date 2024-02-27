@@ -1,6 +1,7 @@
 import { INailyContainerMapValue, NailyContainer } from "../bootstrap/container.class";
 import { InitFactory } from "../bootstrap/init.class";
 import { ScopeEnum } from "../constants";
+import { Jexl } from "jexl";
 
 export interface ImplNailyService {
   /**
@@ -25,6 +26,10 @@ export interface ImplNailyPlugin {
   preDefineCreateInjectable?<T>(target: Type<T>, container: NailyContainer): INailyContainerMapValue;
   beforeCreateInjectable?<T>(target: Type<T>, factory: InitFactory<T>, container: NailyContainer): void;
   afterCreateInjectable?<T>(target: Type<T>, instance: T, factory: InitFactory<T>, container: NailyContainer): Object;
+}
+
+export interface ImplNailyJexlPlugin {
+  buildJexl?(jexlInstance: InstanceType<typeof Jexl>): void;
 }
 
 export interface Type<T = any> extends Function {

@@ -5,10 +5,11 @@
   "description": "",
   "scripts": {
     "build": "rollup -c rollup.config.mjs",
-    "dev": "pnpm build && node .naily/cjs/main.cjs"
+    "dev": "pnpm build && cross-env NODE_ENV=development node .naily/cjs/main.cjs"
   },
   "dependencies": {
     "@nailyjs/core": "workspace:*",
+    "@nailyjs/backend": "workspace:*",
     "@nailyjs/backend-express": "workspace:*"
   }
 }

@@ -4,6 +4,8 @@ export const NailyContainerConstant = {
   INJECTKEY: Symbol("__injectkey__"),
 
   INTERCEPT: Symbol("__intercept__"),
+  VALUE: Symbol("__value__"),
+  VALUEKEY: Symbol("__valuekey__"),
 };
 
 export const enum ScopeEnum {

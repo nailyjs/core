@@ -5,6 +5,23 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.mjs",
   "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/esm/common/index.mjs",
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts"
+    },
+    "./backend": {
+      "import": "./lib/esm/backend/index.mjs",
+      "require": "./lib/cjs/backend/index.js",
+      "types": "./lib/types/backend/index.d.ts"
+    },
+    "./common": {
+      "import": "./lib/esm/common/index.mjs",
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts"
+    }
+  },
   "files": [
     "lib"
   ],
@@ -17,6 +34,10 @@
   },
   "dependencies": {
     "reflect-metadata": "^0.2.1",
-    "is-class": "^0.0.9"
+    "is-class": "^0.0.9",
+    "jexl": "^2.3.0",
+    "@types/jexl": "^2.3.4",
+    "js-yaml": "^4.1.0",
+    "@types/js-yaml": "^4.0.9"
   }
 }
