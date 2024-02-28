@@ -1,3 +1,3 @@
 {
-  "exclude": ["commitlint.config.cjs"]
+  "exclude": ["commitlint.config.cjs", "lib"]
 }

@@ -8,8 +8,7 @@
     "build": "naily build"
   },
   "dependencies": {
-    "@nailyjs/core": "*",
-    "@nailyjs/backend": "*"
+    "@nailyjs/core": "*"
   },
   "devDependencies": {
     "@nailyjs/cli": "*",

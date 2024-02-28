@@ -8,7 +8,7 @@
     "naily.yml"
   ],
   "scripts": {
-    "build": "tsc -b tsconfig.build.json && naily build",
+    "build": "naily build --type lib",
     "format": "prettier --write ./",
     "prepublishOnly": "npm run build"
   },

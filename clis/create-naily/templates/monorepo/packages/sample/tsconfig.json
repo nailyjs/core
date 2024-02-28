@@ -1,16 +1,10 @@
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "target": "ES2021",
-    "moduleResolution": "Node",
-    "module": "ES6",
-    "esModuleInterop": true,
-    "strict": false,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "emitDecoratorMetadata": true
   },
-  "include": ["src/**/*", "rollup.config.ts"]
+  "include": ["src/**/*"]
 }
