@@ -1,0 +1,24 @@
+{
+  "name": "my-naily-sample",
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "naily dev",
+    "format": "prettier --write ./",
+    "build": "naily build"
+  },
+  "dependencies": {
+    "@nailyjs/core": "*",
+    "@nailyjs/backend": "*"
+  },
+  "devDependencies": {
+    "@nailyjs/cli": "*",
+    "prettier": "*",
+    "eslint": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-prettier": "*",
+    "prettier-eslint": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "typescript": "^5"
+  }
+}

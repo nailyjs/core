@@ -1,0 +1,40 @@
+{
+  "name": "my-naily-monorepo",
+  "version": "0.0.0",
+  "description": "",
+  "files": [
+    "lib",
+    "bin",
+    "naily.yml"
+  ],
+  "scripts": {
+    "dev:sample": "pnpm -F my-naily-sample dev",
+    "build:sample": "pnpm -F my-naily-sample build",
+    "format": "prettier --write ./"
+  },
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "homepage": "",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "bugs": {},
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@nailyjs/core": "*"
+  },
+  "devDependencies": {
+    "@nailyjs/cli": "*",
+    "prettier": "*",
+    "eslint": "*",
+    "eslint-config-prettier": "*",
+    "eslint-plugin-prettier": "*",
+    "prettier-eslint": "*",
+    "@typescript-eslint/eslint-plugin": "*",
+    "typescript": "^5"
+  }
+}

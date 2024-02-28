@@ -5,6 +5,10 @@
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.mjs",
   "types": "lib/types/index.d.ts",
+  "scripts": {
+    "build": "naily build --type lib",
+    "prepublishOnly": "pnpm build"
+  },
   "exports": {
     ".": {
       "import": "./lib/esm/common/index.mjs",
@@ -28,9 +32,19 @@
   "keywords": [
     "naily-component"
   ],
-  "scripts": {
-    "build": "naily build --type lib",
-    "prepublishOnly": "pnpm build"
+  "bugs": {
+    "email": "gczgroup@qq.com",
+    "url": "https://github.com/nailyjs/core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nailyjs/core"
+  },
+  "homepage": "https://github.com/nailyjs/core",
+  "author": {
+    "url": "https://github.com/groupguanfang",
+    "email": "gczgroup@qq.com",
+    "name": "Zero"
   },
   "dependencies": {
     "reflect-metadata": "^0.2.1",
