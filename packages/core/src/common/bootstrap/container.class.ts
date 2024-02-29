@@ -36,7 +36,7 @@ export class NailyContainer {
       let v: INailyContainerMapValue = { target: injectable.target };
       for (const plugin of this.plugins) {
         if (plugin.preDefineCreateInjectable) {
-          v = plugin.preDefineCreateInjectable(injectable.target, this);
+          v = plugin.preDefineCreateInjectable(injectable.target, this, plugins);
         }
       }
       this.add(injectable.token, v);

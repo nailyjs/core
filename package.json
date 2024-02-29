@@ -6,6 +6,7 @@
     "build:backend": "pnpm -F @nailyjs/backend build",
     "build:commander": "pnpm -F @nailyjs/commander build",
     "build:cli": "pnpm -F @nailyjs/cli build",
+    "build:cache": "pnpm -F @nailyjs/cache-manager build",
     "build:create": "pnpm -F create-naily build",
     "dev": "pnpm -F test-backend dev",
     "build": "pnpm -F test-backend build",

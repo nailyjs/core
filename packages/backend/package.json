@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "reflect-metadata": "^0.2.1",
-    "@nailyjs/core": "workspace:*"
+    "@nailyjs/core": "workspace:*",
+    "is-class": "^0.0.9"
   }
 }

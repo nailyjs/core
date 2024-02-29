@@ -160,6 +160,9 @@ importers:
       '@nailyjs/core':
         specifier: workspace:*
         version: link:../core
+      is-class:
+        specifier: ^0.0.9
+        version: 0.0.9
       reflect-metadata:
         specifier: ^0.2.1
         version: 0.2.1
@@ -175,9 +178,27 @@ importers:
       '@types/express':
         specifier: ^4.17.21
         version: 4.17.21
+      '@types/express-serve-static-core':
+        specifier: ^4.17.43
+        version: 4.17.43
       express:
         specifier: ^4.18.2
         version: 4.18.2
+      reflect-metadata:
+        specifier: ^0.2.1
+        version: 0.2.1
+
+  packages/cache-manager:
+    dependencies:
+      '@nailyjs/core':
+        specifier: workspace:*
+        version: link:../core
+      cache-manager:
+        specifier: ^5.4.0
+        version: 5.4.0
+      is-class:
+        specifier: ^0.0.9
+        version: 0.0.9
       reflect-metadata:
         specifier: ^0.2.1
         version: 0.2.1
@@ -214,6 +235,30 @@ importers:
       reflect-metadata:
         specifier: ^0.2.1
         version: 0.2.1
+
+  packages/swagger:
+    dependencies:
+      '@nailyjs/backend':
+        specifier: workspace:*
+        version: link:../backend
+      '@nailyjs/core':
+        specifier: workspace:*
+        version: link:../core
+      '@types/lodash':
+        specifier: ^4.14.202
+        version: 4.14.202
+      is-class:
+        specifier: ^0.0.9
+        version: 0.0.9
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      reflect-metadata:
+        specifier: ^0.2.1
+        version: 0.2.1
+      swagger-ui-dist:
+        specifier: ^5.11.8
+        version: 5.11.8
 
   tests/backend:
     dependencies:
@@ -1928,6 +1973,10 @@ packages:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
 
+  /@types/lodash@4.14.202:
+    resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
+    dev: false
+
   /@types/mdast@4.0.3:
     resolution: {integrity: sha512-LsjtqsyF+d2/yFOYaN22dHZI1Cpwkrj+g06G8+qtUKlhovPW89YhqSnfKtMbkgmEtYpH2gydRNULd6y8mciAFg==}
     dependencies:
@@ -2776,6 +2825,14 @@ packages:
   /bytes@3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /cache-manager@5.4.0:
+    resolution: {integrity: sha512-FS7o8vqJosnLpu9rh2gQTo8EOzCRJLF1BJ4XDEUDMqcfvs7SJZs5iuoFTXLauzQ3S5v8sBAST1pCwMaurpyi1A==}
+    dependencies:
+      lodash.clonedeep: 4.5.0
+      lru-cache: 10.2.0
+      promise-coalesce: 1.1.2
     dev: false
 
   /call-bind@1.0.5:
@@ -5164,6 +5221,10 @@ packages:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: true
 
+  /lodash.clonedeep@4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
+    dev: false
+
   /lodash.isfunction@3.0.9:
     resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}
     dev: true
@@ -6552,6 +6613,11 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /promise-coalesce@1.1.2:
+    resolution: {integrity: sha512-zLaJ9b8hnC564fnJH6NFSOGZYYdzrAJn2JUUIwzoQb32fG2QAakpDNM+CZo1km6keXkRXRM+hml1BFAPVnPkxg==}
+    engines: {node: '>=16'}
+    dev: false
+
   /prompts@2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
@@ -7489,6 +7555,10 @@ packages:
   /supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  /swagger-ui-dist@5.11.8:
+    resolution: {integrity: sha512-IfPtCPdf6opT5HXrzHO4kjL1eco0/8xJCtcs7ilhKuzatrpF2j9s+3QbOag6G3mVFKf+g+Ca5UG9DquVUs2obA==}
+    dev: false
 
   /synckit@0.8.6:
     resolution: {integrity: sha512-laHF2savN6sMeHCjLRkheIU4wo3Zg9Ln5YOjOo7sZ5dVQW8yF5pPE5SIw1dsPhq3TRp1jisKRCdPhfs/1WMqDA==}

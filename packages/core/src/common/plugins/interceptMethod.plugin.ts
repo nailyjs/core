@@ -2,9 +2,11 @@ import isClass from "is-class";
 import { NailyContainerConstant } from "..";
 import { NailyContainer } from "../bootstrap/container.class";
 import { InitFactory } from "../bootstrap/init.class";
-import { ImplNailyInterceptor, ImplNailyPlugin, ImplNailyService, Type } from "../typings";
+import { ImplNailyInterceptPlugin, ImplNailyInterceptor, ImplNailyPlugin, ImplNailyService, Type } from "../typings";
 
 export class InterceptMethodPlugin implements ImplNailyPlugin {
+  constructor(private readonly interceptPlugins: ImplNailyInterceptPlugin[] = []) {}
+
   afterCreateInjectable<T>(target: Type<T>, instance: T, factory: InitFactory<T>, container: NailyContainer): Object {
     const methodKeys = Reflect.ownKeys(target.prototype).filter((key) => key !== "constructor");
     for (const key of methodKeys) {
@@ -23,20 +25,66 @@ export class InterceptMethodPlugin implements ImplNailyPlugin {
           const method = instance[key];
           instance[key] = async (...args: any[]) => {
             if (interceptorInstance.before && typeof interceptorInstance.before === "function") {
-              interceptorInstance.before(...args);
+              let interceptorBeforeArgs: any[] = [];
+              for (const plugin of this.interceptPlugins) {
+                if (plugin.transformBefore && typeof plugin.transformBefore === "function") {
+                  interceptorBeforeArgs = await plugin.transformBefore({
+                    getTarget: () => target,
+                    getInstance: () => instance,
+                    getArguments: () => args,
+                    getMethodKey: () => key,
+                  });
+                }
+              }
+              await interceptorInstance.before(...interceptorBeforeArgs);
             }
             try {
               const value = await method.apply(instance, args);
               if (interceptorInstance.after && typeof interceptorInstance.after === "function") {
-                interceptorInstance.after(value);
+                let interceptorAfterArgs: any[] = [];
+                for (const plugin of this.interceptPlugins) {
+                  if (plugin.transformAfter && typeof plugin.transformAfter === "function") {
+                    interceptorAfterArgs = await plugin.transformAfter({
+                      getTarget: () => target,
+                      getInstance: () => instance,
+                      getArguments: () => args,
+                      getMethodKey: () => key,
+                      getReturnValue: () => value,
+                    });
+                  }
+                }
+                await interceptorInstance.after(...interceptorAfterArgs);
               }
             } catch (err) {
               if (interceptorInstance.catch && typeof interceptorInstance.catch === "function") {
-                interceptorInstance.catch(err);
+                let interceptorCatchArgs: any[] = [];
+                for (const plugin of this.interceptPlugins) {
+                  if (plugin.transformCatch && typeof plugin.transformCatch === "function") {
+                    interceptorCatchArgs = await plugin.transformCatch({
+                      getTarget: () => target,
+                      getInstance: () => instance,
+                      getArguments: () => args,
+                      getMethodKey: () => key,
+                      getError: () => err,
+                    });
+                  }
+                }
+                await interceptorInstance.catch(...interceptorCatchArgs);
               }
             } finally {
               if (interceptorInstance.finally && typeof interceptorInstance.finally === "function") {
-                interceptorInstance.finally();
+                let interceptorFinallyArgs: any[] = [];
+                for (const plugin of this.interceptPlugins) {
+                  if (plugin.transformFinally && typeof plugin.transformFinally === "function") {
+                    interceptorFinallyArgs = await plugin.transformFinally({
+                      getTarget: () => target,
+                      getInstance: () => instance,
+                      getArguments: () => args,
+                      getMethodKey: () => key,
+                    });
+                  }
+                }
+                await interceptorInstance.finally(...interceptorFinallyArgs);
               }
             }
           };

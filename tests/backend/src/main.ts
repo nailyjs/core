@@ -4,8 +4,10 @@ import { NailyApplication } from "./app.controller";
 
 new NailyApplication()
   .enableInternalPlugin()
+  .enableBodyParser()
   .usePlugin(new InjectValuePlugin())
   .run()
   .then((server) => {
-    console.log(`Server is running on ${(server.address() as AddressInfo).address}:${(server.address() as AddressInfo).port}`);
+    const { address, port } = server.address() as AddressInfo;
+    console.log(`Server is running on ${address}:${port}`);
   });

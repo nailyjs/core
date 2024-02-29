@@ -3,6 +3,15 @@ import { NailyContainerConstant, ScopeEnum } from "../constants";
 import { IInjectMetadata, IInjectableOptions, IToken, Type } from "../typings";
 import { IInjectClassMetadata } from "../typings/metadata.typing";
 
+/**
+ * ### Naily Injectable
+ *
+ * This decorator is used to mark the class as an injectable class.
+ *
+ * @export
+ * @param {Partial<IInjectableOptions>} [options]
+ * @return {ClassDecorator}
+ */
 export function Injectable(options?: Partial<IInjectableOptions>): ClassDecorator;
 export function Injectable(options: Partial<IInjectableOptions> = { scope: ScopeEnum.Singleton }) {
   return (target: Type) => {
@@ -20,6 +29,15 @@ export function Injectable(options: Partial<IInjectableOptions> = { scope: Scope
   };
 }
 
+/**
+ * ### Naily Autowired
+ *
+ * This decorator is used to mark the property as an autowired property.
+ *
+ * @export
+ * @param {IToken} [token]
+ * @return {PropertyDecorator}
+ */
 export function Autowired(token?: IToken): PropertyDecorator;
 export function Autowired(token?: IToken) {
   return (target: Object, propertyKey: string | symbol) => {

@@ -13,3 +13,12 @@ export interface IValueMetadata {
   jexl: string;
   propertyKey: string | symbol;
 }
+
+export const enum IInterceptParamMetadataType {
+  CatchedError = "CatchedError",
+  Parameter = "Parameter",
+}
+
+export interface IInterceptParamMetadata {
+  type: IInterceptParamMetadataType;
+}

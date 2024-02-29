@@ -4,6 +4,7 @@ export const NailyContainerConstant = {
   INJECTKEY: Symbol("__injectkey__"),
 
   INTERCEPT: Symbol("__intercept__"),
+  INTERCEPT_PARAMETER: Symbol("__intercept_parameter__"),
   VALUE: Symbol("__value__"),
   VALUEKEY: Symbol("__valuekey__"),
 };
