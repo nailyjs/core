@@ -6,6 +6,7 @@ import { AbstractNailyBackendAdapter } from "../class/adapter.class";
 export abstract class AbstractNailyBackendBootStrap<T> extends AbstractBootstrap<T> {
   private readonly backendPipe: (ImplNailyBackendPipe | Type<ImplNailyBackendPipe>)[] = [];
   private readonly backendGuard: (ImplNailyBackendGuard | Type<ImplNailyBackendGuard>)[] = [];
+  private readonly backendPlugin: NailyBackendPlugin[] = [];
 
   /**
    * ### Use backend pipe
@@ -21,8 +22,31 @@ export abstract class AbstractNailyBackendBootStrap<T> extends AbstractBootstrap
     return this;
   }
 
+  /**
+   * ### Use backend guard
+   *
+   * Use the backend guard. The backend guard will be called when the request reaches the controller.
+   *
+   * @param {(ImplNailyBackendGuard | Type<ImplNailyBackendGuard>)} guard - The backend guard to use.
+   * @return {this}
+   * @memberof AbstractNailyBackendBootStrap
+   */
   public useBackendGuard(guard: ImplNailyBackendGuard | Type<ImplNailyBackendGuard>): this {
     this.backendGuard.push(guard);
+    return this;
+  }
+
+  /**
+   * ### Use backend plugin
+   *
+   * Use the backend plugin. The backend plugin will be called when the request reaches the controller.
+   *
+   * @param {NailyBackendPlugin} plugin - The backend plugin to use.
+   * @return {this}
+   * @memberof AbstractNailyBackendBootStrap
+   */
+  public useBackendPlugin(plugin: NailyBackendPlugin): this {
+    this.backendPlugin.push(plugin);
     return this;
   }
 
@@ -48,6 +72,6 @@ export abstract class AbstractNailyBackendBootStrap<T> extends AbstractBootstrap
    */
   protected initAdapter(adapter: AbstractNailyBackendAdapter) {
     super.enableInternalPlugin();
-    super.usePlugin(new NailyBackendPlugin(adapter, this.backendPipe, this.backendGuard));
+    super.usePlugin(new NailyBackendPlugin(adapter, this.backendPipe, this.backendGuard, this.backendPlugin));
   }
 }

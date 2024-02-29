@@ -37,6 +37,10 @@ export class NailyContainer {
       for (const plugin of this.plugins) {
         if (plugin.preDefineCreateInjectable) {
           v = plugin.preDefineCreateInjectable(injectable.target, this, plugins);
+          if (!v)
+            throw new TypeError(`Class ${injectable.target.name} is not injectable, please use @Injectable() decorator`, {
+              cause: `Plugin error: ${plugin.constructor.name} preDefineCreateInjectable return undefined or null`,
+            });
         }
       }
       this.add(injectable.token, v);

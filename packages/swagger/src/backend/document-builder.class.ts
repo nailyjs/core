@@ -3,7 +3,6 @@ import {
   ExternalDocumentationObject,
   InfoObject,
   OpenAPIObject,
-  PathsObject,
   SecurityRequirementObject,
   SecuritySchemeObject,
   ServerObject,
@@ -14,7 +13,6 @@ import { isUndefined, negate, pickBy } from "lodash";
 
 export class NailySwaggerDocumentBuilder {
   private info: InfoObject;
-  private paths: PathsObject;
   private servers: ServerObject[];
   private security: SecurityRequirementObject[];
   private components: ComponentsObject;
@@ -362,11 +360,10 @@ export class NailySwaggerDocumentBuilder {
    * @return {OpenAPIObject}
    * @memberof NailySwaggerDocumentBuilder
    */
-  public build(): OpenAPIObject {
+  public build(): Omit<OpenAPIObject, "paths"> {
     return {
       openapi: "3.0.0",
       info: this.info,
-      paths: this.paths,
       servers: this.servers,
       security: this.security,
       components: this.components,

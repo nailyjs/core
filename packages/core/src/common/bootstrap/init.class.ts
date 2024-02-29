@@ -41,6 +41,7 @@ export class InitFactory<T extends ImplNailyService> {
     }
     // 实例化类
     let result = new this.rootService(...params);
+    if (!result) throw new TypeError(`Class ${this.rootService.name} is not injectable, please use @Injectable() decorator`);
     // 获取类的元数据
     const injectableOptions: IInjectableClassMetadata = this.getInjectableOptions();
     // 如果类没有元数据，抛出错误
@@ -49,6 +50,10 @@ export class InitFactory<T extends ImplNailyService> {
     for (const plugin of this.plugins) {
       if (plugin.afterCreateInjectable && typeof plugin.afterCreateInjectable === "function") {
         result = plugin.afterCreateInjectable(this.rootService, result, this, this.container) as T;
+        if (!result)
+          throw new TypeError(`Class ${this.rootService.name} is not injectable, please use @Injectable() decorator`, {
+            cause: `Plugin error: ${plugin.constructor.name} afterCreateInjectable return undefined or null`,
+          });
       }
     }
     // 设置类的实例到容器
