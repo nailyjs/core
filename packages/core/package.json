@@ -1,0 +1,58 @@
+{
+  "name": "@nailyjs/core",
+  "description": "Naily.js Core",
+  "version": "0.33.0",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.mjs",
+  "types": "lib/types/index.d.ts",
+  "scripts": {
+    "build": "naily build --type lib",
+    "prepublishOnly": "pnpm build"
+  },
+  "exports": {
+    ".": {
+      "import": "./lib/esm/common/index.mjs",
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts"
+    },
+    "./backend": {
+      "import": "./lib/esm/backend/index.mjs",
+      "require": "./lib/cjs/backend/index.js",
+      "types": "./lib/types/backend/index.d.ts"
+    },
+    "./common": {
+      "import": "./lib/esm/common/index.mjs",
+      "require": "./lib/cjs/common/index.js",
+      "types": "./lib/types/common/index.d.ts"
+    }
+  },
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "naily-component"
+  ],
+  "bugs": {
+    "email": "gczgroup@qq.com",
+    "url": "https://github.com/nailyjs/core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nailyjs/core"
+  },
+  "homepage": "https://github.com/nailyjs/core",
+  "author": {
+    "url": "https://github.com/groupguanfang",
+    "email": "gczgroup@qq.com",
+    "name": "Zero"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.1",
+    "is-class": "^0.0.9",
+    "jexl": "^2.3.0",
+    "@types/jexl": "^2.3.4",
+    "js-yaml": "^4.1.0",
+    "@types/js-yaml": "^4.0.9",
+    "zod": "^3.22.4"
+  }
+}
