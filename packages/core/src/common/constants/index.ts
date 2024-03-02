@@ -26,6 +26,7 @@ export const AutoInject = Symbol("__AUTO_INJECT__");
  */
 export enum ScopeEnum {
   Autoload = "Autoload",
+  OnInject = "OnInject",
   AfterInject = "AfterInject",
   BeforeBoot = "BeforeBoot",
   AfterBoot = "AfterBoot",

@@ -1,17 +1,20 @@
 import { NailyContainer, NailyContainerUtil } from "../containers";
-import { NailyContainerConstant } from "../constants";
+import { NailyContainerConstant, ScopeEnum } from "../constants";
 import { IToken, IType } from "../typings";
-import { IInjectableOptions, n } from "../schemas";
+import { IInjectableOptions, InjectableOptionsSchema, n } from "../schemas";
 
-function createInjectDecorator(token?: IToken, forceAutoload: boolean = false): PropertyDecorator & ParameterDecorator {
+function createInjectDecorator(token?: IToken): PropertyDecorator & ParameterDecorator {
   return (target: Object, key: string | symbol, index?: number) => {
     if (typeof index === "number") {
       if (token) {
         const existingTarget = NailyContainer.safeGetTarget(token);
-        if (!existingTarget && !forceAutoload) {
+        const existingTargetOptions: IInjectableOptions = InjectableOptionsSchema.parse(
+          Reflect.getMetadata(NailyContainerConstant.INJECTABLE, existingTarget),
+        );
+        if (!existingTarget && existingTargetOptions.scope !== ScopeEnum.OnInject) {
           throw new Error(`The token ${String(token)} does not exist in the container, please check your ${target.constructor.name} class`);
         }
-        if (!existingTarget && forceAutoload) {
+        if (!existingTarget && existingTargetOptions.scope === ScopeEnum.OnInject) {
           NailyContainer.addTarget(token, target.constructor as IType);
           const instance = NailyContainer.initializeExistingTarget(
             token,
@@ -24,7 +27,11 @@ function createInjectDecorator(token?: IToken, forceAutoload: boolean = false): 
       }
 
       const metadata: any[] = Reflect.getMetadata("design:paramtypes", target) || [];
-      if (forceAutoload && metadata[index] && n.class().parse(metadata[index])) {
+      const metadataIndexOptions: IInjectableOptions = InjectableOptionsSchema.parse(
+        Reflect.getMetadata(NailyContainerConstant.INJECTABLE, metadata[index]),
+      );
+
+      if (metadataIndexOptions.scope === ScopeEnum.OnInject && metadata[index] && n.class().parse(metadata[index])) {
         const injectDesignTypeTargetOptions: IInjectableOptions = Reflect.getMetadata(NailyContainerConstant.INJECTABLE, metadata[index]);
         if (NailyContainer.safeGetTarget(injectDesignTypeTargetOptions.token)) {
           NailyContainer.addTarget(injectDesignTypeTargetOptions.token, metadata[index]);
@@ -40,8 +47,8 @@ function createInjectDecorator(token?: IToken, forceAutoload: boolean = false): 
       Reflect.defineMetadata(NailyContainerConstant.INJECT, token, target, `${index}`);
     } else {
       const injectTyping: IType = Reflect.getMetadata("design:type", target, key);
-      const metadata: IInjectableOptions = Reflect.getMetadata(NailyContainerConstant.INJECTABLE, injectTyping);
-      if (forceAutoload && metadata && n.class().parse(injectTyping)) {
+      const metadata: IInjectableOptions = InjectableOptionsSchema.parse(Reflect.getMetadata(NailyContainerConstant.INJECTABLE, injectTyping));
+      if (metadata.scope === ScopeEnum.OnInject && metadata && n.class().parse(injectTyping)) {
         if (NailyContainer.safeGetTarget(metadata.token)) {
           NailyContainer.addTarget(metadata.token, injectTyping);
         }
@@ -65,11 +72,10 @@ function createInjectDecorator(token?: IToken, forceAutoload: boolean = false): 
  *
  * @export
  * @param {IToken} token - The token of the class or constant
- * @param {boolean} [forceAutoload = false] - Whether to force autoload the class
  * @return {(PropertyDecorator & ParameterDecorator)}
  */
-export function Inject(token: IToken, forceAutoload: boolean = false): PropertyDecorator & ParameterDecorator {
-  return createInjectDecorator(token, forceAutoload);
+export function Inject(token: IToken): PropertyDecorator & ParameterDecorator {
+  return createInjectDecorator(token);
 }
 
 /**
@@ -78,9 +84,8 @@ export function Inject(token: IToken, forceAutoload: boolean = false): PropertyD
  * The `@Autowired` decorator will automatically get type information from the constructor and inject the class or constant into the class.
  *
  * @export
- * @param {boolean} [forceAutoload = false] - Whether to force autoload the class
  * @return {(PropertyDecorator & ParameterDecorator)}
  */
-export function Autowired(forceAutoload: boolean = false): PropertyDecorator & ParameterDecorator {
-  return createInjectDecorator(undefined, forceAutoload);
+export function Autowired(): PropertyDecorator & ParameterDecorator {
+  return createInjectDecorator();
 }
