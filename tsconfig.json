@@ -1,0 +1,7 @@
+{
+  "exclude": ["**/*.cjs", "**/*.mjs", "coverage/**/*", "*/**/coverage/**/*", "*/**/lib/**/*", "*/**/dist/**/*"],
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+    "skipLibCheck": true
+  }
+}
