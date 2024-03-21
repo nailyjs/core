@@ -1,6 +1,8 @@
 {
   "name": "v40",
   "scripts": {
+    "test": "cross-env NODE_ENV=test vitest",
+    "test:ui": "cross-env NODE_ENV=test vitest --ui",
     "format": "prettier --write ./",
     "lint": "eslint \"./**/*.ts\" --fix",
     "prepare": "husky install",
@@ -17,11 +19,9 @@
     ],
     "*.vue": [
       "eslint --fix",
-      "prettier --write",
-      "stylelint --fix"
+      "prettier --write"
     ],
     "*.{scss,less,html}": [
-      "stylelint --fix",
       "prettier --write"
     ],
     "*.md": [
@@ -41,6 +41,9 @@
     "@types/glob": "^8.1.0",
     "@types/node": "^20.11.30",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@vitest/coverage-istanbul": "^1.4.0",
+    "@vitest/coverage-v8": "^1.4.0",
+    "@vitest/ui": "^1.4.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",

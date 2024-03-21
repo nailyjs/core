@@ -54,11 +54,11 @@ export interface IDecoratorBuilderContext {
    *
 
    * @template Value
-   * @param {string} key
+   * @param {unknown} key
    * @return {Value}
    * @memberof IDecoratorBuilderContext
    */
-  getMetadata(key: string): unknown | undefined;
+  getMetadata(key: unknown): unknown | undefined;
   /**
    * ### Get prototype ownkeys
    *
