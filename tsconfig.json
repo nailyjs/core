@@ -1,3 +1,3 @@
 {
-  "exclude": ["*.cjs", "*.mjs"]
+  "exclude": ["**/*.cjs", "**/*.mjs", "**/coverage", "**/*.js"]
 }
