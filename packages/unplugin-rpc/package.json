@@ -1,7 +1,7 @@
 {
   "name": "unplugin-rpc",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A json rpc plugin.",
   "license": "MIT",
   "homepage": "https://github.com/antfu/unplugin-starter#readme",
