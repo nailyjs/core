@@ -9,8 +9,6 @@ import { ViteDevHttpAdapter } from './core/vite-server-adapter'
 let __filename = globalThis.__filename
 if (!__filename && import.meta.filename)
   __filename = import.meta.filename
-else if (!__filename)
-  __filename = new URL('.', import.meta.url).pathname
 
 async function runViteDevServer(options: Options, server: ViteDevServer): Promise<void> {
   const entryExport = options?.entryExport || 'app'
