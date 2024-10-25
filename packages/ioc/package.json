@@ -4,9 +4,15 @@
   "version": "1.0.0",
   "description": "A simple IoC container for TypeScript",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
-  "keywords": [
-    "es-project-template"
-  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nailyjs/core#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nailyjs/core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nailyjs/core/issues"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

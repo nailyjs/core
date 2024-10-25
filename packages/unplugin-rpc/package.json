@@ -2,15 +2,16 @@
   "name": "unplugin-rpc",
   "type": "module",
   "version": "1.0.0",
-  "description": "A json rpc plugin.",
+  "description": "A json rpc plugin for naily.js with vite, astro, and more.",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "license": "MIT",
-  "homepage": "https://github.com/antfu/unplugin-starter#readme",
+  "homepage": "https://github.com/nailyjs/core#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-starter.git"
+    "url": "git+https://github.com/nailyjs/core.git"
   },
   "bugs": {
-    "url": "https://github.com/antfu/unplugin-starter/issues"
+    "url": "https://github.com/nailyjs/core/issues"
   },
   "publishConfig": {
     "access": "public"
@@ -20,8 +21,7 @@
     "vite",
     "webpack",
     "rollup",
-    "transform",
-    "es-project-template"
+    "transform"
   ],
   "exports": {
     ".": {
