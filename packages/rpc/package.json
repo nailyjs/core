@@ -1,0 +1,42 @@
+{
+  "name": "@nailyjs/rpc",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Rpc package for naily.js",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "keywords": [
+    "es-project-template"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./axios": {
+      "types": "./dist/axios.d.ts",
+      "import": "./dist/axios.js",
+      "require": "./dist/axios.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "release": "bumpp && pnpm publish"
+  },
+  "dependencies": {
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/ioc": "workspace:*",
+    "axios": "^1.7.7",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

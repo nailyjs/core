@@ -1,0 +1,45 @@
+{
+  "name": "@nailyjs/backend",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Create a tsup project",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "keywords": [
+    "es-project-template"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./utils": {
+      "types": "./dist/utils.d.ts",
+      "import": "./dist/utils.js",
+      "require": "./dist/utils.cjs"
+    },
+    "./node-adapter": {
+      "types": "./dist/node-adapter.d.ts",
+      "import": "./dist/node-adapter.js",
+      "require": "./dist/node-adapter.cjs"
+    },
+    "./dist/*": "./dist/*"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "release": "bumpp && pnpm publish"
+  },
+  "dependencies": {
+    "@nailyjs/ioc": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

@@ -1,0 +1,5 @@
+packages:
+  - packages/*
+  - fixtures/*
+  - tests/*
+  - packages/unplugin-rpc/playground

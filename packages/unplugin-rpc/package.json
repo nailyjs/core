@@ -1,0 +1,133 @@
+{
+  "name": "unplugin-rpc",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A json rpc plugin.",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/unplugin-starter#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/unplugin-starter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antfu/unplugin-starter/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "unplugin",
+    "vite",
+    "webpack",
+    "rollup",
+    "transform",
+    "es-project-template"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./astro": {
+      "import": "./dist/astro.js",
+      "require": "./dist/astro.cjs"
+    },
+    "./vite": {
+      "import": "./dist/vite.js",
+      "require": "./dist/vite.cjs"
+    },
+    "./webpack": {
+      "import": "./dist/webpack.js",
+      "require": "./dist/webpack.cjs"
+    },
+    "./nuxt": {
+      "import": "./dist/nuxt.js",
+      "require": "./dist/nuxt.cjs"
+    },
+    "./types": {
+      "import": "./dist/types.js",
+      "require": "./dist/types.cjs"
+    },
+    "./*": "./*"
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch src",
+    "build:fix": "esno scripts/postbuild.ts",
+    "lint": "eslint .",
+    "play": "npm -C playground run dev",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "@farmfe/core": ">=1",
+    "@nuxt/kit": "^3",
+    "@nuxt/schema": "^3",
+    "esbuild": "*",
+    "rollup": "^3",
+    "vite": ">=3",
+    "webpack": "^4 || ^5"
+  },
+  "peerDependenciesMeta": {
+    "@farmfe/core": {
+      "optional": true
+    },
+    "@nuxt/kit": {
+      "optional": true
+    },
+    "@nuxt/schema": {
+      "optional": true
+    },
+    "esbuild": {
+      "optional": true
+    },
+    "rollup": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/ioc": "workspace:*",
+    "@nailyjs/rpc": "workspace:*",
+    "@rollup/pluginutils": "^5.1.2",
+    "importx-tsup": "^0.5.2",
+    "unplugin": "^1.12.2",
+    "unplugin-swc": "^1.5.1"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.0.0",
+    "@nuxt/kit": "^3.13.0",
+    "@nuxt/schema": "^3.13.0",
+    "@types/node": "^22.5.1",
+    "bumpp": "^9.5.2",
+    "chalk": "^5.3.0",
+    "eslint": "^9.9.1",
+    "esno": "^4.7.0",
+    "fast-glob": "^3.3.2",
+    "nodemon": "^3.1.4",
+    "rollup": "^4.21.2",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2",
+    "vitest": "^2.0.5",
+    "webpack": "^5.94.0"
+  }
+}

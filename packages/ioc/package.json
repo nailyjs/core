@@ -1,0 +1,38 @@
+{
+  "name": "@nailyjs/ioc",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A simple IoC container for TypeScript",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "keywords": [
+    "es-project-template"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "release": "bumpp && pnpm publish"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "kleur": "^4.1.5",
+    "tsup": "^8.3.0"
+  }
+}
