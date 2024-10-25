@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/rpc",
   "type": "module",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Rpc package for naily.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "license": "MIT",
