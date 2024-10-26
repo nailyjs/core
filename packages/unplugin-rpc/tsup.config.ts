@@ -1,7 +1,7 @@
-import type { Options } from 'tsup'
+import { defineConfig } from 'tsup'
 
-export default <Options>{
-  entryPoints: [
+export default defineConfig({
+  entry: [
     'src/*.ts',
   ],
   clean: true,
@@ -10,6 +10,4 @@ export default <Options>{
   cjsInterop: true,
   splitting: true,
   onSuccess: 'npm run build:fix',
-  noExternal: ['unplugin-swc'],
-  external: ['@swc/core', '@swc/helpers'],
-}
+})
