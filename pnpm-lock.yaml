@@ -140,6 +140,12 @@ importers:
       '@rollup/pluginutils':
         specifier: ^5.1.2
         version: 5.1.2(rollup@4.24.0)
+      '@swc/core':
+        specifier: ^1.7.39
+        version: 1.7.39(@swc/helpers@0.5.13)
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       esbuild:
         specifier: '*'
         version: 0.23.1

@@ -7,4 +7,4 @@ import './welcome-server'
 export const app = new RpcBootstrap(new NodeHttpAdapter())
 
 if (import.meta.env.PROD)
-  app.run(1000)
+  app.run(1000).then(() => console.log('Server started on http://localhost:1000'))

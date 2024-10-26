@@ -1,10 +1,19 @@
 import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
-import Rpc from '../src/vite'
+import Rpc, { swc } from '../src'
 
 export default defineConfig({
   plugins: [
     Inspect(),
-    Rpc(),
+
+    swc(),
+
+    Rpc.vite({
+      viteOptions: {
+        plugins: [
+          swc(),
+        ],
+      },
+    }),
   ],
 })

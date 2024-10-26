@@ -16,6 +16,7 @@
     "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
     "build:backend": "pnpm -F @nailyjs/backend build",
     "play:rpc": "pnpm -F rpc-playground dev",
+    "play:build": "pnpm -F rpc-playground build",
     "lint": "eslint .",
     "postinstall": "npx simple-git-hooks",
     "test": "vitest",

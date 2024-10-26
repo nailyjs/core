@@ -109,6 +109,8 @@
     "@nailyjs/ioc": "workspace:*",
     "@nailyjs/rpc": "workspace:*",
     "@rollup/pluginutils": "^5.1.2",
+    "@swc/core": "^1.7.39",
+    "defu": "^6.1.4",
     "importx-tsup": "^0.5.2",
     "unplugin": "^1.12.2",
     "unplugin-swc": "^1.5.1"

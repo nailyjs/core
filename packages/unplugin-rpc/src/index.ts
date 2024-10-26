@@ -1,11 +1,13 @@
 import type { UnpluginFactory } from 'unplugin'
-import type { ModuleNode, ViteDevServer } from 'vite'
+import type { UserConfig, ViteDevServer } from 'vite'
 import type { Options } from './types'
 import path from 'node:path'
-import { cwd } from 'node:process'
+import { cwd, exit } from 'node:process'
 import { createFilter } from '@rollup/pluginutils'
 import { createUnplugin } from 'unplugin'
+import { build, mergeConfig } from 'vite'
 import { hmrLogger } from './core/hmr-logger'
+import { swc } from './core/swc'
 import { ViteDevHttpAdapter } from './core/vite-server-adapter'
 
 let __filename = globalThis.__filename
@@ -21,10 +23,21 @@ async function runViteDevServer(options: Options, server: ViteDevServer): Promis
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) => {
   const watchDirs = options?.watchDirs || ['./backend/**/*']
+  const serverEntry = options?.serverEntry || path.join(cwd(), './backend/main.ts')
+  const viteOptions = options?.viteOptions || {}
 
   return {
     name: 'unplugin-rpc',
     vite: {
+      config(config) {
+        if (!config || !config.build || !config.build.outDir) {
+          config = config || {}
+          config.build = config.build || {}
+          if (!config.build.outDir)
+            config.build.outDir = 'dist/frontend'
+        }
+      },
+
       async configureServer(server) {
         await runViteDevServer(options || {}, server)
         server.watcher
@@ -53,9 +66,20 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
         hmrLogger(moduleFilePaths.map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
         return []
       },
+
+      closeBundle() {
+        build(mergeConfig({
+          build: {
+            ssr: serverEntry,
+            ssrManifest: true,
+            outDir: 'dist/backend',
+          },
+        } as UserConfig, viteOptions)).then(() => exit(0))
+      },
     },
   }
 }
 
 export const unplugin = /* #__PURE__ */ createUnplugin(unpluginFactory)
 export default unplugin
+export { swc }
