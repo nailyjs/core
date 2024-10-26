@@ -9,15 +9,15 @@ export interface RpcClientReturn {
 }
 
 export function createRpcClient(url?: string): RpcClientReturn
-export function createRpcClient(axiosInstance: AxiosInstance): RpcClientReturn
-export function createRpcClient(urlOrAxiosInstance: AxiosInstance | string = '/rpc'): RpcClientReturn {
+export function createRpcClient(axiosInstance: AxiosInstance, url?: string): RpcClientReturn
+export function createRpcClient(urlOrAxiosInstance: AxiosInstance | string = '/rpc', url: string = '/rpc'): RpcClientReturn {
   function request<T extends Record<string, (...args: any[]) => any>>(symbol: string | symbol, paramSchema?: z.ZodTuple): RpcServerRequest<T> {
     return new Proxy({}, {
       get(_, p) {
         return async function (...args: any[]) {
           const result = await (typeof urlOrAxiosInstance === 'object' ? urlOrAxiosInstance : axios)({
             method: 'POST',
-            url: typeof urlOrAxiosInstance === 'string' ? urlOrAxiosInstance : '/rpc',
+            url: typeof urlOrAxiosInstance === 'string' ? urlOrAxiosInstance : url,
             headers: {
               'Content-Type': 'application/json',
             },
