@@ -3,10 +3,10 @@ name: upload dist folder to server
 on:
   push:
     branches:
-      - main
+      - v1
   pull_request:
     branches:
-      - main
+      - v1
 
 jobs:
   basic-check:
