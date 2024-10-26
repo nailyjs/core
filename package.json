@@ -11,6 +11,7 @@
     "access": "public"
   },
   "scripts": {
+    "build": "tsx scripts/build-all.ts",
     "build:ioc": "pnpm -F @nailyjs/ioc build",
     "build:rpc": "pnpm -F @nailyjs/rpc build",
     "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
