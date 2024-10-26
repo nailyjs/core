@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/ioc",
   "type": "module",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "A simple IoC container for TypeScript",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "license": "MIT",
