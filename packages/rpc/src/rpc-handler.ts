@@ -6,8 +6,17 @@ import { RpcHandlerContext } from './rpc-handler-context'
 import { JsonRpcSchema } from './schema'
 
 export class RpcHttpHandler extends RpcHandlerContext implements HandlerContext {
-  constructor(private readonly baseURL: string = '/') {
+  constructor(private baseURL: string = '/') {
     super()
+  }
+
+  setBaseURL(baseURL: string): this {
+    this.baseURL = baseURL
+    return this
+  }
+
+  getBaseURL(): string {
+    return this.baseURL
   }
 
   findRpcControllerWrapper(comparisonRpcId: string | symbol, comparisonMethodKey: string | symbol): Promise<InjectableWrapper | Response> {

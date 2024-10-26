@@ -13,22 +13,29 @@ if (!__filename && import.meta.filename)
 async function runViteDevServer(options: Options, server: ViteDevServer): Promise<void> {
   const entryExport = options?.entryExport || 'app'
   const serverEntry = options?.serverEntry || path.join(cwd(), './backend/main.ts')
-  const devBaseURL = options?.devBaseURL || '/rpc'
 
-  await new ViteDevHttpAdapter(server, serverEntry, entryExport, devBaseURL).runWithViteServer()
+  await new ViteDevHttpAdapter(server, serverEntry, entryExport).runWithViteServer()
 }
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) => {
-  const serverEntry = options?.serverEntry || path.join(cwd(), './backend/main.ts')
+  const watchDirs = options?.watchDirs || ['./backend/**/*']
 
   return {
     name: 'unplugin-rpc',
     vite: {
+
       async configureServer(server) {
         await runViteDevServer(options || {}, server)
-        server.watcher.on('change', async (filePath) => {
-          if (path.resolve(filePath) === path.resolve(serverEntry)) await server.restart()
-        })
+        server.watcher
+          .add(watchDirs)
+          .on('change', async (filePath) => {
+            // original: restart server
+            // await server.restart()
+
+            // HMR: reload module
+            const mod = server.moduleGraph.getModuleById(filePath)
+            if (mod) await server.reloadModule(mod)
+          })
       },
     },
   }

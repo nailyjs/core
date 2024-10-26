@@ -8,6 +8,5 @@ export interface Options {
    * @default 'app'
    */
   entryExport?: ExcludeDefault<string>
-  /** @default '/api' */
-  devBaseURL?: string
+  watchDirs?: string[] | string
 }

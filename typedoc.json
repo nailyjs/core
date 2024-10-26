@@ -1,0 +1,18 @@
+{
+  "entryPoints": [
+    "./packages/backend/src/index.ts",
+    "./packages/backend/src/utils.ts",
+    "./packages/ioc/src/node-adapter.ts",
+    "./packages/ioc/src/index.ts",
+    "./packages/rpc/src/index.ts",
+    "./packages/rpc/src/axios.ts",
+    "./packages/unplugin-rpc/src/index.ts"
+  ],
+  "out": "./typedocs",
+  "skipErrorChecking": true,
+  "exclude": ["**/node_modules/**/*", "**/dist/**/*"],
+  "jsDocCompatibility": true,
+  "plugin": [
+    "typedoc-material-theme"
+  ]
+}

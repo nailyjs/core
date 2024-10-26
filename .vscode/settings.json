@@ -3,9 +3,11 @@
     "antfu",
     "Autowired",
     "bumpp",
+    "docsearch",
     "esno",
     "farmfe",
     "flexable",
+    "Inversify",
     "linkcode",
     "Naily",
     "nailyjs",
@@ -13,7 +15,9 @@
     "paramtypes",
     "pluginutils",
     "postbuild",
-    "tsup"
+    "tsup",
+    "Twoslash",
+    "vitepress"
   ],
 
   "files.associations": {
@@ -57,7 +61,16 @@
     "jsonc",
     "yaml"
   ],
-  "interline-translate.knownPopularWordCount": 6000,
   "iconify.annotations": true,
-  "iconify.inplace": true
+  "iconify.inplace": true,
+  "material-icon-theme.activeIconPack": "vue_vuex",
+  "material-icon-theme.folders.associations": {
+    "typedocs": "docs",
+    "deps": "lib",
+    "ioc": "container",
+    "rpc": "server",
+    ".vitepress": "vuepress",
+    "unplugin-rpc": "plugin"
+  },
+  "vite.autoStart": false
 }

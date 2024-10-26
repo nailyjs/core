@@ -9,7 +9,6 @@ export class ViteDevHttpAdapter extends AbstractHttpAdapter {
     private readonly viteServer: ViteDevServer,
     private readonly serverEntry: string,
     private readonly entryExport: string,
-    private readonly devBaseURL: string = '/api',
   ) {
     super()
   }
@@ -23,26 +22,33 @@ export class ViteDevHttpAdapter extends AbstractHttpAdapter {
     return this.viteServer.close()
   }
 
-  setupHandler(ctx: HandlerContext): void | Promise<void> {
+  setupHandler(ctx: RpcHttpHandler): void | Promise<void> {
     this.viteServer.middlewares.use(async (req, res, next) => {
+      // 不是 POST 请求则跳过
       if (req.method !== 'POST')
         return next()
 
+      // 加载服务端入口模块
       const mod = await this.viteServer.ssrLoadModule(this.serverEntry, { fixStacktrace: true })
-
       if (!(this.entryExport in mod) || typeof mod[this.entryExport] !== 'object')
         throw new Error(`Cannot find export "${this.entryExport}" in ${this.serverEntry}`)
       const app: RpcBootstrap<any> = mod[this.entryExport]
+
+      // 设置基础 URL
       const baseURL = app.getBaseURL()
-      if (!req.url?.startsWith(baseURL))
+      ctx.setBaseURL(baseURL)
+      if (!req.url?.startsWith(ctx.getBaseURL()))
         return next()
+
+      // 设置请求处理器
       const adapter = app.getBackendAdapter()
       ctx.getInjectableContainer = adapter.getInjectableContainer
       ctx.getInjectContainer = adapter.getInjectContainer
       ctx.getInjectableTarget = adapter.getInjectableTarget
       ctx.hasInjectableTarget = adapter.hasInjectableTarget
-      await adapter.setupHandler(ctx)
 
+      // 执行请求处理器
+      await adapter.setupHandler(ctx)
       const request = await transformIncomingMessageToRequest(req).getRequest()
       const response = await ctx.callback(request)
       if (response === SkipHandle)
@@ -56,7 +62,7 @@ export class ViteDevHttpAdapter extends AbstractHttpAdapter {
   }
 
   async runWithViteServer(): Promise<void> {
-    const handler = new RpcHttpHandler(this.devBaseURL)
+    const handler = new RpcHttpHandler()
     await this.setupHandler(handler)
   }
 }
