@@ -28,13 +28,8 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
         await runViteDevServer(options || {}, server)
         server.watcher
           .add(watchDirs)
-          .on('change', async (filePath) => {
-            // original: restart server
-            // await server.restart()
-
-            // HMR: reload module
-            const mod = server.moduleGraph.getModuleById(filePath)
-            if (mod) await server.reloadModule(mod)
+          .on('change', async () => {
+            await server.restart()
           })
       },
     },
