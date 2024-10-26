@@ -18,5 +18,14 @@ export function swc(mixed?: swcPlugin.Options): PluginOption {
     },
   } as swcPlugin.Options)
 
-  return ((swcPlugin.default as any).default as any).vite(options)
+  let swcVitePlugin: typeof import('unplugin-swc').default['vite']
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
+  if (typeof swcPlugin.default.default === 'object' && typeof swcPlugin.default.default.vite === 'function')
+    // eslint-disable-next-line ts/ban-ts-comment
+    // @ts-expect-error
+    swcVitePlugin = swcPlugin.default.default.vite
+  else swcVitePlugin = swcPlugin.default.vite
+
+  return swcVitePlugin(options)
 }
