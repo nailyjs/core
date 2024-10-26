@@ -91,10 +91,6 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [
     Rpc({
-      // vite的开发环境下，这里设置baseURL才会生效
-      // 生产环境下会被忽略，使用后端入口文件的`setBaseURL`方法来设置
-      // 默认值是`/api`
-      devBaseURL: '/api',
       // 后端入口文件的app导出名，默认是`app`。特别注意最好不用`default`，用默认导出可能会有问题
       entryExport: 'app',
       // 后端入口文件的路径，默认是`./backend/main.ts`。

@@ -1,0 +1,70 @@
+name: upload dist folder to server
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  basic-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码仓库
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 设置 Node.js 版本
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.14.0
+
+      # 安装 pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # 安装依赖
+      - name: Install dependencies
+        run: pnpm install
+
+      # 构建项目
+      - name: Build project
+        run: pnpm run build
+
+      # 检查代码规范
+      - name: Check code style
+        run: pnpm run lint
+
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码仓库
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 设置 Node.js 版本
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.14.0
+
+      # 安装 pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # 安装依赖
+      - name: Install dependencies
+        run: pnpm install
+
+      # 构建项目
+      - name: Build docs
+        run: pnpm run docs:build
+
+      # 使用 tsx 直接运行 TypeScript 脚本
+      - name: Upload dist folder to server
+        run: pnpm exec tsx scripts/upload-server.ts ./docs/.vitepress/dist ${{ secrets.SERVER_PATH }} -h ${{ secrets.SERVER_HOST }} -u ${{ secrets.SERVER_USER }} -p ${{ secrets.SERVER_PASSWORD }}
