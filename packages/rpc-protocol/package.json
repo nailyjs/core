@@ -1,0 +1,38 @@
+{
+  "name": "@nailyjs/rpc-docs-protocol",
+  "type": "module",
+  "version": "1.0.14",
+  "description": "Json-RPC 2.0 protocol docs implementation.",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "keywords": [
+    "json-rpc",
+    "rpc",
+    "naily"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w"
+  },
+  "dependencies": {
+    "@nailyjs/rpc": "workspace:*",
+    "@types/json-schema": "^7.0.15",
+    "json-schema": "^0.4.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

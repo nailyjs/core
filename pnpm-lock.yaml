@@ -138,6 +138,25 @@ importers:
         specifier: ^8.3.0
         version: 8.3.0(@swc/core@1.7.39(@swc/helpers@0.5.13))(jiti@2.3.3)(postcss@8.4.47)(tsx@4.19.1)(typescript@5.6.3)(yaml@2.6.0)
 
+  packages/rpc-protocol:
+    dependencies:
+      '@nailyjs/rpc':
+        specifier: workspace:*
+        version: link:../rpc
+      '@types/json-schema':
+        specifier: ^7.0.15
+        version: 7.0.15
+      json-schema:
+        specifier: ^0.4.0
+        version: 0.4.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
+    devDependencies:
+      tsup:
+        specifier: ^8.3.0
+        version: 8.3.0(@swc/core@1.7.39(@swc/helpers@0.5.13))(jiti@2.3.3)(postcss@8.4.47)(tsx@4.19.1)(typescript@5.6.3)(yaml@2.6.0)
+
   packages/unplugin-rpc:
     dependencies:
       '@farmfe/core':
@@ -1577,7 +1596,7 @@ packages:
   '@vitest/eslint-plugin@1.1.7':
     resolution: {integrity: sha512-pTWGW3y6lH2ukCuuffpan6kFxG6nIuoesbhMiQxskyQMRcCN5t9SXsKrNHvEw3p8wcCsgJoRqFZVkOTn6TjclA==}
     peerDependencies:
-      '@typescript-eslint/utils': ^8.2.0
+      '@typescript-eslint/utils': '>= 8.0'
       eslint: '>= 8.57.0'
       typescript: '>= 5.0.0'
       vitest: '*'
@@ -3447,6 +3466,9 @@ packages:
 
   json-schema-traverse@0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
+
+  json-schema@0.4.0:
+    resolution: {integrity: sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==}
 
   json-stable-stringify-without-jsonify@1.0.1:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
@@ -9185,6 +9207,8 @@ snapshots:
   json-parse-even-better-errors@2.3.1: {}
 
   json-schema-traverse@0.4.1: {}
+
+  json-schema@0.4.0: {}
 
   json-stable-stringify-without-jsonify@1.0.1: {}
 

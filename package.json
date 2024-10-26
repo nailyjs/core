@@ -15,6 +15,7 @@
     "build:ioc": "pnpm -F @nailyjs/ioc build",
     "build:backend": "pnpm -F @nailyjs/backend build",
     "build:rpc": "pnpm -F @nailyjs/rpc build",
+    "build:rpc-docs-protocol": "pnpm -F @nailyjs/rpc-docs-protocol build",
     "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
     "play:rpc": "pnpm -F rpc-playground dev",
     "play:build": "pnpm -F rpc-playground build",
