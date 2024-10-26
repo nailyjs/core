@@ -132,20 +132,55 @@
  * Custom CSS
  * -------------------------------------------------------------------------- */
 
-:root {
-  --vp-nav-bg-color: transparent;
-  --vp-local-nav-bg-color: transparent;
-  --vp-sidebar-bg-color: transparent;
-}
+html.dark {
+  .Layout {
+    --overlay-blurple: #7a5cd633;
+    --overlay-red: #ff000033;
+    --overlay-green: #00ff0033;
+    background: linear-gradient(215deg, var(--overlay-blurple), transparent 90%), radial-gradient(var(--overlay-red), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh, radial-gradient(var(--overlay-green), transparent 65%) no-repeat 50% calc(100% + 20rem) / 80rem 30rem;
+  }
 
+  body {
+    background-color: hsl(224deg 19.56% 4.66%)
+  }
 
-.dark body {
-  background-color: hsl(224deg 19.56% 4.66%)
-}
+  &:root {
+    --vp-nav-bg-color: transparent;
+    --vp-local-nav-bg-color: transparent;
+    --vp-sidebar-bg-color: transparent;
+    --vp-c-bg-elv: #3c1b33;
+  }
 
-.dark .Layout {
-  --overlay-blurple: #7a5cd633;
-  --overlay-red: #ff000033;
-  --overlay-green: #00ff0033;
-  background: linear-gradient(215deg, var(--overlay-blurple), transparent 90%), radial-gradient(var(--overlay-red), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh, radial-gradient(var(--overlay-green), transparent 65%) no-repeat 50% calc(100% + 20rem) / 80rem 30rem;
+  @media (max-width: 1280px) {
+    .VPLocalNav.has-sidebar {
+      border-bottom: none !important;
+    }
+  }
+
+  .VPNavBar, .VPLocalNav.has-sidebar {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .VPLocalNav.has-sidebar .container {
+    border-bottom: 1px solid var(--vp-c-gutter);
+  }
+
+  .VPNavScreen {
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  aside {
+    border-right: 1px solid var(--vp-c-gutter);
+
+    &.open {
+      @media (max-width: 960px) {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        background-color: #191d466e;
+      }
+    }
+  }
 }

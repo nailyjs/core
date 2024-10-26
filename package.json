@@ -54,6 +54,7 @@
     "unocss": "^0.63.6",
     "unplugin-swc": "^1.5.1",
     "vite": "^5.4.2",
+    "vite-ssg": "^0.23.8",
     "vitepress": "^1.4.1",
     "vitest": "^2.1.2"
   },

@@ -86,7 +86,7 @@ pnpm add unplugin-rpc @nailyjs/rpc @nailyjs/ioc @nailyjs/backend
 
 ```typescript twoslash
 import Rpc from 'unplugin-rpc/vite'
-import { defineConfig } from 'vite'
+import { defineConfig, type UserConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
@@ -95,10 +95,48 @@ export default defineConfig({
       entryExport: 'app',
       // 后端入口文件的路径，默认是`./backend/main.ts`。
       serverEntry: './backend/main.ts',
+      // 当后端使用`vite build`命令打包时，会采用下面的配置。
+      // 这个配置项会与默认的配置项进行合并
+      // 默认配置项可以在`unplugin-rpc`的`src/index.ts`下的`buildServer`函数中找到。
+      viteOptions: {},
+      // 是否在vite关闭时打包后端代码，默认是`true`。
+      buildOnViteCloseBundle: true,
     }),
   ],
 })
 ```
+
+::: warning 关于`buildOnViteCloseBundle`
+
+有时候你得调整一下你的配置，比如当你在使用`vite-ssg`打包项目的时候，你可能需要将这个配置项设置为`false`，然后在`vite-ssg`打包完成的`ssgOptions.onFinished`回调中手动build后端代码。此时你可以在`vite.config.ts`中这样配置：
+
+```typescript twoslash
+/// <reference types="vite-ssg" />
+
+import Rpc from 'unplugin-rpc/vite'
+import { defineConfig } from 'vite'
+// 导入这个函数，这个函数执行的时候就会去build后端的代码
+import { buildServer } from 'unplugin-rpc'
+
+export default defineConfig({
+  plugins: [
+    Rpc({
+      buildOnViteCloseBundle: false,
+      // ... 其他配置
+    })
+  ],
+
+  // 在vite-ssg打包完成后，手动调用buildServer函数来build后端代码
+  ssgOptions: {
+    async onFinished() {
+      await buildServer()
+    }
+  }
+})
+```
+
+你可以参考[vitesse-naily](https://github.com/nailyjs/vitesse-naily/blob/main/vite.config.ts)的`vite.config.ts`文件，看看如何配置`vite-ssg`支持。
+:::
 
 你可以看到这个插件的配置文件中定义了`entryExport`和`serverEntry`，所以你得在项目根目录创建`./backend/main.ts`文件，填入如下内容：
 

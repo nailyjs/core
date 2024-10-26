@@ -55,7 +55,8 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      { icon: 'npm', link: 'https://www.npmjs.com/org/nailyjs' },
+      { icon: 'github', link: 'https://github.com/nailyjs/core' },
     ],
   },
 
