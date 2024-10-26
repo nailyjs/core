@@ -34,7 +34,8 @@
   "scripts": {
     "build": "tsup",
     "watch": "tsup --watch",
-    "release": "bumpp && pnpm publish"
+    "release": "bumpp && pnpm publish",
+    "prepublishOnly": "tsup"
   },
   "dependencies": {
     "@nailyjs/backend": "workspace:*",

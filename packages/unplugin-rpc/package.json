@@ -69,7 +69,8 @@
     "play": "npm -C playground run dev",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "@farmfe/core": ">=1",
