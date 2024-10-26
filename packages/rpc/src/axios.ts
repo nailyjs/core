@@ -1,6 +1,7 @@
 import type { AxiosInstance } from 'axios'
 import type { z } from 'zod'
 import type { RpcServerRequest } from './types'
+import { AbstractBootstrap } from '@nailyjs/ioc'
 import axios from 'axios'
 import { JsonRpcSchema } from './schema'
 
@@ -14,6 +15,10 @@ export function createRpcClient(urlOrAxiosInstance: AxiosInstance | string = '/r
   function request<T extends Record<string, (...args: any[]) => any>>(symbol: string | symbol, paramSchema?: z.ZodTuple): RpcServerRequest<T> {
     return new Proxy({}, {
       get(_, p) {
+        // If not in client environment, return a dummy async function
+        if (!AbstractBootstrap.isClient())
+          return async function () {}
+
         return async function (...args: any[]) {
           const result = await (typeof urlOrAxiosInstance === 'object' ? urlOrAxiosInstance : axios)({
             method: 'POST',
