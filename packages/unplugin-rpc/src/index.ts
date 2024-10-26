@@ -3,6 +3,7 @@ import type { ViteDevServer } from 'vite'
 import type { Options } from './types'
 import path from 'node:path'
 import { cwd } from 'node:process'
+import { createFilter } from '@rollup/pluginutils'
 import { createUnplugin } from 'unplugin'
 import { ViteDevHttpAdapter } from './core/vite-server-adapter'
 
@@ -28,8 +29,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
         await runViteDevServer(options || {}, server)
         server.watcher
           .add(watchDirs)
-          .on('change', async () => {
-            await server.restart()
+          .on('change', async (filePath) => {
+            const isWatchedFile = createFilter(watchDirs)(filePath)
+            if (isWatchedFile) await server.restart()
           })
       },
     },
