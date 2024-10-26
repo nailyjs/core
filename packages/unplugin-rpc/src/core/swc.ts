@@ -25,6 +25,12 @@ export function swc(mixed?: swcPlugin.Options): PluginOption {
     // eslint-disable-next-line ts/ban-ts-comment
     // @ts-expect-error
     swcVitePlugin = swcPlugin.default.default.vite
+  // eslint-disable-next-line ts/ban-ts-comment
+  // @ts-expect-error
+  else if (typeof swcPlugin.vite === 'function')
+    // eslint-disable-next-line ts/ban-ts-comment
+    // @ts-expect-error
+    swcVitePlugin = swcPlugin.vite
   else swcVitePlugin = swcPlugin.default.vite
 
   return swcVitePlugin(options)
