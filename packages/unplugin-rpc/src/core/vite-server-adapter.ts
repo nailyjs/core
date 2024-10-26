@@ -1,4 +1,3 @@
-import type { HandlerContext } from '@nailyjs/backend'
 import type { ViteDevServer } from 'vite'
 import { AbstractHttpAdapter, SkipHandle } from '@nailyjs/backend'
 import { sendResponse, transformIncomingMessageToRequest } from '@nailyjs/backend/utils'

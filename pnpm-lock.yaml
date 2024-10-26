@@ -180,6 +180,9 @@ importers:
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
+      kleur:
+        specifier: ^4.1.5
+        version: 4.1.5
       nodemon:
         specifier: ^3.1.4
         version: 3.1.7
