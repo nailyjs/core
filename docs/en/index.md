@@ -12,7 +12,7 @@ hero:
   actions:
     - theme: brand
       text: Quick Start
-      link: /rpc-guide/start
+      link: /rpc-guide
     # - theme: alt
     #   text: API Examples
     #   link: /api-examples
