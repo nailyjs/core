@@ -25,3 +25,22 @@ export interface JsonRpcDoc {
   tags: string[]
   docs: Record<string, JsonRpcDocsObject>
 }
+
+export class JsonRpcDataSource {
+  constructor(private readonly doc: JsonRpcDoc) {}
+
+  getAllTags(): string[] {
+    return [
+      ...this.doc.tags,
+      ...Object.keys(this.doc.docs).map((key) => {
+        return this.doc.docs[key].tags
+      }).flat().filter(tag => tag !== undefined),
+    ]
+  }
+
+  getDocByTag(tag: string): [string, JsonRpcDocsObject][] {
+    return Object.entries(this.doc.docs).filter(([_key, docObject]) => {
+      return docObject.tags?.includes(tag)
+    })
+  }
+}
