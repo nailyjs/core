@@ -1,7 +1,7 @@
 {
   "name": "unplugin-rpc",
   "type": "module",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A json rpc plugin for naily.js with vite, astro, and more.",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "license": "MIT",
