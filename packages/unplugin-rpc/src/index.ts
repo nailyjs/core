@@ -21,11 +21,11 @@ async function runViteDevServer(options: Options, server: ViteDevServer): Promis
   await new ViteDevHttpAdapter(server, serverEntry, entryExport).runWithViteServer()
 }
 
-export function buildServer(options?: Options | undefined): void {
+export async function buildServer(options?: Options | undefined): Promise<void> {
   const serverEntry = options?.serverEntry || path.join(cwd(), './backend/main.ts')
   const viteOptions = options?.viteOptions || {}
 
-  build(mergeConfig({
+  await build(mergeConfig({
     build: {
       ssr: serverEntry,
       ssrManifest: true,
@@ -35,7 +35,7 @@ export function buildServer(options?: Options | undefined): void {
     plugins: [
       swc(),
     ],
-  } as UserConfig, viteOptions)).then(() => exit(0))
+  } as UserConfig, viteOptions))
 }
 
 export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) => {
@@ -81,6 +81,11 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
         if (ctx.server.config.clearScreen !== false) console.clear()
         hmrLogger(moduleFilePaths.map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
         return []
+      },
+
+      closeBundle() {
+        if (options?.buildOnViteCloseBundle === true)
+          buildServer(options).then(() => exit(0))
       },
     },
   }
