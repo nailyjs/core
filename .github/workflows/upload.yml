@@ -31,6 +31,10 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      # 编译所有代码包
+      - name: Build packages
+        run: pnpm run build
+
       # 检查代码规范
       - name: Check code style
         run: pnpm run lint
