@@ -1,4 +1,3 @@
-import type * as swc from 'unplugin-swc'
 import type { UserConfig } from 'vite'
 
 export type ExcludeDefault<T extends string> = T extends 'default' ? never : T
@@ -12,6 +11,16 @@ export interface Options {
    */
   entryExport?: ExcludeDefault<string>
   watchDirs?: string[] | string
+  /**
+   * Vite build options.
+   */
   viteOptions?: UserConfig
-  swcOptions?: swc.Options
+  /**
+   * Build server on Vite close bundle.
+   *
+   * e.g. If you are using `vite-ssg`, you should set this to `false` and build the server in `ssgOptions.onFinished`.
+   *
+   * @default true
+   */
+  buildOnViteCloseBundle?: boolean
 }

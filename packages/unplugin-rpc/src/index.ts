@@ -21,13 +21,29 @@ async function runViteDevServer(options: Options, server: ViteDevServer): Promis
   await new ViteDevHttpAdapter(server, serverEntry, entryExport).runWithViteServer()
 }
 
-export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) => {
-  const watchDirs = options?.watchDirs || ['./backend/**/*']
+export function buildServer(options?: Options | undefined): void {
   const serverEntry = options?.serverEntry || path.join(cwd(), './backend/main.ts')
   const viteOptions = options?.viteOptions || {}
 
+  build(mergeConfig({
+    build: {
+      ssr: serverEntry,
+      ssrManifest: true,
+      outDir: 'dist/backend',
+    },
+
+    plugins: [
+      swc(),
+    ],
+  } as UserConfig, viteOptions)).then(() => exit(0))
+}
+
+export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) => {
+  const watchDirs = options?.watchDirs || ['./backend/**/*']
+
   return {
     name: 'unplugin-rpc',
+
     vite: {
       config(config) {
         if (!config || !config.build || !config.build.outDir) {
@@ -66,20 +82,9 @@ export const unpluginFactory: UnpluginFactory<Options | undefined> = (options) =
         hmrLogger(moduleFilePaths.map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
         return []
       },
-
-      closeBundle() {
-        build(mergeConfig({
-          build: {
-            ssr: serverEntry,
-            ssrManifest: true,
-            outDir: 'dist/backend',
-          },
-        } as UserConfig, viteOptions)).then(() => exit(0))
-      },
     },
   }
 }
 
 export const unplugin = /* #__PURE__ */ createUnplugin(unpluginFactory)
 export default unplugin
-export { swc }
