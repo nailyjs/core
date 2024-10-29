@@ -82,7 +82,7 @@ export class RpcBootstrap<Adapter> extends BackendBootstrap {
    * @return {this}
    * @memberof RpcBootstrap
    */
-  use(rpcPlugin: RpcServerPlugin): this {
+  async use(rpcPlugin: RpcServerPlugin): Promise<this> {
     this._rpcPlugins.push(rpcPlugin)
     return this
   }
