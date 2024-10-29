@@ -2,7 +2,7 @@ import type { Class, InjectableWrapper } from '@nailyjs/ioc'
 import { BackendContainer } from '@nailyjs/backend'
 import { RpcControllerSymbol } from './constant'
 
-export class RpcHandlerContext extends BackendContainer {
+export class RpcControllerContainer extends BackendContainer {
   private isRpcController(target: Class): boolean {
     return Reflect.hasMetadata(RpcControllerSymbol, target)
   }

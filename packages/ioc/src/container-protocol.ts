@@ -1,4 +1,4 @@
-import type { InjectOptions } from './decorators'
+import type { InjectWrapper } from './inject-wrapper'
 import type { InjectableWrapper } from './injectable-wrapper'
 import type { Class } from './types'
 
@@ -16,7 +16,7 @@ export interface ContainerProtocol {
    * @return {Set<Partial<InjectOptions>>}
    * @memberof ContainerProtocol
    */
-  getInjectContainer(): Set<Partial<InjectOptions>>
+  getInjectContainer(): Set<InjectWrapper>
   /**
    * ### Get the Injectable Target.
    *

@@ -1,7 +1,8 @@
 import type { InjectableWrapper } from '@nailyjs/ioc'
-import { Container } from '@nailyjs/ioc'
+import { Container, Injectable } from '@nailyjs/ioc'
 import { RestControllerSymbol } from './constant'
 
+@Injectable()
 export class BackendContainer extends Container {
   private isCatchError(errors: any[] | boolean, comparisonError: unknown): boolean {
     if (typeof errors === 'boolean') return errors
@@ -111,45 +112,9 @@ export class BackendContainer extends Container {
     return this
   }
 
-  /**
-   * ### Iterate over the rest controllers.
-   *
-   * This method will iterate over the rest controllers and call the callback function.
-   * The callback function should accept three arguments: `target`, `methodKey`, and `wrapper`.
-   * - `target` is the target `instance`(like {@linkcode InjectableWrapper.singletonInstance}),
-   * it is the instance of the class constructor or the instance of the class.
-   * - `methodKey` is the current method key, it is the key of the method. It is the method key of the class.
-   * - `wrapper` is the current class wrapper, it is the instance of the {@linkcode InjectableWrapper}.
-   *
-   * @example
-   * ```typescript
-   * RestController()
-   * class MyController {
-   *   Get('/')
-   *   index() {}
-   * }
-   * ```
-   *
-   * It will execute when the class is a rest controller.
-   *
-   * @param {((target: Record<string | symbol, any>, methodKey: string | symbol, wrapper: InjectableWrapper) => any)} callback The callback function.
-   * @return {Promise<this>} The instance of the backend container.
-   * @memberof BackendContainer
-   */
-  async eachRestController(callback: (target: Record<string | symbol, any>, methodKey: string | symbol, wrapper: InjectableWrapper) => any): Promise<this> {
-    const container = this.getInjectableContainer()
-
-    for (const wrapper of container) {
-      if (!Reflect.hasMetadata(RestControllerSymbol, wrapper.getTarget())) continue
-
-      const methodKeys = wrapper.getPrototypeKeys().filter(key => key !== 'constructor')
-      const instance = wrapper.getOrCreateInstance()
-      for (let i = 0; i < methodKeys.length; i++) {
-        if (typeof instance[methodKeys[i]] !== 'function') continue
-        await callback(instance, methodKeys[i], wrapper)
-      }
-    }
-
-    return this
+  wrapperIsController(wrapper: InjectableWrapper): boolean {
+    return !wrapper.isFilter()
+      && wrapper.isInjectable()
+      && Reflect.hasMetadata(RestControllerSymbol, wrapper.getTarget())
   }
 }

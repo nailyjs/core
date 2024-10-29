@@ -15,7 +15,7 @@ export abstract class AbstractHttpAdapter<ServerInstance = any> extends BackendC
    * @return {Promise<void>}
    * @memberof AbstractHttpAdapter
    */
-  abstract listen(port: number, callback?: () => any): Promise<void>
+  abstract listen(port: number, callback?: () => any): Promise<any>
   /**
    * ### Close the server.
    *

@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/rpc-docs-protocol",
   "type": "module",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Json-RPC 2.0 protocol docs implementation.",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "keywords": [

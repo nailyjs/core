@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "type": "module",
+  "version": "0.0.4",
+  "private": true,
+  "description": "The backend fixture",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w",
+    "dev": "tsup && node dist/main.js"
+  },
+  "dependencies": {
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/config": "workspace:*",
+    "@nailyjs/ioc": "workspace:*",
+    "@nailyjs/jexl": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

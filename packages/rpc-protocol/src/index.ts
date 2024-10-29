@@ -34,13 +34,19 @@ export class JsonRpcDataSource {
       ...this.doc.tags,
       ...Object.keys(this.doc.docs).map((key) => {
         return this.doc.docs[key].tags
-      }).flat().filter(tag => tag !== undefined),
+      }).flat().filter(tag => tag !== undefined).filter((tag, index, self) => self.indexOf(tag) === index),
     ]
   }
 
   getDocByTag(tag: string): [string, JsonRpcDocsObject][] {
     return Object.entries(this.doc.docs).filter(([_key, docObject]) => {
       return docObject.tags?.includes(tag)
+    })
+  }
+
+  getNoTagDoc(): [string, JsonRpcDocsObject][] {
+    return Object.entries(this.doc.docs).filter(([_key, docObject]) => {
+      return docObject.tags === undefined || docObject.tags.length === 0
     })
   }
 }

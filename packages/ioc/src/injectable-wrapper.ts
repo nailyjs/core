@@ -11,6 +11,16 @@ export class InjectableWrapper<TClass extends Class = Class> extends Container i
     super()
   }
 
+  static getOrCreateInjectableWrapper(target: Class): InjectableWrapper {
+    let injectableWrapper = new Container().getInjectableTarget(target)
+    if (!injectableWrapper) {
+      injectableWrapper = new InjectableWrapper(target)
+      // eslint-disable-next-line dot-notation
+      Container['markedInjectable'].add(injectableWrapper)
+    }
+    return injectableWrapper
+  }
+
   /**
    * ### Get the injectable options of the target class.
    *
@@ -217,6 +227,36 @@ export class InjectableWrapper<TClass extends Class = Class> extends Container i
   }
 
   /**
+   * ### Bind the property dependencies of the target class.
+   *
+   * It will be called in {@linkcode InjectableWrapper.createInstance} and {@linkcode InjectableWrapper.getOrCreateInstance}.
+   * We use `Object.defineProperty` to bind the property dependencies. The property will be `readonly`.
+   * If the property is not an injectable, it will not bind the property.
+   *
+   * @param instance The instance of the target class.
+   * @memberof InjectableWrapper
+   */
+  bindPropertyDependencies<Instance>(instance: Instance): void {
+    const injectedContainer = this.getInjectContainer()
+
+    for (const injected of injectedContainer) {
+      const injectedOptions = injected.getInjectOptions()
+      const propertyKey = injectedOptions.currentProperty
+      const target = injectedOptions.currentTarget.constructor
+      if (target !== this.target)
+        continue
+      const designType = Reflect.getMetadata('design:type', target.prototype, propertyKey)
+      const wrapper = this.getInjectableByTargetOrToken(injectedOptions.injectionToken || designType)
+      if (!wrapper)
+        continue
+      Object.defineProperty(instance, propertyKey, {
+        writable: false,
+        value: wrapper.getOrCreateInstance(),
+      })
+    }
+  }
+
+  /**
    * ### Create a raw instance of the target class.
    *
    * A shortcut to {@linkcode Reflect.construct}.
@@ -245,7 +285,8 @@ export class InjectableWrapper<TClass extends Class = Class> extends Container i
     const dependencies = this.getConstructorDependencies(skipAllIfNotInjectable)
     const args = dependencies.map(dependency => dependency.getOrCreateInstance())
     const rawInstance = this.createRawInstance(args)
-    if (this.isSingleton() && noStore === false) this.singletonInstance = rawInstance
+    this.bindPropertyDependencies(rawInstance)
+    if (this.isSingleton() && noStore !== true) this.singletonInstance = rawInstance
     return this.singletonInstance
   }
 
@@ -267,11 +308,7 @@ export class InjectableWrapper<TClass extends Class = Class> extends Container i
   getOrCreateInstance(skipAllIfNotInjectable: boolean = false): InstanceType<TClass> {
     if (this.singletonInstance !== null && this.isSingleton())
       return this.singletonInstance
-    const dependencies = this.getConstructorDependencies(skipAllIfNotInjectable)
-    const args = dependencies.map(dependency => dependency.getOrCreateInstance())
-    const rawInstance = this.createRawInstance(args)
-    if (this.isSingleton()) this.singletonInstance = rawInstance
-    return this.singletonInstance
+    return this.createInstance(skipAllIfNotInjectable)
   }
 
   /**

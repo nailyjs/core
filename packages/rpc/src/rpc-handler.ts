@@ -1,11 +1,12 @@
-import type { HandlerContext, HandlerRequest, HandlerResponse, SkipHandle } from '@nailyjs/backend'
+import type { HandlerRequest, HandlerResponse, SkipHandle } from '@nailyjs/backend'
 import type { InjectableWrapper } from '@nailyjs/ioc'
 import type { z } from 'zod'
 import { randomUUID } from 'node:crypto'
-import { RpcHandlerContext } from './rpc-handler-context'
+import { HandlerContext } from '@nailyjs/backend'
+import { RpcControllerContainer } from './rpc-controller-container'
 import { JsonRpcSchema } from './schema'
 
-export class RpcHttpHandler extends RpcHandlerContext implements HandlerContext {
+export class RpcHttpHandler extends HandlerContext {
   constructor(private baseURL: string = '/') {
     super()
   }
@@ -19,10 +20,12 @@ export class RpcHttpHandler extends RpcHandlerContext implements HandlerContext 
     return this.baseURL
   }
 
+  private readonly rpcControllerContainer = new RpcControllerContainer()
+
   findRpcControllerWrapper(comparisonRpcId: string | symbol, comparisonMethodKey: string | symbol): Promise<InjectableWrapper | Response> {
     // eslint-disable-next-line no-async-promise-executor
     return new Promise<InjectableWrapper | Response>(async (resolve) => {
-      await this.eachRpcController((_target, key, wrapper, rpcId) => {
+      await this.rpcControllerContainer.eachRpcController((_target, key, wrapper, rpcId) => {
         if (key === comparisonMethodKey && comparisonRpcId === rpcId) resolve(wrapper)
       })
       resolve(new Response(JSON.stringify({

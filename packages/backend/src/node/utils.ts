@@ -132,13 +132,15 @@ export interface SendResponseReturn {
 export function sendResponse(response: Response, serverResponse: ServerResponse<IncomingMessage>): SendResponseReturn {
   function readHeaders(response: Response): IncomingHttpHeaders {
     const headers: IncomingHttpHeaders = {}
-    for (const [key, value] of response.headers) {
+    for (const [key, value] of response.headers || new Headers()) {
       headers[key] = value
     }
     return headers
   }
 
   function readBody(body: ReadableStream<Uint8Array>): Promise<string> {
+    if (!body) return Promise.resolve('')
+
     const reader = body.getReader()
     let result = ''
     return reader.read().then(function processText({ done, value }) {
@@ -151,9 +153,8 @@ export function sendResponse(response: Response, serverResponse: ServerResponse<
   }
 
   async function send(): Promise<ServerResponse<IncomingMessage>> {
-    return serverResponse
-      .writeHead(response.status, response.statusText, readHeaders(response))
-      .end(await readBody(response.body))
+    serverResponse.writeHead(response.status, response.statusText, readHeaders(response))
+    return serverResponse.end(await readBody(response.body))
   }
 
   return {

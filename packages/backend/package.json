@@ -19,11 +19,6 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./utils": {
-      "types": "./dist/utils.d.ts",
-      "import": "./dist/utils.js",
-      "require": "./dist/utils.cjs"
-    },
     "./node-adapter": {
       "types": "./dist/node-adapter.d.ts",
       "import": "./dist/node-adapter.js",
@@ -44,7 +39,8 @@
     "prepublishOnly": "tsup"
   },
   "dependencies": {
-    "@nailyjs/ioc": "workspace:*"
+    "@nailyjs/ioc": "workspace:*",
+    "path-to-regexp": "^8.2.0"
   },
   "devDependencies": {
     "tsup": "^8.3.0"

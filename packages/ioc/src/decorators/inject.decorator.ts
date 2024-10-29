@@ -1,6 +1,7 @@
 import type { InjectionToken } from '../types'
 import { InjectSymbol } from '../constants/constant'
-import { MarkedInject } from '../constants/container-constant'
+import { Container } from '../container'
+import { InjectWrapper } from '../inject-wrapper'
 
 export interface InjectOptions {
   injectionToken: InjectionToken
@@ -16,7 +17,8 @@ export function Inject(options?: Partial<InjectOptions>): PropertyDecorator & Pa
       currentTarget: target,
     }
     Reflect.defineMetadata(InjectSymbol, metadata, target.constructor, propertyKey)
-    MarkedInject.add(metadata)
+    // eslint-disable-next-line dot-notation
+    Container['markedInject'].add(new InjectWrapper(metadata))
   }) as PropertyDecorator & ParameterDecorator
 }
 

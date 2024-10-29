@@ -1,11 +1,14 @@
 import type { SkipHandle } from './constant'
 import { BackendContainer } from './backend-container'
+import { ControllerMethodExecutor } from './class-method-executor'
 
 export interface HandlerRequest extends Request {}
 
 export interface HandlerResponse extends Response {}
 
-export abstract class HandlerContext extends BackendContainer {
+export class HandlerContext extends BackendContainer {
+  private readonly methodExecutor = new ControllerMethodExecutor()
+
   /**
    * ### The request handler callback.
    *
@@ -25,7 +28,18 @@ export abstract class HandlerContext extends BackendContainer {
    * @see Response object: [MDN Reference](https://developer.mozilla.org/zh-CN/docs/Web/API/Response)
    * @memberof HandlerContext
    */
-  abstract callback(request: HandlerRequest): HandlerResponse | typeof SkipHandle | Promise<HandlerResponse | typeof SkipHandle>
+  async callback(request: HandlerRequest): Promise<HandlerResponse | typeof SkipHandle> {
+    try {
+      const result = await this.methodExecutor.executeResult(request)
+      if (!result) return new Response('', { status: 404, statusText: 'Not Found' })
+      else if (result instanceof Response) return result
+      else if (typeof result === 'object') return new Response(JSON.stringify(result), { status: 200, statusText: 'OK' })
+      else return new Response(result, { status: 200, statusText: 'OK' })
+    }
+    catch (error) { await this.catchError(error) }
+    finally { await this.catchFinally() }
+  }
+
   /**
    * ### Handle the {@linkcode callback} `error`.
    *
@@ -38,7 +52,13 @@ export abstract class HandlerContext extends BackendContainer {
    * @return {(void | Promise<void>)}
    * @memberof HandlerContext
    */
-  abstract catchError(error: unknown, ...args: any[]): any | Promise<any>
+  async catchError(error: unknown, ...args: any[]): Promise<any> {
+    return await this.eachErrorHandler(
+      async (target, methodKey) => await target[methodKey](error, ...args),
+      error,
+    )
+  }
+
   /**
    * ### Handle the {@linkcode callback} `finally`.
    *
@@ -50,5 +70,10 @@ export abstract class HandlerContext extends BackendContainer {
    * @return {(void | Promise<void>)}
    * @memberof HandlerContext
    */
-  abstract catchFinally(...args: any[]): any | Promise<any>
+  async catchFinally(...args: any[]): Promise<any> {
+    return await this.eachFinallyHandler(
+      async (target, methodKey) => await target[methodKey](...args),
+      args[0],
+    )
+  }
 }

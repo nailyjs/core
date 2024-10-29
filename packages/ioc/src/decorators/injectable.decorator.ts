@@ -1,6 +1,6 @@
-import type { Class, ScopeType } from '../types'
+import type { Class, InjectionToken, ScopeType } from '../types'
 import { InjectableSymbol } from '../constants/constant'
-import { MarkedInjectable } from '../constants/container-constant'
+import { Container } from '../container'
 import { InjectableWrapper } from '../injectable-wrapper'
 import 'reflect-metadata'
 
@@ -19,6 +19,7 @@ export interface InjectableOptions {
    * @memberof InjectableOptions
    */
   scope: ScopeType
+  injectionToken?: InjectionToken | InjectionToken[]
 }
 
 /**
@@ -36,7 +37,8 @@ export function Injectable(options: Partial<InjectableOptions> = {}): ClassDecor
       currentTarget: target,
     }
     Reflect.defineMetadata(InjectableSymbol, metadata, target)
-    MarkedInjectable.add(new InjectableWrapper(target))
+    // eslint-disable-next-line dot-notation
+    Container['markedInjectable'].add(new InjectableWrapper(target))
   }) as ClassDecorator
 }
 

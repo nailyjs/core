@@ -1,4 +1,5 @@
 import type { ContainerProtocol } from './container-protocol'
+import type { PluginProtocol } from './plugin-protocol'
 import { Container } from './container'
 
 export abstract class AbstractBootstrap extends Container implements ContainerProtocol {
@@ -50,5 +51,10 @@ export abstract class AbstractBootstrap extends Container implements ContainerPr
    */
   static isClient(): boolean {
     return typeof window !== 'undefined' && typeof document !== 'undefined'
+  }
+
+  async use(plugin: PluginProtocol): Promise<this> {
+    await plugin.install(this)
+    return this
   }
 }

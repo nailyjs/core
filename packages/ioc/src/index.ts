@@ -7,7 +7,7 @@ export * from './container-protocol'
 export * from './decorators'
 export * from './errors'
 export * from './injectable-wrapper'
-export * from './injectable-wrapper'
+export * from './plugin-protocol'
 export * from './types'
 
 export * from 'reflect-metadata'

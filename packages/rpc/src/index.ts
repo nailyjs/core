@@ -1,6 +1,7 @@
 export * from './constant'
 export * from './decorators'
 export * from './rpc-bootstrap'
+export * from './rpc-controller-container'
 export * from './rpc-handler'
 export * from './rpc-plugin-protocol'
 export * from './schema'

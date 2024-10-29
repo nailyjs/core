@@ -17,6 +17,8 @@ export default defineConfig({
             target: ScriptTarget.ES2022,
             module: ModuleKind.ES2022,
             moduleResolution: ModuleResolutionKind.Bundler,
+            experimentalDecorators: true,
+            emitDecoratorMetadata: true,
           },
         },
       }),
@@ -28,10 +30,10 @@ export default defineConfig({
       label: '简体中文',
       lang: 'zh',
     },
-    en: {
-      label: 'English',
-      lang: 'en',
-    },
+    // en: {
+    //   label: 'English',
+    //   lang: 'en',
+    // },
   },
 
   themeConfig: {
@@ -40,16 +42,30 @@ export default defineConfig({
       {
         text: '指南',
         items: [
-          { text: 'RPC指南', link: '/rpc-guide' },
+          { text: 'IOC 指南', link: '/ioc-guide' },
+          { text: 'RPC 指南', link: '/rpc-guide' },
+          { text: 'Restful 指南', link: '/restful-guide' },
         ],
       },
     ],
 
     sidebar: [
       {
-        text: 'RPC指南',
+        text: 'IOC 指南',
         items: [
-          { text: '开始使用', link: '/rpc-guide' },
+          { text: '开始使用 IOC', link: '/ioc-guide' },
+        ],
+      },
+      {
+        text: 'RPC 指南',
+        items: [
+          { text: '开始使用 RPC', link: '/rpc-guide' },
+        ],
+      },
+      {
+        text: 'Restful 指南',
+        items: [
+          { text: '开始使用 Restful', link: '/restful-guide' },
         ],
       },
     ],
