@@ -45,17 +45,23 @@ export function Injectable(options: Partial<InjectableOptions> = {}): ClassDecor
 /**
  * Mark a class as an injectable service.
  *
- * @export
- * @param {Partial<InjectableOptions>} [options] Options for the injectable service.
+ * @exports
+ * @param {InjectionToken} injectionToken Injection token for the injectable service.
+ * @param {Omit<Partial<InjectableOptions>, 'injectionToken'>} extraOptions Options for the injectable service.
  * @return {ClassDecorator}
  */
-export const Service = Injectable
+export function Service(injectionToken: InjectionToken, extraOptions?: Omit<Partial<InjectableOptions>, 'injectionToken'>): ClassDecorator {
+  return Injectable({ ...extraOptions, injectionToken })
+}
 
 /**
  * Mark a class as an injectable service.
  *
  * @exports
- * @param {Partial<InjectableOptions>} [options] Options for the injectable service.
+ * @param {InjectionToken} injectionToken Injection token for the injectable service.
+ * @param {Omit<Partial<InjectableOptions>, 'injectionToken'>} extraOptions Options for the injectable service.
  * @return {ClassDecorator}
  */
-export const Component = Injectable
+export function Component(injectionToken?: InjectionToken, extraOptions?: Omit<Partial<InjectableOptions>, 'injectionToken'>): ClassDecorator {
+  return Injectable({ ...extraOptions, injectionToken })
+}

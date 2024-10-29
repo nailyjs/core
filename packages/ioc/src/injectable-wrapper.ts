@@ -24,11 +24,16 @@ export class InjectableWrapper<TClass extends Class = Class> extends Container i
   /**
    * ### Get the injectable options of the target class.
    *
+   * If the options `injectionToken` is not provided, it will return the target class.
+   *
    * @return {InjectableOptions}
    * @memberof InjectableWrapper
    */
   getInjectableOptions(): InjectableOptions {
-    return Reflect.getMetadata(InjectableSymbol, this.target) || {}
+    const options: InjectableOptions = Reflect.getMetadata(InjectableSymbol, this.target) || {}
+    if (!options.injectionToken || (Array.isArray(options.injectionToken) && options.injectionToken.length === 0))
+      options.injectionToken = this.target
+    return options
   }
 
   /**

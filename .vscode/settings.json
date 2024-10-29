@@ -72,7 +72,9 @@
     "ioc": "container",
     "rpc": "server",
     ".vitepress": "vuepress",
-    "unplugin-rpc": "plugin"
+    "unplugin-rpc": "plugin",
+    "rpc-protocol": "interface",
+    "jexl": "src"
   },
   "vite.autoStart": false
 }

@@ -2,19 +2,15 @@ import type { Container, PluginProtocol } from '@nailyjs/ioc'
 import type { ValueMetadata } from './decorators'
 import { InjectableWrapper } from '@nailyjs/ioc'
 import { JexlExecutor } from '@nailyjs/jexl'
-import { loadConfig } from 'c12'
+import { ConfigProvider } from './config-provider'
 
-class ConfigurationPlugin implements PluginProtocol {
-  private readConfiguration(): ReturnType<typeof loadConfig> {
-    return loadConfig({
-      name: 'naily',
-    })
-  }
-
+class ConfigurationPluginImpl implements PluginProtocol {
   async install(bootstrap: Container): Promise<void> {
     const injectableContainer = bootstrap.getInjectableContainer()
     const jexlExecutor: JexlExecutor = InjectableWrapper.getOrCreateInjectableWrapper(JexlExecutor).getOrCreateInstance()
-    const configuration = await this.readConfiguration()
+    const configProvider: ConfigProvider = InjectableWrapper.getOrCreateInjectableWrapper(ConfigProvider).getOrCreateInstance()
+
+    const configuration = await configProvider.readConfiguration(bootstrap)
     const newInjectableContainer = new Set<InjectableWrapper>()
 
     for (const wrapper of injectableContainer) {
@@ -52,6 +48,6 @@ class ConfigurationPlugin implements PluginProtocol {
   }
 }
 
-export function Configuration(): PluginProtocol {
-  return new ConfigurationPlugin()
+export function ConfigurationPlugin(): PluginProtocol {
+  return new ConfigurationPluginImpl()
 }
