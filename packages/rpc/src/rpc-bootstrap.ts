@@ -84,6 +84,6 @@ export class RpcBootstrap<Adapter> extends BackendBootstrap {
    */
   async use(rpcPlugin: RpcServerPlugin): Promise<this> {
     this._rpcPlugins.push(rpcPlugin)
-    return this
+    return super.use(rpcPlugin)
   }
 }
