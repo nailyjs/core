@@ -165,6 +165,9 @@ importers:
 
   packages/jexl:
     dependencies:
+      '@nailyjs/ioc':
+        specifier: workspace:*
+        version: link:../ioc
       '@types/jexl':
         specifier: ^2.3.4
         version: 2.3.4
