@@ -77,9 +77,10 @@
     "rpc-protocol": "interface",
     "jexl": "src",
     "backend-node-adapter": "node",
-    "backend-adapter-packages": "packages",
+    "backend-adapter": "packages",
     "backend-bun-adapter": "node",
-    "core-packages": "packages"
+    "logger": "log",
+    "logger-adapter": "packages"
   },
   "vite.autoStart": false
 }
