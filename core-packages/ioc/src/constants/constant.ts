@@ -1,0 +1,6 @@
+export const InjectableSymbol = Symbol('__naily_injectable__')
+export const InjectSymbol = Symbol('__naily_inject__')
+export const FilterSymbol = Symbol('__naily_filter__')
+export const CatchSymbol = Symbol('__naily_catch__')
+export const FinallySymbol = Symbol('__naily_finally__')
+export const OptionalSymbol = '__naily_optional__'

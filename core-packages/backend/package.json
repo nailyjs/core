@@ -1,0 +1,51 @@
+{
+  "name": "@nailyjs/backend",
+  "type": "module",
+  "version": "1.0.14",
+  "description": "Create a tsup project",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "license": "MIT",
+  "homepage": "https://github.com/nailyjs/core#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nailyjs/core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nailyjs/core/issues"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./node-adapter": {
+      "types": "./dist/node-adapter.d.ts",
+      "import": "./dist/node-adapter.js",
+      "require": "./dist/node-adapter.cjs"
+    },
+    "./dist/*": "./dist/*"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup --watch",
+    "release": "bumpp && pnpm publish",
+    "prepublishOnly": "tsup"
+  },
+  "dependencies": {
+    "@nailyjs/ioc": "workspace:*",
+    "path-to-regexp": "^8.2.0"
+  },
+  "optionalDependencies": {
+    "@nailyjs/backend-node-adapter": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

@@ -1,5 +1,6 @@
 packages:
-  - packages/*
+  - core-packages/*
+  - adapter-packages/*
   - fixtures/*
   - tests/*
   - packages/unplugin-rpc/playground

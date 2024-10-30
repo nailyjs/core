@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@nailyjs/backend": "workspace:*",
+    "@nailyjs/cache": "workspace:*",
     "@nailyjs/config": "workspace:*",
     "@nailyjs/ioc": "workspace:*",
     "@nailyjs/jexl": "workspace:*"

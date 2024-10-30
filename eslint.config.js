@@ -12,5 +12,6 @@ export default antfu({
     'ts/no-wrapper-object-types': 'off',
     'ts/no-redeclare': 'off',
     'unused-imports/no-unused-imports': 'off',
+    'ts/consistent-type-imports': 'off',
   },
 })

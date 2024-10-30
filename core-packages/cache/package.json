@@ -1,0 +1,33 @@
+{
+  "name": "@nailyjs/cache",
+  "type": "module",
+  "version": "1.0.14",
+  "description": "Cache manager for Naily.js",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w"
+  },
+  "dependencies": {
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/config": "workspace:*",
+    "@nailyjs/ioc": "workspace:*",
+    "cache-manager": "^6.1.2"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

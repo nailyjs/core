@@ -1,10 +1,9 @@
 import { Get, RestController } from '@nailyjs/backend'
-import { Value } from '@nailyjs/config'
+import { CacheProvider } from '@nailyjs/cache'
 
 @RestController()
 export class TestController {
-  @Value('1 + 1')
-  private readonly hello: string
+  constructor(private readonly cache: CacheProvider) {}
 
   @Get()
   getString(): string {

@@ -19,6 +19,8 @@
     "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
     "build:jexl": "pnpm -F @nailyjs/jexl build",
     "build:config": "pnpm -F @nailyjs/config build",
+    "build:cache": "pnpm -F @nailyjs/cache build",
+    "build:backend-node-adapter": "pnpm -F @nailyjs/backend-node-adapter build",
     "play:rpc": "pnpm -F rpc-playground dev",
     "play:build": "pnpm -F rpc-playground build",
     "dev:backend": "pnpm -F backend dev",

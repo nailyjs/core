@@ -1,4 +1,4 @@
-import type { UserInputConfig } from 'c12'
+import type { UserInputConfig } from '@nailyjs/config'
 import { Configuration } from '@nailyjs/config'
 import { Service } from '@nailyjs/ioc'
 

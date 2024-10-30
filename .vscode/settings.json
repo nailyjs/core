@@ -11,6 +11,7 @@
     "Inversify",
     "jexl",
     "linkcode",
+    "mdel",
     "Naily",
     "nailyjs",
     "nuxt",
@@ -65,7 +66,7 @@
   ],
   "iconify.annotations": true,
   "iconify.inplace": true,
-  "material-icon-theme.activeIconPack": "vue_vuex",
+  "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.folders.associations": {
     "typedocs": "docs",
     "deps": "lib",
@@ -74,7 +75,11 @@
     ".vitepress": "vuepress",
     "unplugin-rpc": "plugin",
     "rpc-protocol": "interface",
-    "jexl": "src"
+    "jexl": "src",
+    "backend-node-adapter": "node",
+    "backend-adapter-packages": "packages",
+    "backend-bun-adapter": "node",
+    "core-packages": "packages"
   },
   "vite.autoStart": false
 }
