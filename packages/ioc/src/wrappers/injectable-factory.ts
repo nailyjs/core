@@ -24,8 +24,8 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
     return Reflect.construct(this.classWrapper.getTarget(), args)
   }
 
-  getInjectedConstructorDependencies(): (ClassWrapper | ConstantWrapper)[] {
-    const dependencies: (ClassWrapper | ConstantWrapper)[] = []
+  getInjectedConstructorDependencies(): (ClassWrapper | ConstantWrapper | undefined)[] {
+    const dependencies: (ClassWrapper | ConstantWrapper | undefined)[] = []
     const markedInjected: SingleInjectOptionWrapper[] = this.getMetadataScanner()
       .getInjectMetadata()
       .getInjectOptions()
@@ -39,7 +39,6 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
       if (!injectionToken) continue
       const wrapper = this.getGlobalContainer().getContainer().get(injectionToken)
       if (!wrapper && inject.isRequired()) throw new Error(`Dependency not found for injectionToken ${injectionToken.toString()}.`)
-      if (!wrapper) continue
       dependencies[parameterIndex] = wrapper
     }
 
@@ -61,15 +60,14 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
     return dependencies
   }
 
-  getConstructorDependencies(): (ClassWrapper | ConstantWrapper)[] {
+  getConstructorDependencies(): (ClassWrapper | ConstantWrapper | undefined)[] {
     const injectedDependencies = this.getInjectedConstructorDependencies()
     const reflectDependencies = this.getReflectConstructorDependencies()
     const dependencies: (ClassWrapper | ConstantWrapper)[] = []
 
     // 如果 injectedDependencies 有值，就用 injectedDependencies，否则用 reflectDependencies
-    for (let i = 0; i < reflectDependencies.length; i++) {
-      dependencies[i] = injectedDependencies[i] ?? reflectDependencies[i]
-    }
+    for (let i = 0; i < reflectDependencies.length; i++)
+      dependencies[i] = injectedDependencies[i] || reflectDependencies[i]
 
     return dependencies
   }
