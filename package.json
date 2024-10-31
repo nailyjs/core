@@ -1,0 +1,37 @@
+{
+  "name": "@nailyjs/monorepo",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Create a lib monorepo with antfu's code style",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "new": "pnpm create es-project@latest",
+    "build:ioc": "pnpm -F @nailyjs/ioc build",
+    "lint": "eslint .",
+    "postinstall": "npx simple-git-hooks",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^3.7.3",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.7.5",
+    "bumpp": "^9.7.1",
+    "eslint": "^9.12.0",
+    "js-yaml": "^4.1.0",
+    "lint-staged": "^15.2.10",
+    "simple-git-hooks": "^2.11.1",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.2"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
