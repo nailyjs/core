@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
+    "@swc/core": "^1.7.42",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.7.5",
     "bumpp": "^9.7.1",
