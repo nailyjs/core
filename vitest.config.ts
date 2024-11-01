@@ -8,6 +8,8 @@ export default defineConfig({
       reporter: ['html', 'clover', 'json'],
     },
 
-    reporters: env.GITHUB_ACTIONS ? ['dot', 'github-actions'] : ['dot'],
+    reporters: env.GITHUB_ACTIONS ? ['default', 'github-actions'] : ['dot'],
   },
 })
+
+console.log(env)
