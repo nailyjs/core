@@ -25,4 +25,4 @@ jobs:
         run: npm install -g pnpm && pnpm install
 
       - name: Run Vitest tests
-        run: GITHUB_ACTIONS=true pnpm run test
+        run: pnpm run test

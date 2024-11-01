@@ -2,6 +2,10 @@ import { Autowired, ClassWrapper, ConstantWrapper, Container, Inject, Injectable
 import { AbstractBootstrap } from '../src/bootstrap'
 
 describe('ioc', () => {
+  it('should 1 + 1 = 2', () => {
+    expect(1 + 1).toBe(3)
+  })
+
   it('should automatic analyze deps', () => {
     @Injectable()
     class BarService {
@@ -60,7 +64,7 @@ describe('ioc', () => {
         expect(propertyDeps.get('container')).toBeInstanceOf(ClassWrapper)
         expect(constructorDeps[0]).toBeInstanceOf(ClassWrapper)
         expect(constructorDeps[1]).toBeInstanceOf(ClassWrapper)
-        expect(constructorDeps[2]).toBeDefined()
+        expect(constructorDeps[2]).toBeUndefined()
         expect(constructorDeps[3]).toBeInstanceOf(ClassWrapper)
 
         const instance: FooService = classFactory.getOrCreateInstance()
