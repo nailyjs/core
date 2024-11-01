@@ -3,7 +3,6 @@ import type { Class, InjectionToken, PostConstructMetadata } from '../types'
 import { PostConstructWatermark } from '../constant'
 import { Container } from '../container'
 import { MetadataScanner } from '../metadata-scanner'
-import { TaskRunner } from '../task-runner'
 import { InjectableFactory } from './injectable-factory'
 
 export class ClassWrapper<Instance = any> implements ContainerWrapper {
@@ -41,19 +40,6 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
     return this._injectableFactory
   }
 
-  private _taskRunner: TaskRunner | null = null
-  /**
-   * ### Get task runner.
-   *
-   * @description Get task runner for the class.
-   * @param cache - if false, it will create a new instance of task runner. Default is `true`.
-   */
-  getTaskRunner(cache: boolean = true): TaskRunner {
-    if (this._taskRunner && cache) return this._taskRunner
-    this._taskRunner = new TaskRunner()
-    return this._taskRunner
-  }
-
   getInjectionToken(): InjectionToken {
     return this.getMetadataScanner()
       .getInjectableMetadata()
@@ -63,7 +49,7 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
   private singletonInstance: null | Instance = null
 
   setSingletonInstance(instance: Instance): void {
-    const taskRunner = this.getTaskRunner()
+    const taskRunner = this.getGlobalContainer().getTaskRunner()
     const tasks: PostConstructMetadata[] = this.getMetadata(PostConstructWatermark) || []
     // 这是全部一起开始执行的并行任务list
     const parallelTasks = tasks.filter(({ callType }) => callType === 'parallel')

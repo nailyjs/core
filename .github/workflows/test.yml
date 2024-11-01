@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - v2
+  pull_request:
+    branches:
+      - v2
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x] # 使用 Node.js 18.x 版本
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: pnpm # 缓存 pnpm 包
+
+      # Step 3: Install pnpm
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+
+      # Step 4: Install dependencies (using pnpm)
+      - name: Install dependencies
+        run: |
+          pnpm install
+
+      # Step 5: Run tests for all packages
+      - name: Run tests
+        run: |
+          pnpm run test --filter
+
+      # (Optional) Step 6: Upload test results if needed
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: ./packages/**/test-results.xml

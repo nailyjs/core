@@ -24,7 +24,7 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
     return Reflect.construct(this.classWrapper.getTarget(), args)
   }
 
-  getInjectedConstructorDependencies(): (ClassWrapper | ConstantWrapper | undefined)[] {
+  getInjectedConstructorDependencies(existDeps: (ClassWrapper | ConstantWrapper | undefined)[] = []): (ClassWrapper | ConstantWrapper | undefined)[] {
     const dependencies: (ClassWrapper | ConstantWrapper | undefined)[] = []
     const markedInjected: SingleInjectOptionWrapper[] = this.getMetadataScanner()
       .getInjectMetadata()
@@ -38,14 +38,15 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
       const injectionToken = inject.getInjectionToken()
       if (!injectionToken) continue
       const wrapper = this.getGlobalContainer().getContainer().get(injectionToken)
-      if (!wrapper && inject.isRequired()) throw new Error(`Dependency not found for injectionToken ${injectionToken.toString()}.`)
+      if (!wrapper && inject.isRequired() && !existDeps[parameterIndex])
+        throw new Error(`Dependency not found for injectionToken ${injectionToken.toString()}.`)
       dependencies[parameterIndex] = wrapper
     }
 
     return dependencies
   }
 
-  getReflectConstructorDependencies(): (ClassWrapper | ConstantWrapper | undefined)[] {
+  getReflectConstructorDependencies(existDeps: (ClassWrapper | ConstantWrapper | undefined)[] = []): (ClassWrapper | ConstantWrapper | undefined)[] {
     const dependencies: (ClassWrapper | ConstantWrapper | undefined)[] = []
     const designParamTypes = this.getMetadataScanner().getConstructorParamTypes()
     const markedInjected: SingleInjectOptionWrapper[] = this.getMetadataScanner()
@@ -58,7 +59,7 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
       if (designParamType === undefined) continue
       const wrapper = this.getGlobalContainer().getContainer().get(designParamType)
       const injectInfo = markedInjected.find(injectOptions => injectOptions.getParameterIndex() === i)
-      if (!wrapper && (!injectInfo || injectInfo.isRequired()))
+      if (!wrapper && (!injectInfo || injectInfo.isRequired()) && !existDeps[i])
         throw new Error(`Dependency not found for designParamType ${designParamType.toString()}.`)
       dependencies[i] = wrapper
     }
@@ -68,7 +69,7 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
 
   getConstructorDependencies(): (ClassWrapper | ConstantWrapper | undefined)[] {
     const injectedDependencies = this.getInjectedConstructorDependencies()
-    const reflectDependencies = this.getReflectConstructorDependencies()
+    const reflectDependencies = this.getReflectConstructorDependencies(injectedDependencies)
     const dependencies: (ClassWrapper | ConstantWrapper | undefined)[] = []
 
     // 如果 injectedDependencies 有值，就用 injectedDependencies，否则用 reflectDependencies

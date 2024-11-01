@@ -1,4 +1,4 @@
-import { Autowired, ClassWrapper, ConstantWrapper, Container, Inject, Injectable, Optional, PostConstruct } from '../src'
+import { Autowired, ClassWrapper, ConstantWrapper, Container, Inject, Injectable, InjectableWatermark, InjectWatermark, Optional, PostConstruct } from '../src'
 import { AbstractBootstrap } from '../src/bootstrap'
 
 it('should automatic analyze deps', () => {
@@ -18,35 +18,45 @@ it('should automatic analyze deps', () => {
       @Autowired()
       baz2Service: BarService,
       container: Container,
+      @Autowired(InjectableWatermark)
+      private readonly injectableWatermark: string,
     ) {
       expect(barService).toBeInstanceOf(BarService)
       expect(bazService).toBeInstanceOf(BarService)
       expect(baz2Service).toBeInstanceOf(BarService)
       expect(container).toBeInstanceOf(Container)
+      expect(injectableWatermark).toBe(InjectableWatermark)
 
       // 属性注入的时候，在constructor 里 thisBarService 还没有被注入
-      expect(this.thisBarService).toBeUndefined()
+      expect(this.container).toBeUndefined()
+      expect(this.injectWatermark).toBeUndefined()
     }
 
     @Autowired()
-    thisBarService: Container
+    container: Container
+
+    @Autowired(InjectWatermark)
+    injectWatermark: string
 
     @PostConstruct()
     postConstructFunc() {
       // 在 postConstruct 里 thisBarService 已经被注入
-      expect(this.thisBarService).toBeInstanceOf(Container)
+      expect(this.container).toBeInstanceOf(Container)
+      expect(this.injectWatermark).toBe(InjectWatermark)
     }
   }
 
   class Bootstrap extends AbstractBootstrap {
     async run(): Promise<any> {
+      this.enableInternalConstant()
+
       const wrapper = this.createClassWrapper(FooService).save()
       expect(wrapper.getMetadataScanner().isInjectable()).toBeTruthy()
       expect(wrapper.getMetadataScanner().isFilter()).toBeFalsy()
       const classFactory = wrapper.getClassFactory()
       const constructorDeps = classFactory.getConstructorDependencies()
       const propertyDeps = classFactory.getPropertyDependencies()
-      expect(propertyDeps.get('thisBarService')).toBeInstanceOf(ClassWrapper)
+      expect(propertyDeps.get('container')).toBeInstanceOf(ClassWrapper)
       expect(constructorDeps[0]).toBeInstanceOf(ClassWrapper)
       expect(constructorDeps[1]).toBeInstanceOf(ClassWrapper)
       expect(constructorDeps[2]).toBeUndefined()
@@ -54,7 +64,7 @@ it('should automatic analyze deps', () => {
 
       const instance: FooService = classFactory.getOrCreateInstance()
       expect(instance).toBeInstanceOf(FooService)
-      expect(instance.thisBarService).toBeInstanceOf(Container)
+      expect(instance.container).toBeInstanceOf(Container)
     }
   }
   new Bootstrap().run()
