@@ -40,4 +40,4 @@ jobs:
       # Step 5: Run tests for all packages
       - name: Run tests
         run: |
-          pnpm run test
+          pnpm run test:actions
