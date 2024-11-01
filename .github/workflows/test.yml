@@ -40,7 +40,7 @@ jobs:
       # Step 5: Run tests for all packages
       - name: Run tests
         run: |
-          pnpm run test --filter
+          pnpm run test
 
       # (Optional) Step 6: Upload test results if needed
       - name: Upload test results
