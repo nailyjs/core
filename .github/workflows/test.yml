@@ -3,41 +3,29 @@ name: CI
 on:
   push:
     branches:
-      - v2
+      - main
   pull_request:
     branches:
-      - v2
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x] # 使用 Node.js 18.x 版本
-
     steps:
-      # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '18' # 你可以根据你的项目选择 Node.js 版本
 
-      # Step 3: Install pnpm
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
-
-      # Step 4: Install dependencies (using pnpm)
       - name: Install dependencies
-        run: |
-          pnpm install
+        run: npm install -g pnpm && pnpm install
 
-      # Step 5: Run tests for all packages
-      - name: Run tests
-        run: |
-          pnpm run test:actions
+      - name: Run Vitest tests
+        run: pnpm run test -- --reporter=github-actions
+        # 如果你的 package.json 中有 "test" 脚本，可以使用上面的命令
+        # 如果没有，可以直接运行 vitest:
+        # run: npx vitest run --reporter=github-actions

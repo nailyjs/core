@@ -12,8 +12,7 @@
     "build:ioc": "pnpm -F @nailyjs/ioc build",
     "lint": "eslint .",
     "postinstall": "npx simple-git-hooks",
-    "test": "vitest --ui --coverage",
-    "test:actions": "cross-env GITHUB_ACTIONS=true vitest --ui --coverage"
+    "test": "vitest --ui --coverage"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",

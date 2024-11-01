@@ -59,7 +59,7 @@ it('should automatic analyze deps', () => {
       expect(propertyDeps.get('container')).toBeInstanceOf(ClassWrapper)
       expect(constructorDeps[0]).toBeInstanceOf(ClassWrapper)
       expect(constructorDeps[1]).toBeInstanceOf(ClassWrapper)
-      expect(constructorDeps[2]).toBeUndefined()
+      expect(constructorDeps[2]).toBeDefined()
       expect(constructorDeps[3]).toBeInstanceOf(ClassWrapper)
 
       const instance: FooService = classFactory.getOrCreateInstance()
