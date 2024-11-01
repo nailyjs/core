@@ -3,7 +3,7 @@ import { AbstractBootstrap } from '../src/bootstrap'
 
 describe('ioc', () => {
   it('should 1 + 1 = 2', () => {
-    expect(1 + 1).toBe(3)
+    expect(1 + 1).toBe(4)
   })
 
   it('should automatic analyze deps', () => {
