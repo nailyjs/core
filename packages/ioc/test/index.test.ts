@@ -1,6 +1,10 @@
 import { Autowired, ClassWrapper, ConstantWrapper, Container, Inject, Injectable, InjectableWatermark, InjectWatermark, Optional, PostConstruct } from '../src'
 import { AbstractBootstrap } from '../src/bootstrap'
 
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason)
+})
+
 it('should automatic analyze deps', () => {
   @Injectable()
   class BarService {
