@@ -5,7 +5,7 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
-      reporter: [],
+      reporter: ['html', 'clover', 'json'],
     },
 
     reporters: env.GITHUB_ACTIONS ? ['dot', 'github-actions'] : ['dot'],
