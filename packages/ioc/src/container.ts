@@ -1,8 +1,10 @@
 import type { Saveable } from './protocols'
 import type { Class, InjectionToken } from './types'
+import { Injectable } from './decorators'
 import { ClassWrapper } from './wrappers/class-wrapper'
 import { ConstantWrapper } from './wrappers/constant-wrapper'
 
+@Injectable()
 export class Container implements Saveable {
   private static map = new Map<InjectionToken, ClassWrapper | ConstantWrapper>()
 
@@ -22,7 +24,8 @@ export class Container implements Saveable {
     return new ConstantWrapper(injectionToken, value)
   }
 
-  save(wrapper: ClassWrapper | ConstantWrapper): void {
+  save(wrapper: ClassWrapper | ConstantWrapper): this {
     Container.map.set(wrapper.getInjectionToken(), wrapper)
+    return this
   }
 }

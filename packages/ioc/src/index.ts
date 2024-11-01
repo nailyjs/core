@@ -1,5 +1,6 @@
 export * from './constant'
 export * from './container'
+export * from './decorators'
 export * from './metadata-scanner'
 export * from './protocols'
 export * from './types'

@@ -4,7 +4,7 @@ import type { InjectionToken } from './types'
 import type { ClassWrapper } from './wrappers/class-wrapper'
 
 export interface Saveable {
-  save(...args: any[]): void
+  save(...args: any[]): void | this
 }
 export interface GetInjectionTokenable {
   getInjectionToken(): InjectionToken | undefined

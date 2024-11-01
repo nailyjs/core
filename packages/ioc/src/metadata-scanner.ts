@@ -39,4 +39,8 @@ export class MetadataScanner {
   getMethodParamTypes(propertyKey: string | symbol): any[] {
     return this.getClassWrapper().getPropertyMetadata('design:paramtypes', propertyKey) || []
   }
+
+  getPropertyType(propertyKey: string | symbol): any {
+    return this.getClassWrapper().getPropertyMetadata('design:type', propertyKey, true)
+  }
 }

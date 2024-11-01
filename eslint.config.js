@@ -6,5 +6,6 @@ export default antfu({
     'antfu/curly': 'off',
     'antfu/if-newline': 'off',
     'ts/method-signature-style': 'off',
+    'ts/no-wrapper-object-types': 'off',
   },
 })

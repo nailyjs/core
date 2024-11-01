@@ -13,3 +13,8 @@ export interface InjectOptions {
   parameterIndex: number | undefined
   propertyKey: string | symbol | undefined
 }
+export type CallType = 'parallel' | 'series'
+export interface PostConstructMetadata {
+  propertyKey: string | symbol
+  callType: CallType
+}

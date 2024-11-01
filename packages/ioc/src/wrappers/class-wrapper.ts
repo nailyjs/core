@@ -1,7 +1,9 @@
 import type { ContainerWrapper } from '../protocols'
-import type { Class, InjectionToken } from '../types'
+import type { Class, InjectionToken, PostConstructMetadata } from '../types'
+import { PostConstructWatermark } from '../constant'
 import { Container } from '../container'
 import { MetadataScanner } from '../metadata-scanner'
+import { TaskRunner } from '../task-runner'
 import { InjectableFactory } from './injectable-factory'
 
 export class ClassWrapper<Instance = any> implements ContainerWrapper {
@@ -39,6 +41,19 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
     return this._injectableFactory
   }
 
+  private _taskRunner: TaskRunner | null = null
+  /**
+   * ### Get task runner.
+   *
+   * @description Get task runner for the class.
+   * @param cache - if false, it will create a new instance of task runner. Default is `true`.
+   */
+  getTaskRunner(cache: boolean = true): TaskRunner {
+    if (this._taskRunner && cache) return this._taskRunner
+    this._taskRunner = new TaskRunner()
+    return this._taskRunner
+  }
+
   getInjectionToken(): InjectionToken {
     return this.getMetadataScanner()
       .getInjectableMetadata()
@@ -48,6 +63,27 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
   private singletonInstance: null | Instance = null
 
   setSingletonInstance(instance: Instance): void {
+    const taskRunner = this.getTaskRunner()
+    const tasks: PostConstructMetadata[] = this.getMetadata(PostConstructWatermark) || []
+    // 这是全部一起开始执行的并行任务list
+    const parallelTasks = tasks.filter(({ callType }) => callType === 'parallel')
+    // 这是上一个任务执行完后下一个任务才会开始的串行任务list
+    const seriesTasks = tasks.filter(({ callType }) => callType === 'series')
+
+    // 串行任务
+    taskRunner.runTasksSequentially(
+      seriesTasks
+        .filter(({ propertyKey }) => typeof (instance as Record<string | symbol, any>)[propertyKey] === 'function')
+        .map(({ propertyKey }) => () => (instance as Record<string | symbol, any>)[propertyKey]()),
+    )
+
+    // 并行任务
+    taskRunner.runTasksInParallel(
+      parallelTasks
+        .filter(({ propertyKey }) => typeof (instance as Record<string | symbol, any>)[propertyKey] === 'function')
+        .map(({ propertyKey }) => () => (instance as Record<string | symbol, any>)[propertyKey]()),
+    )
+
     this.singletonInstance = instance
   }
 
@@ -67,12 +103,12 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
     return Reflect.getMetadata(key, this.target)
   }
 
-  getPropertyMetadata<Key extends string | symbol = string | symbol>(key: 'design:paramtypes', propertyKey: Key): any[] | undefined
-  getPropertyMetadata<Key extends string | symbol = string | symbol>(key: 'design:type', propertyKey: Key): any | undefined
-  getPropertyMetadata<Key extends string | symbol = string | symbol>(key: 'design:returntype', propertyKey: Key): any | undefined
-  getPropertyMetadata<Value = any, Key extends string | symbol = string | symbol>(key: Key, propertyKey: Key): Value | undefined
-  getPropertyMetadata<Value, Key extends string | symbol = string | symbol>(key: string, propertyKey: Key): Value | undefined {
-    return Reflect.getMetadata(key, this.target, propertyKey)
+  getPropertyMetadata<Key extends string | symbol = string | symbol>(key: 'design:paramtypes', propertyKey: Key, prototype?: boolean): any[] | undefined
+  getPropertyMetadata<Key extends string | symbol = string | symbol>(key: 'design:type', propertyKey: Key, prototype?: boolean): any | undefined
+  getPropertyMetadata<Key extends string | symbol = string | symbol>(key: 'design:returntype', propertyKey: Key, prototype?: boolean): any | undefined
+  getPropertyMetadata<Value = any, Key extends string | symbol = string | symbol>(key: Key, propertyKey: Key, prototype?: boolean): Value | undefined
+  getPropertyMetadata<Value, Key extends string | symbol = string | symbol>(key: string, propertyKey: Key, prototype: boolean = false): Value | undefined {
+    return Reflect.getMetadata(key, prototype === true ? this.target.prototype : this.target, propertyKey)
   }
 
   hasMetadata<Key extends string | symbol = string | symbol>(key: Key): boolean {
@@ -90,7 +126,8 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
     return this._classWrapperContainer
   }
 
-  save(): void {
+  save(): this {
     this.getGlobalContainer().save(this)
+    return this
   }
 }
