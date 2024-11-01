@@ -25,7 +25,7 @@ jobs:
         run: npm install -g pnpm && pnpm install
 
       - name: Run Vitest tests
-        run: pnpm run test -- --reporter=github-actions
+        run: pnpm run test --reporter=github-actions
         # 如果你的 package.json 中有 "test" 脚本，可以使用上面的命令
         # 如果没有，可以直接运行 vitest:
         # run: npx vitest run --reporter=github-actions
