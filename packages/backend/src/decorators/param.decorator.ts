@@ -1,6 +1,6 @@
 import type { Pipe } from './pipe.decorator'
 import { Class } from '@nailyjs/ioc'
-import { createRestControllerParamDecorator } from '../factories/param-factory'
+import { createRestControllerParamDecorator, CreateRestControllerParamDecoratorReturn } from '../factories/param-factory'
 import { InternalCookiesPipe } from '../pipes'
 import { InternalBodyPipe } from '../pipes/body.pipe'
 import { InternalBodyArrayBufferPipe } from '../pipes/body-arrayBuffer.pipe'
@@ -14,49 +14,49 @@ import { InternalQueryPipe } from '../pipes/query.pipe'
 import { InternalReqPipe } from '../pipes/req.pipe'
 import { InternalSessionPipe } from '../pipes/session.pipe'
 
-export const Params = createRestControllerParamDecorator({
+export const Params: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
   decorate: 'Params',
   onDecorate(ctx) {
     ctx.unshiftPipe(InternalParamsPipe)
   },
 })
 
-export const Query = createRestControllerParamDecorator({
+export const Query: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
   decorate: 'Query',
   onDecorate(ctx) {
     ctx.unshiftPipe(InternalQueryPipe)
   },
 })
 
-export const Header = createRestControllerParamDecorator({
+export const Header: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
   decorate: 'Header',
   onDecorate(ctx) {
     ctx.unshiftPipe(InternalHeaderPipe)
   },
 })
 
-export const Cookies = createRestControllerParamDecorator({
+export const Cookies: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
   decorate: 'Cookies',
   onDecorate(ctx) {
     ctx.unshiftPipe(InternalCookiesPipe)
   },
 })
 
-export const Req = createRestControllerParamDecorator({
+export const Req: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
   decorate: 'Req',
   onDecorate(ctx) {
     ctx.unshiftPipe(InternalReqPipe)
   },
 })
 
-export const Ip = createRestControllerParamDecorator({
+export const Ip: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
   decorate: 'Ip',
   onDecorate(ctx) {
     ctx.unshiftPipe(InternalIpPipe)
   },
 })
 
-export const Session = createRestControllerParamDecorator({
+export const Session: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
   decorate: 'Session',
   onDecorate(ctx) {
     ctx.unshiftPipe(InternalSessionPipe)
@@ -74,30 +74,32 @@ export function Body(...args: any[]): ParameterDecorator {
   })(...args)
 }
 
-Body.FormData = createRestControllerParamDecorator({
-  decorate: 'BodyFormData',
-  onDecorate(ctx) {
-    ctx.unshiftPipe(InternalBodyFormDataPipe)
-  },
-})
+export namespace Body {
+  export const FormData: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
+    decorate: 'BodyFormData',
+    onDecorate(ctx) {
+      ctx.unshiftPipe(InternalBodyFormDataPipe)
+    },
+  })
 
-Body.Json = createRestControllerParamDecorator({
-  decorate: 'BodyJson',
-  onDecorate(ctx) {
-    ctx.unshiftPipe(InternalBodyJsonPipe)
-  },
-})
+  export const Json: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
+    decorate: 'BodyJson',
+    onDecorate(ctx) {
+      ctx.unshiftPipe(InternalBodyJsonPipe)
+    },
+  })
 
-Body.Text = createRestControllerParamDecorator({
-  decorate: 'BodyText',
-  onDecorate(ctx) {
-    ctx.unshiftPipe(InternalBodyTextPipe)
-  },
-})
+  export const Text: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
+    decorate: 'BodyText',
+    onDecorate(ctx) {
+      ctx.unshiftPipe(InternalBodyTextPipe)
+    },
+  })
 
-Body.ArrayBuffer = createRestControllerParamDecorator({
-  decorate: 'BodyArrayBuffer',
-  onDecorate(ctx) {
-    ctx.unshiftPipe(InternalBodyArrayBufferPipe)
-  },
-})
+  export const ArrayBuffer: CreateRestControllerParamDecoratorReturn = createRestControllerParamDecorator({
+    decorate: 'BodyArrayBuffer',
+    onDecorate(ctx) {
+      ctx.unshiftPipe(InternalBodyArrayBufferPipe)
+    },
+  })
+}
