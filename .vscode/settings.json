@@ -1,12 +1,15 @@
 {
   "cSpell.words": [
     "antfu",
+    "appengine",
     "Autowired",
     "bumpp",
     "Containerable",
+    "Fastly",
     "Naily",
     "nailyjs",
     "paramtypes",
+    "psuedo",
     "returntype",
     "Scannerable",
     "Tokenable",
@@ -60,6 +63,14 @@
   "iconify.inplace": true,
   "material-icon-theme.folders.associations": {
     "wrappers": "lib",
-    "protocols": "interface"
+    "protocols": "interface",
+    "filters": "class",
+    "adapters": "src",
+    "factories": "class",
+    "node": "node"
+  },
+  "material-icon-theme.activeIconPack": "nest",
+  "material-icon-theme.files.associations": {
+    "*.error.ts": "nest-filter"
   }
 }

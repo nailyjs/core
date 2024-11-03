@@ -10,16 +10,19 @@
   "scripts": {
     "new": "pnpm create es-project@latest",
     "build:ioc": "pnpm -F @nailyjs/ioc build",
+    "build:backend": "pnpm -F @nailyjs/backend build",
     "lint": "eslint .",
     "postinstall": "npx simple-git-hooks",
     "test": "vitest",
-    "test:ui": "vitest --ui --coverage"
+    "test:ui": "vitest --ui --coverage",
+    "swc": "tsx scripts/swc.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
     "@swc/core": "^1.7.42",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.7.5",
+    "@types/source-map-support": "^0.5.10",
     "@vitest/coverage-v8": "^2.1.4",
     "@vitest/ui": "2.1.4",
     "bumpp": "^9.7.1",
@@ -27,9 +30,11 @@
     "eslint": "^9.12.0",
     "js-yaml": "^4.1.0",
     "lint-staged": "^15.2.10",
+    "magic-string": "^0.30.12",
     "simple-git-hooks": "^2.11.1",
+    "source-map-support": "^0.5.21",
     "tsup": "^8.3.0",
-    "tsx": "^4.19.1",
+    "tsx": "^4.19.2",
     "typescript": "^5.6.3",
     "unplugin-swc": "^1.5.1",
     "vitest": "^2.1.2"

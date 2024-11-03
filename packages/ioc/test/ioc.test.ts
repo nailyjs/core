@@ -2,11 +2,7 @@ import { Autowired, ClassWrapper, ConstantWrapper, Container, Inject, Injectable
 import { AbstractBootstrap } from '../src/bootstrap'
 
 describe('ioc', () => {
-  it('should 1 + 1 = 2', () => {
-    expect(1 + 1).toBe(4)
-  })
-
-  it('should automatic analyze deps', () => {
+  it('should automatic analyze deps', async () => {
     @Injectable()
     class BarService {
     }
@@ -44,10 +40,23 @@ describe('ioc', () => {
       injectWatermark: string
 
       @PostConstruct()
-      postConstructFunc() {
+      async postConstructFunc() {
         // 在 postConstruct 里 thisBarService 已经被注入
         expect(this.container).toBeInstanceOf(Container)
         expect(this.injectWatermark).toBe(InjectWatermark)
+
+        console.log('postConstructFunc called')
+        return await new Promise<void>((resolve) => {
+          setTimeout(() => {
+            console.log('postConstructFunc resolved')
+            resolve()
+          }, 5)
+        })
+      }
+
+      @PostConstruct('series')
+      postConstructFunc2() {
+        console.log('postConstructFunc2 called')
       }
     }
 
@@ -72,7 +81,7 @@ describe('ioc', () => {
         expect(instance.container).toBeInstanceOf(Container)
       }
     }
-    new Bootstrap().run()
+    await new Bootstrap().run()
   })
 
   it('should create constant', () => {

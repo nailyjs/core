@@ -1,26 +1,17 @@
-import type { Container } from '../container'
-import type { MetadataScanner } from '../metadata-scanner'
-import type { ClassWrapperProvider, GetInjectionTokenable } from '../protocols'
+import type { GetInjectionTokenable } from '../protocols'
 import type { InjectionToken, InjectOptions } from '../types'
-import type { ClassWrapper } from './class-wrapper'
 import type { InjectMetadataWrapper } from './inject-options-wrapper'
+import { AbstractClassWrapperProvider } from './class-wrapper-provider'
 
-export class SingleInjectOptionWrapper implements ClassWrapperProvider, GetInjectionTokenable {
+export class SingleInjectOptionWrapper extends AbstractClassWrapperProvider implements GetInjectionTokenable {
   constructor(
     private readonly injectMetadataWrapper: InjectMetadataWrapper,
     private readonly singleInjectOptions: InjectOptions,
-  ) {}
-
-  getClassWrapper(): ClassWrapper {
-    return this.injectMetadataWrapper.getClassWrapper()
-  }
-
-  getGlobalContainer(): Container {
-    return this.injectMetadataWrapper.getGlobalContainer()
-  }
-
-  getMetadataScanner(): MetadataScanner {
-    return this.injectMetadataWrapper.getMetadataScanner()
+  ) {
+    super(
+      injectMetadataWrapper.getGlobalContainer(),
+      injectMetadataWrapper.getClassWrapper(),
+    )
   }
 
   getInjectMetadataWrapper(): InjectMetadataWrapper {

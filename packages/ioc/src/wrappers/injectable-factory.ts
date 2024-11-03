@@ -1,27 +1,15 @@
-import type { Container } from '../container'
-import type { MetadataScanner } from '../metadata-scanner'
-import type { ClassWrapperProvider } from '../protocols'
 import type { SingleInjectOptionWrapper } from './single-inject-option-wrapper'
 import { ClassWrapper } from './class-wrapper'
+import { AbstractClassWrapperProvider } from './class-wrapper-provider'
 import { ConstantWrapper } from './constant-wrapper'
 
-export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
-  constructor(private readonly classWrapper: ClassWrapper<Instance>) {}
-
-  getClassWrapper(): ClassWrapper<Instance> {
-    return this.classWrapper
-  }
-
-  getGlobalContainer(cache: boolean = true): Container {
-    return this.classWrapper.getGlobalContainer(cache)
-  }
-
-  getMetadataScanner(cache: boolean = true): MetadataScanner {
-    return this.classWrapper.getMetadataScanner(cache)
+export class InjectableFactory<Instance = any> extends AbstractClassWrapperProvider {
+  constructor(injectableFactoryClassWrapper: ClassWrapper<Instance>) {
+    super(injectableFactoryClassWrapper.getGlobalContainer(), injectableFactoryClassWrapper)
   }
 
   createRawInstance<Args extends any[]>(args: Args): Instance {
-    return Reflect.construct(this.classWrapper.getTarget(), args)
+    return Reflect.construct(this.getClassWrapper().getTarget(), args)
   }
 
   getInjectedConstructorDependencies(existDeps: (ClassWrapper | ConstantWrapper | undefined)[] = []): (ClassWrapper | ConstantWrapper | undefined)[] {
@@ -103,7 +91,7 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
         dependencies.set(propertyKey, wrapper)
       }
       else {
-        throw new Error(`Property type not found for propertyKey ${propertyKey.toString()} in class ${this.classWrapper.getTarget().name}.`)
+        throw new Error(`Property type not found for propertyKey ${propertyKey.toString()} in class ${this.getClassWrapper().getTarget().name}.`)
       }
     }
 
@@ -117,12 +105,16 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
     else return undefined
   }
 
-  getOrCreateInstance(): Instance {
-    const currentSingletonInstance = this.classWrapper.getSingletonInstance()
-    if (currentSingletonInstance) return currentSingletonInstance
-
+  getOrCreateInstance<Ins = Instance>(): Ins {
+    const classWrapper = this.getClassWrapper()
+    const metadataScanner = classWrapper.getMetadataScanner()
+    const injectableMetadata = metadataScanner.getInjectableMetadata()
     const constructorDeps = this.getConstructorDependencies()
     const propertyDeps = this.getPropertyDependencies()
+
+    const currentSingletonInstance = classWrapper.getSingletonInstance()
+    if (currentSingletonInstance && injectableMetadata.isSingleton()) return currentSingletonInstance
+
     const args = constructorDeps.map(this.createInstanceByWrapper.bind(this))
     const instance = this.createRawInstance(args)
 
@@ -131,7 +123,7 @@ export class InjectableFactory<Instance = any> implements ClassWrapperProvider {
       // @ts-expect-error
       instance[key] = this.createInstanceByWrapper(wrapper)
 
-    this.classWrapper.setSingletonInstance(instance)
-    return instance
+    classWrapper.setSingletonInstance(instance)
+    return instance as unknown as Ins
   }
 }

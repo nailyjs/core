@@ -1,6 +1,5 @@
 import type { ContainerWrapper } from '../protocols'
-import type { Class, InjectionToken, PostConstructMetadata } from '../types'
-import { PostConstructWatermark } from '../constant'
+import type { Class, InjectionToken } from '../types'
 import { Container } from '../container'
 import { MetadataScanner } from '../metadata-scanner'
 import { InjectableFactory } from './injectable-factory'
@@ -50,25 +49,29 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
 
   setSingletonInstance(instance: Instance): void {
     const taskRunner = this.getGlobalContainer().getTaskRunner()
-    const tasks: PostConstructMetadata[] = this.getMetadata(PostConstructWatermark) || []
+    const tasks = this.getMetadataScanner()
+      .getPostConstructMetadata()
+      .getPostConstructOptions()
     // 这是全部一起开始执行的并行任务list
-    const parallelTasks = tasks.filter(({ callType }) => callType === 'parallel')
+    const parallelTasks = tasks.filter(task => task.isParallel())
     // 这是上一个任务执行完后下一个任务才会开始的串行任务list
-    const seriesTasks = tasks.filter(({ callType }) => callType === 'series')
+    const seriesTasks = tasks.filter(task => task.isSeries())
 
     // 串行任务
     taskRunner.runTasksSequentially(
       seriesTasks
-        .filter(({ propertyKey }) => typeof (instance as Record<string | symbol, any>)[propertyKey] === 'function')
-        .map(({ propertyKey }) => () => (instance as Record<string | symbol, any>)[propertyKey]()),
-    )
+        .filter(task => typeof (instance as Record<string | symbol, any>)[task.getPropertyKey()] === 'function')
+        .map(task => (instance as Record<string | symbol, any>)[task.getPropertyKey()])
+        .map(task => task.bind(instance)),
+    ).catch(error => console.error(error))
 
     // 并行任务
     taskRunner.runTasksInParallel(
       parallelTasks
-        .filter(({ propertyKey }) => typeof (instance as Record<string | symbol, any>)[propertyKey] === 'function')
-        .map(({ propertyKey }) => () => (instance as Record<string | symbol, any>)[propertyKey]()),
-    )
+        .filter(task => typeof (instance as Record<string | symbol, any>)[task.getPropertyKey()] === 'function')
+        .map(task => (instance as Record<string | symbol, any>)[task.getPropertyKey()])
+        .map(task => task.bind(instance)),
+    ).catch(error => console.error(error))
 
     this.singletonInstance = instance
   }

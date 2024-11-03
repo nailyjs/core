@@ -8,3 +8,6 @@ export function Injectable(options: Partial<InjectableOptions> = {}): ClassDecor
     new Container().createClassWrapper(target).save()
   }) as ClassDecorator
 }
+
+export const Service = Injectable
+export const Component = Injectable

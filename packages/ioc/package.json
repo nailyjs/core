@@ -9,7 +9,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./dist/*": "./dist/*"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -22,7 +23,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "watch": "tsup -w"
+    "watch": "tsup -w",
+    "jsr": "npx jsr publish"
   },
   "dependencies": {
     "reflect-metadata": "^0.2.2"

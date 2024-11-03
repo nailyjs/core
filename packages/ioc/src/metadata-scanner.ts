@@ -2,6 +2,7 @@ import type { ClassWrapper } from './wrappers/class-wrapper'
 import { FilterWatermark, InjectableWatermark } from './constant'
 import { InjectMetadataWrapper } from './wrappers/inject-options-wrapper'
 import { InjectableMetadataWrapper } from './wrappers/injectable-options-wrapper'
+import { PostConstructMetadataWrapper } from './wrappers/post-construct-options-wrapper'
 
 export class MetadataScanner {
   constructor(private readonly classWrapper: ClassWrapper) {}
@@ -32,12 +33,16 @@ export class MetadataScanner {
     return this._injectMetadata
   }
 
+  getPostConstructMetadata(): PostConstructMetadataWrapper {
+    return new PostConstructMetadataWrapper(this)
+  }
+
   getConstructorParamTypes(): any[] {
     return this.getClassWrapper().getMetadata('design:paramtypes') || []
   }
 
   getMethodParamTypes(propertyKey: string | symbol): any[] {
-    return this.getClassWrapper().getPropertyMetadata('design:paramtypes', propertyKey) || []
+    return this.getClassWrapper().getPropertyMetadata('design:paramtypes', propertyKey, true) || []
   }
 
   getPropertyType(propertyKey: string | symbol): any {

@@ -1,24 +1,16 @@
-import type { Container } from '../container'
 import type { MetadataScanner } from '../metadata-scanner'
 import type { ClassWrapperProvider } from '../protocols'
 import type { InjectableOptions, InjectionToken, Scope } from '../types'
-import type { ClassWrapper } from './class-wrapper'
 import { InjectableWatermark } from '../constant'
+import { AbstractClassWrapperProvider } from './class-wrapper-provider'
 import 'reflect-metadata'
 
-export class InjectableMetadataWrapper implements ClassWrapperProvider {
-  constructor(private readonly metadataScanner: MetadataScanner) {}
-
-  getMetadataScanner(): MetadataScanner {
-    return this.metadataScanner
-  }
-
-  getClassWrapper(): ClassWrapper {
-    return this.getMetadataScanner().getClassWrapper()
-  }
-
-  getGlobalContainer(): Container {
-    return this.getClassWrapper().getGlobalContainer()
+export class InjectableMetadataWrapper extends AbstractClassWrapperProvider implements ClassWrapperProvider {
+  constructor(private readonly metadataScanner: MetadataScanner) {
+    super(
+      metadataScanner.getClassWrapper().getGlobalContainer(),
+      metadataScanner.getClassWrapper(),
+    )
   }
 
   getRawInjectableOptions(): Partial<InjectableOptions> {

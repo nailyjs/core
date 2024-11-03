@@ -1,0 +1,40 @@
+{
+  "name": "@nailyjs/backend",
+  "type": "module",
+  "version": "0.0.4",
+  "description": "Backend module for naily.js",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./node-adapter": {
+      "types": "./dist/node-adapter.d.ts",
+      "import": "./dist/node-adapter.js",
+      "require": "./dist/node-adapter.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w"
+  },
+  "dependencies": {
+    "@nailyjs/ioc": "workspace:*",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12",
+    "cookie": "^1.0.1",
+    "lodash-es": "^4.17.21",
+    "path-to-regexp": "^8.2.0",
+    "tsup": "^8.3.0"
+  }
+}

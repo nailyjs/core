@@ -15,11 +15,17 @@ export abstract class AbstractBootstrap extends Container {
     return this
   }
 
+  private _isEnableInternalConstant = false
+  isEnableInternalConstant(): boolean {
+    return this._isEnableInternalConstant
+  }
+
   enableInternalConstant(): this {
     this.createConstantWrapper(InjectableWatermark, InjectableWatermark).save()
     this.createConstantWrapper(InjectWatermark, InjectWatermark).save()
     this.createConstantWrapper(FilterWatermark, FilterWatermark).save()
     this.createConstantWrapper(PostConstructWatermark, PostConstructWatermark).save()
+    this._isEnableInternalConstant = true
     return this
   }
 
