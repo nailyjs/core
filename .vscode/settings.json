@@ -6,6 +6,7 @@
     "bumpp",
     "Containerable",
     "Fastly",
+    "inversify",
     "Naily",
     "nailyjs",
     "paramtypes",

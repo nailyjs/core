@@ -3,6 +3,22 @@
  * This is the core package of naily, which provides the basic IOC features. It is a lightweight、across-platform and easy-to-use IOC meta framework for TypeScript.
  *
  * @module
+ * @example
+ * ```typescript
+ * import { Container, Injectable, Inject } from '@nailyjs/ioc'
+ *
+ * Injectable()
+ * export class FooService {}
+ *
+ * Injectable()
+ * export class BarService {
+ *  constructor(private fooService: FooService) {}
+ * }
+ *
+ * // No similar inversify.js, container will automatically inspect the dependencies of the constructors.
+ * const container = new Container()
+ * console.log(container.getContainer()) // It is a Map object, which contains all the registered services.
+ * ```
  */
 
 export * from './apply-decorator'
