@@ -2,7 +2,7 @@
   "name": "@nailyjs/ioc",
   "type": "module",
   "version": "2.0.0",
-  "description": "IOC Container for Naily.js",
+  "description": "Core IOC Container for Naily.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {
     ".": {
@@ -12,6 +12,7 @@
     },
     "./dist/*": "./dist/*"
   },
+  "readme": "../../README.md",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",

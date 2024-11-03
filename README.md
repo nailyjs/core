@@ -1,3 +1,10 @@
-# Monorepo
+<div align="center">
+<br />
 
-> There are no descriptions for this repository.
+<img src="https://universervice.oss-cn-guangzhou.aliyuncs.com/logo.png" width="150" />
+
+# Naily
+
+Naily is a IOC framework for TypeScript.
+
+</div>
