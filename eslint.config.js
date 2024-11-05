@@ -1,6 +1,7 @@
-import antfu from '@antfu/eslint-config'
+// @ts-check
+import naily from '@nailyjs/eslint'
 
-export default antfu({
+export default naily({
   type: 'lib',
   rules: {
     'antfu/curly': 'off',
@@ -8,9 +9,6 @@ export default antfu({
     'ts/method-signature-style': 'off',
     'ts/no-wrapper-object-types': 'off',
     'no-console': 'off',
-    'ts/consistent-type-imports': 'off',
-    'ts/no-redeclare': 'off',
-    'ts/no-namespace': 'off',
     'unicorn/throw-new-error': 'off',
   },
 })

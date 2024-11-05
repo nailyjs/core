@@ -1,0 +1,31 @@
+{
+  "name": "@nailyjs/eslint",
+  "type": "module",
+  "version": "2.0.0",
+  "description": "antfu's style eslint config but with some modifications compatible with naily.js",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w",
+    "prepublishOnly": "tsup"
+  },
+  "dependencies": {
+    "@antfu/eslint-config": "^3.8.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

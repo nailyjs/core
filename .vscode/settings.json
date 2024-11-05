@@ -82,7 +82,8 @@
     "executors": "hook",
     "typeorm": "database",
     "rpc": "api",
-    "unplugin-rpc": "plugin"
+    "unplugin-rpc": "plugin",
+    "eslint": "config"
   },
   "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.files.associations": {

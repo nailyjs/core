@@ -17,11 +17,12 @@
     "build:config": "pnpm -F @nailyjs/config build",
     "build:typeorm": "pnpm -F @nailyjs/typeorm build",
     "build:rpc": "pnpm -F @nailyjs/rpc build",
+    "build:eslint": "pnpm -F @nailyjs/eslint build",
     "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
     "play:rpc": "pnpm -F rpc dev",
 
     "lint": "eslint .",
-    "postinstall": "npx simple-git-hooks",
+    "postinstall": "npx simple-git-hooks && pnpm build:eslint",
     "test": "vitest",
     "test:ui": "vitest --ui --coverage",
     "swx": "pnpm tsx scripts/swc.ts",
@@ -34,9 +35,9 @@
     "release:only": "changeset publish --registry=https://registry.npmjs.com/"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.7.3",
     "@changesets/cli": "^2.27.9",
     "@nailyjs/cli": "workspace:*",
+    "@nailyjs/eslint": "workspace:*",
     "@swc/core": "^1.7.42",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.7.5",
