@@ -22,7 +22,7 @@
     "play:rpc": "pnpm -F rpc dev",
 
     "lint": "eslint .",
-    "postinstall": "npx simple-git-hooks && pnpm build:eslint",
+    "postinstall": "npx simple-git-hooks && pnpm build",
     "test": "vitest",
     "test:ui": "vitest --ui --coverage",
     "swx": "pnpm tsx scripts/swc.ts",
