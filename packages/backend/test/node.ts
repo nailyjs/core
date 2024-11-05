@@ -1,11 +1,24 @@
-import { Injectable } from '@nailyjs/ioc'
+import { Filter, Injectable, PostConstruct } from '@nailyjs/ioc'
 import { NodeBootstrap } from '../adapters/node'
-import { Body, Cookies, Header, Ip, Params, Post, Query, Req, RestController, Session } from '../src'
+import { Body, Cookies, Header, Ip, Params, Post, Query, Req, RestController, type RestErrorHandler, RestFilterContext, Session } from '../src'
+
+@Filter(Error)
+export class TestFilter implements RestErrorHandler {
+  catch(_error: any, ctx: RestFilterContext): void {
+    if (ctx.contextType !== 'RestFilterContext') return
+    ctx.sendResponse(new Response('Error666', { status: 500 }))
+  }
+}
 
 @Injectable()
 export class TestService {
   getHello(): string {
-    return 'Hello World!'
+    throw new Error('Method not implemented.')
+  }
+
+  @PostConstruct()
+  initConstruct(): void {
+    throw new Error('Method not implemented.')
   }
 }
 
@@ -25,7 +38,7 @@ export class TestController {
     @Ip() ip: string,
     @Ip() ips: string[],
     @Session() session: any,
-  ): Promise<any> {
+  ): Promise<string> {
     console.log({ params, body, id, query, headers, cookies, req, ip, ips, session })
     return this.testService.getHello()
   }

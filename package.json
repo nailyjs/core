@@ -2,6 +2,7 @@
   "name": "@nailyjs/monorepo",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@9.12.3",
   "description": "Create a lib monorepo with antfu's code style",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "publishConfig": {
@@ -11,11 +12,16 @@
     "new": "pnpm create es-project@latest",
     "build:ioc": "pnpm -F @nailyjs/ioc build",
     "build:backend": "pnpm -F @nailyjs/backend build",
+    "build:config": "pnpm -F @nailyjs/config build",
+    "build:typeorm": "pnpm -F @nailyjs/typeorm build",
+    "build:rpc": "pnpm -F @nailyjs/rpc build",
+    "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
+    "play:rpc": "pnpm -F rpc dev",
     "lint": "eslint .",
     "postinstall": "npx simple-git-hooks",
     "test": "vitest",
     "test:ui": "vitest --ui --coverage",
-    "swc": "tsx scripts/swc.ts"
+    "swx": "pnpm tsx scripts/swc.ts"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
@@ -31,8 +37,11 @@
     "js-yaml": "^4.1.0",
     "lint-staged": "^15.2.10",
     "magic-string": "^0.30.12",
+    "nodemon": "^3.1.7",
+    "pnpm": "9.12.3",
     "simple-git-hooks": "^2.11.1",
     "source-map-support": "^0.5.21",
+    "sqlite3": "^5.1.7",
     "tsup": "^8.3.0",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",

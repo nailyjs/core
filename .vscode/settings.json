@@ -4,17 +4,23 @@
     "appengine",
     "Autowired",
     "bumpp",
+    "Catched",
     "Containerable",
+    "datasource",
     "Fastly",
     "inversify",
+    "jexl",
     "Naily",
     "nailyjs",
+    "nuxt",
     "paramtypes",
+    "pluginutils",
     "psuedo",
     "returntype",
     "Scannerable",
     "Tokenable",
     "tsup",
+    "typeorm",
     "Wrapperable"
   ],
 
@@ -68,10 +74,17 @@
     "filters": "class",
     "adapters": "src",
     "factories": "class",
-    "node": "node"
+    "node": "node",
+    "ioc": "container",
+    "executors": "hook",
+    "typeorm": "database",
+    "rpc": "api",
+    "unplugin-rpc": "plugin"
   },
   "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.files.associations": {
-    "*.error.ts": "nest-filter"
+    "*.error.ts": "nest-filter",
+    "*.plugin.ts": "nest-middleware",
+    "*.executor.ts": "nest-filter"
   }
 }

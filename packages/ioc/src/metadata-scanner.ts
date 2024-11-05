@@ -1,5 +1,6 @@
 import type { ClassWrapper } from './wrappers/class-wrapper'
 import { FilterWatermark, InjectableWatermark } from './constant'
+import { FilterMetadataWrapper } from './wrappers/filter-options-wrapper'
 import { InjectMetadataWrapper } from './wrappers/inject-options-wrapper'
 import { InjectableMetadataWrapper } from './wrappers/injectable-options-wrapper'
 import { PostConstructMetadataWrapper } from './wrappers/post-construct-options-wrapper'
@@ -31,6 +32,13 @@ export class MetadataScanner {
     if (this._injectMetadata && cache) return this._injectMetadata
     this._injectMetadata = new InjectMetadataWrapper(this)
     return this._injectMetadata
+  }
+
+  private _filterMetadata: FilterMetadataWrapper | null = null
+  getFilterMetadata(cache: boolean = true): FilterMetadataWrapper {
+    if (this._filterMetadata && cache) return this._filterMetadata
+    this._filterMetadata = new FilterMetadataWrapper(this)
+    return this._filterMetadata
   }
 
   getPostConstructMetadata(): PostConstructMetadataWrapper {

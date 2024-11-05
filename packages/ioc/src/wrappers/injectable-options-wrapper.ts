@@ -1,6 +1,6 @@
 import type { MetadataScanner } from '../metadata-scanner'
 import type { ClassWrapperProvider } from '../protocols'
-import type { InjectableOptions, InjectionToken, Scope } from '../types'
+import type { InjectableDecorate, InjectableOptions, InjectionToken, Scope } from '../types'
 import { InjectableWatermark } from '../constant'
 import { AbstractClassWrapperProvider } from './class-wrapper-provider'
 import 'reflect-metadata'
@@ -23,6 +23,26 @@ export class InjectableMetadataWrapper extends AbstractClassWrapperProvider impl
 
   getScope(): Scope {
     return this.getRawInjectableOptions().scope || 'singleton'
+  }
+
+  getDecorate(): InjectableDecorate {
+    return this.getRawInjectableOptions().decorate || 'Injectable'
+  }
+
+  isInjectableDecorator(): boolean {
+    return this.getDecorate() === 'Injectable'
+  }
+
+  isServiceDecorator(): boolean {
+    return this.getDecorate() === 'Service'
+  }
+
+  isComponentDecorator(): boolean {
+    return this.getDecorate() === 'Component'
+  }
+
+  isConfigurationDecorator(): boolean {
+    return this.getDecorate() === 'Configuration'
   }
 
   isSingleton(): boolean {

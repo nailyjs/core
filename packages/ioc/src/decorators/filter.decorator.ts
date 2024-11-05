@@ -1,19 +1,12 @@
-import type { Class } from '../types'
-import { CatchWatermark, FilterWatermark } from '../constant'
-import { Container } from '../container'
+import type { Class, FilterMetadata } from '../types'
+import { FilterWatermark } from '../constant'
+import { Injectable } from './injectable.decorator'
 
 export function Filter(...errors: any[]): ClassDecorator {
   return ((target: Class) => {
-    Reflect.defineMetadata(FilterWatermark, errors || [], target)
-    new Container().createClassWrapper(target).save()
+    Reflect.defineMetadata(FilterWatermark, {
+      errors: errors || [],
+    } as FilterMetadata, target)
+    Injectable()(target)
   }) as ClassDecorator
-}
-
-export function Catch(...errors: any[]): MethodDecorator {
-  return ((target, propertyKey) => {
-    Reflect.defineMetadata(CatchWatermark, [
-      ...(Reflect.getMetadata(CatchWatermark, target.constructor) || []),
-      { propertyKey, errors },
-    ], target.constructor)
-  }) as MethodDecorator
 }

@@ -1,5 +1,5 @@
 import { IPipeContext } from '../contexts/pipe-context'
-import { Pipe } from '../decorators'
+import { Pipe } from '../decorators/pipe.decorator'
 import { IHandlerRequest } from '../handler-request'
 
 @Pipe()

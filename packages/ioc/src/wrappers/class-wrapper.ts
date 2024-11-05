@@ -52,27 +52,7 @@ export class ClassWrapper<Instance = any> implements ContainerWrapper {
     const tasks = this.getMetadataScanner()
       .getPostConstructMetadata()
       .getPostConstructOptions()
-    // 这是全部一起开始执行的并行任务list
-    const parallelTasks = tasks.filter(task => task.isParallel())
-    // 这是上一个任务执行完后下一个任务才会开始的串行任务list
-    const seriesTasks = tasks.filter(task => task.isSeries())
-
-    // 串行任务
-    taskRunner.runTasksSequentially(
-      seriesTasks
-        .filter(task => typeof (instance as Record<string | symbol, any>)[task.getPropertyKey()] === 'function')
-        .map(task => (instance as Record<string | symbol, any>)[task.getPropertyKey()])
-        .map(task => task.bind(instance)),
-    ).catch(error => console.error(error))
-
-    // 并行任务
-    taskRunner.runTasksInParallel(
-      parallelTasks
-        .filter(task => typeof (instance as Record<string | symbol, any>)[task.getPropertyKey()] === 'function')
-        .map(task => (instance as Record<string | symbol, any>)[task.getPropertyKey()])
-        .map(task => task.bind(instance)),
-    ).catch(error => console.error(error))
-
+    taskRunner.runPostConstruct(tasks, this, instance as Record<string | symbol, any>)
     this.singletonInstance = instance
   }
 

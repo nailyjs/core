@@ -1,5 +1,5 @@
 import { IPipeContext } from '../contexts/pipe-context'
-import { Pipe } from '../decorators'
+import { Pipe } from '../decorators/pipe.decorator'
 
 @Pipe()
 export class InternalSessionPipe implements Pipe {

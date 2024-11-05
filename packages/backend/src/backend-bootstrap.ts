@@ -5,7 +5,7 @@ import { ControllerMethodExecutor } from './services/controller-method-executor'
 import { ControllerScanner } from './services/controller-scanner'
 
 export class BackendBootstrap extends AbstractBootstrap {
-  private _backendAdapter: IBackendAdapter
+  protected _backendAdapter: IBackendAdapter
   setBackendAdapter(backendAdapter: IBackendAdapter | Class<IBackendAdapter>): this {
     if (typeof backendAdapter !== 'function') {
       this._backendAdapter = backendAdapter

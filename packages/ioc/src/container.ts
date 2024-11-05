@@ -1,6 +1,6 @@
 import type { Saveable } from './protocols'
 import type { Class, InjectionToken } from './types'
-import { Injectable } from './decorators'
+import { Injectable } from './decorators/injectable.decorator'
 import { TaskRunner } from './task-runner'
 import { ClassWrapper } from './wrappers/class-wrapper'
 import { ConstantWrapper } from './wrappers/constant-wrapper'

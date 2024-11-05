@@ -1,9 +1,17 @@
 import type { ClassWrapper } from '../src'
-import { Injectable, PostConstruct } from '../src'
+import { Filter, Injectable, PostConstruct } from '../src'
 import { AbstractBootstrap } from '../src/bootstrap'
 
 describe('error & filter', () => {
   it('should throw error', async () => {
+    @Filter()
+    class _ErrorFilter {
+      catchAll(error: any) {
+        console.log('catchAll called')
+        console.error(error)
+      }
+    }
+
     @Injectable()
     class FooService {
       @PostConstruct()
@@ -15,11 +23,9 @@ describe('error & filter', () => {
 
     class Bootstrap extends AbstractBootstrap {
       async run(): Promise<any> {
-        this.enableInternalConstant()
-
         const fooService = this.getContainer().get(FooService) as ClassWrapper
         expect(fooService).toBeDefined()
-        expect(fooService?.wrapperType).toBe('class')
+        expect(fooService.wrapperType).toBe('class')
         fooService.getClassFactory().getOrCreateInstance()
       }
     }

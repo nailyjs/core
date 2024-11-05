@@ -1,4 +1,4 @@
-import { Autowired, ClassWrapper, ConstantWrapper, Container, Inject, Injectable, InjectableWatermark, InjectWatermark, Optional, PostConstruct } from '../src'
+import { Autowired, ClassWrapper, ConstantWrapper, Container, Inject, Injectable, InjectableWatermark, InjectWatermark, InternalConstantPlugin, Optional, PostConstruct } from '../src'
 import { AbstractBootstrap } from '../src/bootstrap'
 
 describe('ioc', () => {
@@ -62,7 +62,7 @@ describe('ioc', () => {
 
     class Bootstrap extends AbstractBootstrap {
       async run(): Promise<any> {
-        this.enableInternalConstant()
+        await this.getPluginRunner().runBeforeRun()
 
         const wrapper = this.createClassWrapper(FooService).save()
         expect(wrapper.getMetadataScanner().isInjectable()).toBeTruthy()
@@ -81,7 +81,9 @@ describe('ioc', () => {
         expect(instance.container).toBeInstanceOf(Container)
       }
     }
-    await new Bootstrap().run()
+    await new Bootstrap()
+      .use(InternalConstantPlugin())
+      .run()
   })
 
   it('should create constant', () => {

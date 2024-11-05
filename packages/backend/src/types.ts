@@ -1,5 +1,6 @@
-import type { Class, InjectableOptions } from '@nailyjs/ioc'
+import type { Class, ErrorHandler, InjectableOptions } from '@nailyjs/ioc'
 import type { IHandlerContext } from './contexts/handler-context'
+import { RestFilterContext } from './contexts'
 
 export interface ControllerOptions extends Partial<InjectableOptions> {
   prefix: string
@@ -36,4 +37,7 @@ export interface HandlerParamMetadata {
   propertyKey: string | symbol
   pipes?: Class[]
   infer?: string
+}
+export interface RestErrorHandler extends ErrorHandler {
+  catch(error: any, ctx: RestFilterContext): any
 }

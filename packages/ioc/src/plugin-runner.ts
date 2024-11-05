@@ -9,11 +9,7 @@ export class PluginRunner {
   addPlugin(plugin: IocPlugin | IocPlugin[]): void {
     if (Array.isArray(plugin)) this.pluginsContainer.push(...plugin)
     else this.pluginsContainer.push(plugin)
-
-    // Remove duplicates from the pluginsContainer
-    this.pluginsContainer = this.pluginsContainer
-      .filter((value, index, self) => self.indexOf(value) === index)
-      .filter(plugin => !this.pluginsContainer.some(p => p.name === plugin.name))
+    this.pluginsContainer = Array.from(new Set(this.pluginsContainer))
   }
 
   async runBeforeRun(): Promise<void> {

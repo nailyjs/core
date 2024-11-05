@@ -1,0 +1,36 @@
+{
+  "name": "@nailyjs/typeorm",
+  "type": "module",
+  "version": "0.0.4",
+  "description": "TypeORM module for naily.js.",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "keywords": [
+    "es-project-template"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w"
+  },
+  "dependencies": {
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/config": "workspace:*",
+    "@nailyjs/ioc": "workspace:*",
+    "typeorm": "^0.3.20"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

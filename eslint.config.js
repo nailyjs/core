@@ -11,5 +11,6 @@ export default antfu({
     'ts/consistent-type-imports': 'off',
     'ts/no-redeclare': 'off',
     'ts/no-namespace': 'off',
+    'unicorn/throw-new-error': 'off',
   },
 })

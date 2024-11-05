@@ -1,5 +1,4 @@
 import type { IocPlugin } from './protocols'
-import { FilterWatermark, InjectableWatermark, InjectWatermark, PostConstructWatermark } from './constant'
 import { Container } from './container'
 import { PluginRunner } from './plugin-runner'
 
@@ -12,20 +11,6 @@ export abstract class AbstractBootstrap extends Container {
 
   use(plugin: IocPlugin | IocPlugin[]): this {
     this.getPluginRunner().addPlugin(plugin)
-    return this
-  }
-
-  private _isEnableInternalConstant = false
-  isEnableInternalConstant(): boolean {
-    return this._isEnableInternalConstant
-  }
-
-  enableInternalConstant(): this {
-    this.createConstantWrapper(InjectableWatermark, InjectableWatermark).save()
-    this.createConstantWrapper(InjectWatermark, InjectWatermark).save()
-    this.createConstantWrapper(FilterWatermark, FilterWatermark).save()
-    this.createConstantWrapper(PostConstructWatermark, PostConstructWatermark).save()
-    this._isEnableInternalConstant = true
     return this
   }
 
