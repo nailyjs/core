@@ -23,7 +23,9 @@
     "prepublishOnly": "tsup"
   },
   "dependencies": {
-    "@antfu/eslint-config": "^3.8.0"
+    "@antfu/eslint-config": "^3.8.0",
+    "@nailyjs/config": "workspace:*",
+    "@nailyjs/ioc": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.3.0"

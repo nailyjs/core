@@ -6,6 +6,18 @@ export default defineConfig({
   naily: {
     cli: {},
 
+    eslint: {
+      type: 'lib',
+      rules: {
+        'antfu/curly': 'off',
+        'antfu/if-newline': 'off',
+        'ts/method-signature-style': 'off',
+        'ts/no-wrapper-object-types': 'off',
+        'no-console': 'off',
+        'unicorn/throw-new-error': 'off',
+      },
+    },
+
     typeorm: {
       type: 'sqlite',
       database: path.join(cwd(), './node_modules/.cache/naily/typeorm.db'),
