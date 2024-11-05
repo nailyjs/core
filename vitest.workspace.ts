@@ -11,4 +11,4 @@ function loadWorkspace(): string[] {
   return (parsedFile || { packages: [] as string[] }).packages || []
 }
 
-export default defineWorkspace(loadWorkspace())
+export default defineWorkspace(loadWorkspace().filter(pkg => pkg !== 'fixtures/*'))
