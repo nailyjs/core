@@ -23,3 +23,4 @@ Naily is a IOC framework written in TypeScript.
 - 📦 **unplugin-rpc**: 吸取[cell.js](https://github.com/cellbang/cell)的`@celljs/rpc`之精髓，将其注入[unplugin](https://github.com/unplugin)生态，让任何`vite`前端项目都可以尝试到绝对类型安全的后端开发！
 - 🛠 **插件化**: 支持插件机制，可以自定义扩展功能
 - 🚪 **极为开放的核心**: 不像[inversify.js](https://github.com/inversify/InversifyJS)、[nest.js](https://github.com/nestjs/nest)等一众ioc框架将容器实现藏得很深，拥有极简的容器设计和极为flexable的API，每个人都可以操纵容器的各个边边角角，让ioc的设计理念和理解成本降低
+- ⚙️ **约定大于配置**: 参考[cell.js](https://github.com/cellbang/cell)的设计理念 + 目前前端生态的情况，尽量减少配置过程，每个包内部都有一套现成的默认配置。需要自定义配置时，遵循`程序内部重写的类` > `配置文件naily.config.ts` > `默认配置`的优先级，让开发者更专注于业务逻辑
