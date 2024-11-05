@@ -19,7 +19,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "watch": "tsup -w"
+    "watch": "tsup -w",
+    "prepublishOnly": "tsup"
   },
   "dependencies": {
     "@nailyjs/ioc": "workspace:*",

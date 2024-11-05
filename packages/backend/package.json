@@ -25,7 +25,8 @@
   "scripts": {
     "build": "tsup",
     "watch": "tsup -w",
-    "jsr": "npx jsr publish"
+    "jsr": "npx jsr publish",
+    "prepublishOnly": "tsup"
   },
   "dependencies": {
     "@nailyjs/ioc": "workspace:*",
