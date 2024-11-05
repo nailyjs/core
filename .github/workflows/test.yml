@@ -24,5 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
 
+      - name: Build
+        run: pnpm -r run build
+
+      - name: Run ESLint
+        run: pnpm run lint
+
       - name: Run Vitest tests
         run: pnpm run test
