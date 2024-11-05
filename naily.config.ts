@@ -4,6 +4,8 @@ import { defineConfig } from './packages/config/src/helper'
 
 export default defineConfig({
   naily: {
+    cli: {},
+
     typeorm: {
       type: 'sqlite',
       database: path.join(cwd(), './node_modules/.cache/naily/typeorm.db'),

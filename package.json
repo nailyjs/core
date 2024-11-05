@@ -11,6 +11,7 @@
   "scripts": {
     "new": "pnpm create es-project@latest",
     "build": "pnpm -r build",
+    "build:cli": "pnpm -F @nailyjs/cli build",
     "build:ioc": "pnpm -F @nailyjs/ioc build",
     "build:backend": "pnpm -F @nailyjs/backend build",
     "build:config": "pnpm -F @nailyjs/config build",
@@ -24,6 +25,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui --coverage",
     "swx": "pnpm tsx scripts/swc.ts",
+    "tsx": "tsx",
+    "naily": "naily",
 
     "changeset": "changeset",
     "version-packages": "changeset version",
@@ -33,6 +36,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
     "@changesets/cli": "^2.27.9",
+    "@nailyjs/cli": "workspace:*",
     "@swc/core": "^1.7.42",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.7.5",
