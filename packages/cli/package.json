@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/cli",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The CLI for Naily.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {
@@ -26,7 +26,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "watch": "tsup -w"
+    "watch": "tsup -w",
+    "prepublishOnly": "tsup"
   },
   "dependencies": {
     "@nailyjs/config": "workspace:*",
