@@ -2,6 +2,7 @@
   "name": "@nailyjs/monorepo",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "packageManager": "pnpm@9.12.3",
   "description": "Create a lib monorepo with antfu's code style",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
@@ -10,6 +11,7 @@
   },
   "scripts": {
     "new": "pnpm create es-project@latest",
+    "build": "pnpm -r build",
     "build:ioc": "pnpm -F @nailyjs/ioc build",
     "build:backend": "pnpm -F @nailyjs/backend build",
     "build:config": "pnpm -F @nailyjs/config build",
@@ -17,14 +19,21 @@
     "build:rpc": "pnpm -F @nailyjs/rpc build",
     "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
     "play:rpc": "pnpm -F rpc dev",
+
     "lint": "eslint .",
     "postinstall": "npx simple-git-hooks",
     "test": "vitest",
     "test:ui": "vitest --ui --coverage",
-    "swx": "pnpm tsx scripts/swc.ts"
+    "swx": "pnpm tsx scripts/swc.ts",
+
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && pnpm release:only",
+    "release:only": "changeset publish --registry=https://registry.npmjs.com/"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.7.3",
+    "@changesets/cli": "^2.27.9",
     "@swc/core": "^1.7.42",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.7.5",

@@ -7,4 +7,4 @@
 "@nailyjs/ioc": patch
 ---
 
-feat: add changesets, update all package to 2.0
+feat: add changesets, update all packages to v2.0.
