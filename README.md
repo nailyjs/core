@@ -5,6 +5,21 @@
 
 # Naily
 
-Naily is a IOC framework for TypeScript.
+Naily is a IOC framework written in TypeScript.
 
+[![CI](https://github.com/nailyjs/core/actions/workflows/test.yml/badge.svg)](https://github.com/nailyjs/core/actions/workflows/test.yml)&nbsp;
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/nailyjs/core)&nbsp;
+![GitHub repo size](https://img.shields.io/github/repo-size/nailyjs/core)&nbsp;
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/nailyjs/core)&nbsp;
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/nailyjs/core/v2?label=Main%20Branch%20Last%20Commit)&nbsp;
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nailyjs/core/test.yml)&nbsp;
 </div>
+
+## 特性
+
+- 🖊️ **TypeScript**: 使用 TypeScript 编写，提供完整的类型定义
+- 🚀 **轻量级**: 体积小，核心容器除`reflect-metadata`外几乎无任何外来依赖包
+- 🪜 **跨平台**: 核心容器在服务端/浏览器均可运行；后端适配包等通过`adapter`也不局限于环境，并且尝试让性能最大化，与前端生态接轨，支持`vite dev server`/`node.js`/`bun（正在适配中）`等运行时
+- 📦 **unplugin-rpc**: 吸取[cell.js](https://github.com/cellbang/cell)的`@celljs/rpc`之精髓，将其注入[unplugin](https://github.com/unplugin)生态，让任何`vite`前端项目都可以尝试到绝对类型安全的后端开发！
+- 🛠 **插件化**: 支持插件机制，可以自定义扩展功能
+- 🚪 **极为开放的核心**: 不像[inversify.js](https://github.com/inversify/InversifyJS)、[nest.js](https://github.com/nestjs/nest)等一众ioc框架将容器实现藏得很深，拥有极简的容器设计和极为flexable的API，每个人都可以操纵容器的各个边边角角，让ioc的设计理念和理解成本降低
