@@ -7,12 +7,12 @@
 
 Naily is a IOC framework written in TypeScript.
 
-[![CI](https://github.com/nailyjs/core/actions/workflows/test.yml/badge.svg)](https://github.com/nailyjs/core/actions/workflows/test.yml)&nbsp;
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/nailyjs/core)&nbsp;
-![GitHub repo size](https://img.shields.io/github/repo-size/nailyjs/core)&nbsp;
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/nailyjs/core)&nbsp;
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/nailyjs/core/v2?label=Main%20Branch%20Last%20Commit)&nbsp;
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nailyjs/core/test.yml)&nbsp;
+[![CI](https://github.com/nailyjs/core/actions/workflows/test.yml/badge.svg)](https://github.com/nailyjs/core/actions/workflows/test.yml)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/nailyjs/core)
+![GitHub repo size](https://img.shields.io/github/repo-size/nailyjs/core)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/nailyjs/core)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/nailyjs/core/v2?label=Main%20Branch%20Last%20Commit)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nailyjs/core/test.yml)
 </div>
 
 ## 特性
