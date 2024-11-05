@@ -1,5 +1,5 @@
 import { ConfigPlugin } from '@nailyjs/config'
-import { AbstractBootstrap, Component, Injectable, PostConstruct } from '@nailyjs/ioc'
+import { AbstractBootstrap, Configuration, Injectable, PostConstruct } from '@nailyjs/ioc'
 import { Column, DataSource, DataSourceOptions, Entity, PrimaryGeneratedColumn } from 'typeorm'
 import configuration from '../../../naily.config'
 import { CustomDataSource, TypeOrmPlugin } from '../src'
@@ -34,7 +34,7 @@ describe('typeorm', () => {
       }
     }
 
-    @Component(CustomDataSource)
+    @Configuration(CustomDataSource)
     class TypeOrmConfiguration implements CustomDataSource {
       configure(oldOptions: DataSourceOptions): DataSourceOptions | Promise<DataSourceOptions> {
         expect(oldOptions).toStrictEqual(configuration.naily.typeorm)
