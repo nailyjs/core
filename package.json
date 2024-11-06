@@ -22,6 +22,7 @@
     "build:cache": "pnpm -F @nailyjs/cache build",
     "build:ioredis": "pnpm -F @nailyjs/ioredis build",
     "build:es": "pnpm -F @nailyjs/elasticsearch build",
+    "build:winston": "pnpm -F @nailyjs/winston build",
     "play:rpc": "pnpm -F rpc dev",
 
     "lint": "eslint .",

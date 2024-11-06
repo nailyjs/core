@@ -12,6 +12,7 @@
     "gitly",
     "inversify",
     "jexl",
+    "Logform",
     "Naily",
     "nailyjs",
     "nodegit",
@@ -85,7 +86,9 @@
     "unplugin-rpc": "plugin",
     "eslint": "config",
     "ioredis": "database",
-    "elasticsearch": "database"
+    "elasticsearch": "database",
+    "winston": "log",
+    "schedule": "ci"
   },
   "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.files.associations": {

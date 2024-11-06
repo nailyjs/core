@@ -16,6 +16,12 @@ export default defineConfig({
       },
     },
 
+    logger: {
+      winston: {
+        level: 'info',
+      },
+    },
+
     typeorm: {
       type: 'sqlite',
       database: path.join(cwd(), './node_modules/.cache/naily/typeorm.db'),
