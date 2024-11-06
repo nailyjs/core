@@ -33,7 +33,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && pnpm release:only",
-    "release:only": "changeset publish --registry=https://registry.npmjs.com/"
+    "release:only": "changeset publish --registry=https://registry.npmjs.com --tag"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.9",
