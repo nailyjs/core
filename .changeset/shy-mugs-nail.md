@@ -3,4 +3,4 @@
 "@nailyjs/cli": patch
 ---
 
-feat: add library template, add ioredis module
+feat: add library template in @nailyjs/cli & add ioredis module
