@@ -84,7 +84,8 @@
     "rpc": "api",
     "unplugin-rpc": "plugin",
     "eslint": "config",
-    "ioredis": "database"
+    "ioredis": "database",
+    "elasticsearch": "database"
   },
   "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.files.associations": {
