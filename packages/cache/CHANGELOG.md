@@ -1,13 +1,10 @@
-# @nailyjs/ioc
+# @nailyjs/cache
 
 ## 2.0.2
 
 ### Patch Changes
 
 - 6da9241: feat: add global intelliSense helper interface, update all packages and add cache module
-
-## 2.0.1
-
-### Patch Changes
-
-- 74ec22b: feat: add changesets, update all packages to v2.0.
+- Updated dependencies [6da9241]
+  - @nailyjs/config@2.0.2
+  - @nailyjs/ioc@2.0.2
