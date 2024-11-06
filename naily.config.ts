@@ -4,8 +4,6 @@ import { defineConfig } from './packages/config/src/helper'
 
 export default defineConfig({
   naily: {
-    cli: {},
-
     eslint: {
       type: 'lib',
       rules: {
@@ -17,6 +15,8 @@ export default defineConfig({
         'unicorn/throw-new-error': 'off',
       },
     },
+
+    cacheManager: {},
 
     typeorm: {
       type: 'sqlite',

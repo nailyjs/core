@@ -49,3 +49,6 @@ export async function nailyProxy(): Promise<ReturnType<typeof antfu>> {
 }
 
 export default naily
+
+export * from './eslint-bootstrap'
+export * from './types'

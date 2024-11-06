@@ -4,9 +4,12 @@ import { DataSource, type DataSourceOptions } from 'typeorm'
 
 declare global {
   namespace Naily {
-    export namespace Configuration {
-      export interface NailyUserConfig {
+    namespace Configuration {
+      interface NailyUserConfig {
         /** TypeORM configuration */
+        typeorm?: DataSourceOptions
+      }
+      interface NailyUserIntelliSense {
         typeorm?: DataSourceOptions
       }
     }

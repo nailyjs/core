@@ -62,3 +62,6 @@ export interface IPostConstructCatchContext extends ErrorHandlerContext {
 export interface PostConstructErrorHandler extends ErrorHandler {
   catch(error: any, context: IPostConstructCatchContext): any
 }
+export type InjectionTokenable<T extends Record<string | symbol | number, any>> = T & {
+  injectionToken: string
+}

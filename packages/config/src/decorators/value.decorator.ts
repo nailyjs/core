@@ -11,7 +11,7 @@ export interface ValueMetadata {
   parameterIndex?: number
 }
 
-export function Value<ConfigObject extends Record<string, any> = Naily.Configuration.UserConfig>(jexl: Path<FullObject<ConfigObject>> | (string & {})): PropertyDecorator & ParameterDecorator
+export function Value<ConfigObject extends Record<string, any> = Naily.Configuration.UserIntelliSense>(jexl: Path<FullObject<ConfigObject>> | (string & {})): PropertyDecorator & ParameterDecorator
 export function Value<Key extends string>(jexl: Key): PropertyDecorator & ParameterDecorator
 export function Value(jexl: string = ''): PropertyDecorator & ParameterDecorator {
   return ((target: Object, propertyKey: string | symbol, parameterIndex?: number) => {

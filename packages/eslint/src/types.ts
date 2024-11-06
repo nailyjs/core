@@ -16,6 +16,12 @@ declare global {
          * ```
          * It will proxy the config from `naily.config.ts` to this `naily.eslint` object.
          */
+        eslint?: Parameters<typeof antfu>[0] & {
+          extraOptions?: Array<Parameters<typeof antfu>[1]>
+        }
+      }
+
+      interface NailyUserIntelliSense {
         eslint?: Omit<Parameters<typeof antfu>[0], 'overrides'> & {
           extraOptions?: Array<Parameters<typeof antfu>[1]>
         }

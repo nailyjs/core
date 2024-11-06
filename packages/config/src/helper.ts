@@ -8,6 +8,14 @@ declare global {
         naily?: NailyUserConfig
         [key: string]: any
       }
+
+      export interface NailyUserIntelliSense {
+        [key: string]: any
+      }
+      export interface UserIntelliSense {
+        naily?: NailyUserIntelliSense
+        [key: string]: any
+      }
     }
   }
 }
