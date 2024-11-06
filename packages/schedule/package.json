@@ -1,0 +1,37 @@
+{
+  "name": "@nailyjs/schedule",
+  "type": "module",
+  "version": "2.0.1",
+  "description": "Schedule module for naily.js",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w",
+    "prepublishOnly": "tsup"
+  },
+  "dependencies": {
+    "@nailyjs/config": "workspace:*",
+    "@nailyjs/ioc": "workspace:*",
+    "cron": "^3.1.9",
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

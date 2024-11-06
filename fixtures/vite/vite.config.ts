@@ -1,5 +1,5 @@
 import Vue from '@vitejs/plugin-vue'
-import Rpc from 'unplugin-rpc/vite'
+import NailyRpc from 'unplugin-rpc/vite'
 import swc from 'unplugin-swc'
 import { defineConfig } from 'vite'
 import Inspect from 'vite-plugin-inspect'
@@ -25,6 +25,6 @@ export default defineConfig({
 
     Vue(),
 
-    Rpc(),
+    NailyRpc(),
   ],
 })

@@ -295,6 +295,25 @@ importers:
         specifier: ^8.3.0
         version: 8.3.5(@swc/core@1.7.42)(jiti@2.4.0)(postcss@8.4.47)(tsx@4.19.2)(typescript@5.6.3)(yaml@2.6.0)
 
+  packages/schedule:
+    dependencies:
+      '@nailyjs/config':
+        specifier: workspace:*
+        version: link:../config
+      '@nailyjs/ioc':
+        specifier: workspace:*
+        version: link:../ioc
+      cron:
+        specifier: ^3.1.9
+        version: 3.1.9
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+    devDependencies:
+      tsup:
+        specifier: ^8.3.0
+        version: 8.3.5(@swc/core@1.7.42)(jiti@2.4.0)(postcss@8.4.47)(tsx@4.19.2)(typescript@5.6.3)(yaml@2.6.0)
+
   packages/typeorm:
     dependencies:
       '@nailyjs/backend':
@@ -1386,6 +1405,9 @@ packages:
   '@types/lodash@4.17.13':
     resolution: {integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==}
 
+  '@types/luxon@3.4.2':
+    resolution: {integrity: sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA==}
+
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -1928,6 +1950,9 @@ packages:
 
   core-js-compat@3.38.1:
     resolution: {integrity: sha512-JRH6gfXxGmrzF3tZ57lFx97YARxCXPaMzPo6jELZhv88pBH5VXpQ+y0znKGlFnzuaihqhLbefxSJxWJMPtfDzw==}
+
+  cron@3.1.9:
+    resolution: {integrity: sha512-eNZu+YhLRHLxNJNqZgYuy8mXhzMV0XXmOSh+Ls2j1yTeQLCQ04ya7oNpujxwl4lEyck1fcVa1aRVZ+T4tAC7SA==}
 
   cross-env@7.0.3:
     resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
@@ -2951,6 +2976,10 @@ packages:
   lru-cache@6.0.0:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
+
+  luxon@3.5.0:
+    resolution: {integrity: sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==}
+    engines: {node: '>=12'}
 
   magic-string@0.30.12:
     resolution: {integrity: sha512-Ea8I3sQMVXr8JhN4z+H/d8zwo+tYDgHE9+5G4Wnrwhs0gaK9fXTKx0Tw5Xwsd/bCPTTZNRAdpyzvoeORe9LYpw==}
@@ -5374,6 +5403,8 @@ snapshots:
 
   '@types/lodash@4.17.13': {}
 
+  '@types/luxon@3.4.2': {}
+
   '@types/mdast@4.0.4':
     dependencies:
       '@types/unist': 3.0.3
@@ -6017,6 +6048,11 @@ snapshots:
   core-js-compat@3.38.1:
     dependencies:
       browserslist: 4.24.2
+
+  cron@3.1.9:
+    dependencies:
+      '@types/luxon': 3.4.2
+      luxon: 3.5.0
 
   cross-env@7.0.3:
     dependencies:
@@ -7141,6 +7177,8 @@ snapshots:
     dependencies:
       yallist: 4.0.0
     optional: true
+
+  luxon@3.5.0: {}
 
   magic-string@0.30.12:
     dependencies:

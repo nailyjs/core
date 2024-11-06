@@ -23,6 +23,7 @@
     "build:ioredis": "pnpm -F @nailyjs/ioredis build",
     "build:es": "pnpm -F @nailyjs/elasticsearch build",
     "build:winston": "pnpm -F @nailyjs/winston build",
+    "build:schedule": "pnpm -F @nailyjs/schedule build",
     "play:rpc": "pnpm -F rpc dev",
 
     "lint": "eslint .",
