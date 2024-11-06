@@ -34,6 +34,7 @@ export class CliBootstrap extends AbstractBootstrap {
       choices: [
         { title: 'backend-app', value: 'template-backend-app', description: 'Basic naily backend application' },
         { title: 'vitesse-naily', value: 'vitesse-naily', description: 'Antfu\'s Vitesse with Naily' },
+        { title: 'library', value: 'template-library', description: 'Naily library template' },
       ],
     }).catch(() => exit(0))
     if (!template.template) return exit(0)

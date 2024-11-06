@@ -20,6 +20,7 @@
     "build:eslint": "pnpm -F @nailyjs/eslint build",
     "build:unplugin-rpc": "pnpm -F unplugin-rpc build",
     "build:cache": "pnpm -F @nailyjs/cache build",
+    "build:ioredis": "pnpm -F @nailyjs/ioredis build",
     "play:rpc": "pnpm -F rpc dev",
 
     "lint": "eslint .",

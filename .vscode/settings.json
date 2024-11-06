@@ -83,7 +83,8 @@
     "typeorm": "database",
     "rpc": "api",
     "unplugin-rpc": "plugin",
-    "eslint": "config"
+    "eslint": "config",
+    "ioredis": "database"
   },
   "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.files.associations": {
