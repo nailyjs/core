@@ -1,5 +1,14 @@
 # @nailyjs/typeorm
 
+## 2.0.3
+
+### Patch Changes
+
+- b3f4161: chore: add files field in package.json, minify npm dist output
+- Updated dependencies [b3f4161]
+  - @nailyjs/backend@2.0.3
+  - @nailyjs/config@2.0.3
+
 ## 2.0.2
 
 ### Patch Changes

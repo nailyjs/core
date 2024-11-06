@@ -1,5 +1,11 @@
 # @nailyjs/backend
 
+## 2.0.3
+
+### Patch Changes
+
+- b3f4161: chore: add files field in package.json, minify npm dist output
+
 ## 2.0.2
 
 ### Patch Changes

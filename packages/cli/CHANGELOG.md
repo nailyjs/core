@@ -1,5 +1,12 @@
 # @nailyjs/cli
 
+## 2.0.4
+
+### Patch Changes
+
+- Updated dependencies [b3f4161]
+  - @nailyjs/config@2.0.3
+
 ## 2.0.3
 
 ### Patch Changes
