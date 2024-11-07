@@ -1,20 +1,6 @@
 import { Value } from '@nailyjs/config'
-import { Autowired, ClassWrapper, Container, Injectable, Optional } from '@nailyjs/ioc'
+import { Autowired, ClassWrapper, ConstantWrapper, Container, Injectable, Optional } from '@nailyjs/ioc'
 import { DataSource, type DataSourceOptions } from 'typeorm'
-
-declare global {
-  namespace Naily {
-    namespace Configuration {
-      interface NailyUserConfig {
-        /** TypeORM configuration */
-        typeorm?: DataSourceOptions
-      }
-      interface NailyUserIntelliSense {
-        typeorm?: DataSourceOptions
-      }
-    }
-  }
-}
 
 export const CustomDataSource = '__naily_typeorm_custom_datasource__'
 export interface CustomDataSource {
@@ -26,34 +12,32 @@ export class DataSourceService {
   constructor(
     @Value('naily.typeorm')
     private readonly _typeOrmConfiguration: DataSourceOptions,
-    private readonly container: Container,
     @Optional()
     @Autowired(CustomDataSource)
-    private readonly _customDataSource?: CustomDataSource,
+    private readonly _customDataSourceService?: CustomDataSource,
   ) {}
 
-  private createDataSourceWrapper(options: DataSourceOptions): ClassWrapper<DataSource> {
-    const dataSourceWrapper = this.container.createClassWrapper(DataSource)
-    const dataSourceFactory = dataSourceWrapper.getClassFactory().createRawInstance([options || {}])
-    dataSourceWrapper.setSingletonInstance(dataSourceFactory)
-    return dataSourceWrapper.save()
+  private createDataSourceWrapper(options: DataSourceOptions, container: Container): ConstantWrapper<DataSource> {
+    if (container.getContainer().has(DataSource)) return container.getContainer().get(DataSource) as ConstantWrapper<DataSource>
+    // eslint-disable-next-line ts/ban-ts-comment
+    // @ts-expect-error
+    return container.createConstantWrapper(DataSource, new DataSource(options || {})).save()
   }
 
-  async getDataSource(): Promise<DataSource> {
-    const container = this.container.getContainer()
-    if (container.has(DataSource))
-      return (container.get(DataSource) as ClassWrapper<DataSource>).getSingletonInstance()
+  async getDataSource(container: Container): Promise<DataSource> {
+    const map = container.getContainer()
+    if (map.has(DataSource)) return (map.get(DataSource) as ConstantWrapper<DataSource>).getValue()
 
-    if (this._customDataSource && typeof this._customDataSource.configure === 'function') {
-      const customDataSourceWrapper = this.container.getContainer().get(CustomDataSource) as ClassWrapper<CustomDataSource>
-      if (!customDataSourceWrapper || customDataSourceWrapper.wrapperType !== 'class')
-        return this.createDataSourceWrapper(this._typeOrmConfiguration).getSingletonInstance()
-      if (!customDataSourceWrapper.getMetadataScanner().getInjectableMetadata().isConfigurationDecorator())
-        throw new Error('CustomDataSource must be decorated with @Configuration.')
-
-      const configuredDataSource = await this._customDataSource.configure(this._typeOrmConfiguration)
-      return this.createDataSourceWrapper(configuredDataSource).getSingletonInstance()
+    if (this._customDataSourceService && typeof this._customDataSourceService.configure === 'function') {
+      const configuredDataSource = await this._customDataSourceService.configure(this._typeOrmConfiguration)
+      return this.createDataSourceWrapper(configuredDataSource, container).getValue()
     }
-    return this.createDataSourceWrapper(this._typeOrmConfiguration).getSingletonInstance()
+    return this.createDataSourceWrapper(this._typeOrmConfiguration, container).getValue()
+  }
+
+  static getInstance(container: Container): DataSourceService {
+    const dataSource = container.getContainer().get(DataSourceService) as ClassWrapper<CustomDataSource>
+    if (dataSource) return dataSource.getClassFactory().getOrCreateInstance()
+    return container.createClassWrapper(DataSourceService).save().getClassFactory().getOrCreateInstance()
   }
 }

@@ -4,6 +4,7 @@ import { cwd, exit } from 'node:process'
 import { createFilter } from '@rollup/pluginutils'
 import { createUnplugin, UnpluginFactory } from 'unplugin'
 import { buildServer } from './core/build'
+import { hmrLogger } from './core/hmr-logger'
 import { useViteDevServer } from './core/vite-server-adapter'
 import { Options } from './types'
 
@@ -39,6 +40,24 @@ export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
           await viteDevServer.run()
         })
       },
+
+      handleHotUpdate(ctx) {
+        const moduleFilePaths = ctx.modules.map(mod => mod.file)
+          // 过滤掉空文件
+          .filter(file => file)
+          // 过滤掉不在 watchDirs 中的文件
+          .filter(file => createFilter(watchDirs)(file)) as string[]
+
+        if (moduleFilePaths.length === 0)
+          return
+
+        ctx.server.moduleGraph.invalidateAll()
+        ctx.server.ws.send({ type: 'full-reload' })
+        if (ctx.server.config.clearScreen !== false) console.clear()
+        hmrLogger(moduleFilePaths.map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
+        return []
+      },
+
       closeBundle() {
         if (options?.buildOnViteCloseBundle === true)
           buildServer(options).then(() => exit(0))

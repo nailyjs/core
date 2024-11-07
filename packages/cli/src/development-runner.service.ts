@@ -7,7 +7,7 @@ import { Service } from '@nailyjs/ioc'
 export class DevelopmentRunnerService {
   createProcess(filePath: string): (signal?: NodeJS.Signals | number) => boolean {
     const resolvedFilePath = path.resolve(filePath)
-    const forked = child_process.spawn('node', [resolvedFilePath])
+    const forked = child_process.exec(`FORCE_COLOR=1 node ${resolvedFilePath}`)
 
     const forkStdout = forked.stdout?.pipe(stdout)
     const forkStderr = forked.stderr?.pipe(stderr)

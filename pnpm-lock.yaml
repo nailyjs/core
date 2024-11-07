@@ -98,6 +98,9 @@ importers:
       '@nailyjs/ioc':
         specifier: workspace:*
         version: link:../../packages/ioc
+      '@nailyjs/typeorm':
+        specifier: workspace:*
+        version: link:../../packages/typeorm
 
   fixtures/vite:
     dependencies:
@@ -383,6 +386,9 @@ importers:
       defu:
         specifier: ^6.1.4
         version: 6.1.4
+      kleur:
+        specifier: ^4.1.5
+        version: 4.1.5
       unplugin:
         specifier: ^1.15.0
         version: 1.15.0

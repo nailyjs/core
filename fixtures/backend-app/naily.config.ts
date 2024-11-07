@@ -1,9 +1,15 @@
+import path from 'node:path'
+import { cwd } from 'node:process'
 import { defineConfig } from '@nailyjs/config'
+import '@nailyjs/typeorm'
 
 export default defineConfig({
   naily: {
-    cli: {
-
+    typeorm: {
+      type: 'sqlite',
+      database: path.join(cwd(), './node_modules/.cache/naily/backend-app.sqlite'),
+      logging: true,
+      synchronize: true,
     },
   },
 })

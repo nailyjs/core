@@ -1,7 +1,7 @@
 import { RpcBootstrap } from '@nailyjs/rpc'
 
-export type ViteRpcContextFn = (ctx: RpcBootstrap) => void | Promise<void>
+export type ViteRpcContextFn = (ctx: RpcBootstrap) => RpcBootstrap | Promise<RpcBootstrap>
 
 export function ViteRpc(ctx?: ViteRpcContextFn): ViteRpcContextFn {
-  return ctx || (() => {})
+  return ctx || (ctx => ctx)
 }

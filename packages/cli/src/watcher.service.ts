@@ -10,7 +10,7 @@ export class WatcherService {
   private _watcher: FSWatcher
   getWatcher(): FSWatcher {
     if (this._watcher) return this._watcher
-    this._watcher = watch(this.watchPath || ['src'], {
+    this._watcher = watch(this.watchPath || ['src', 'naily.config.ts'], {
       ignoreInitial: true,
     })
     return this._watcher
