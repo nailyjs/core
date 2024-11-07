@@ -15,10 +15,6 @@ export async function buildServer(options?: Options | undefined): Promise<void> 
       outDir: 'dist/backend',
     },
 
-    ssr: {
-      noExternal: true,
-    },
-
     plugins: [
       swc(),
     ],
