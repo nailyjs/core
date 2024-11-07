@@ -1,5 +1,14 @@
 # unplugin-rpc
 
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies [d2e0a88]
+  - @nailyjs/ioc@2.0.3
+  - @nailyjs/backend@2.0.5
+  - @nailyjs/rpc@2.0.5
+
 ## 2.0.4
 
 ### Patch Changes

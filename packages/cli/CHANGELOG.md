@@ -1,5 +1,14 @@
 # @nailyjs/cli
 
+## 2.0.5
+
+### Patch Changes
+
+- d2e0a88: feat: add dev command in cli, add Setupable interface in core
+- Updated dependencies [d2e0a88]
+  - @nailyjs/ioc@2.0.3
+  - @nailyjs/config@2.0.4
+
 ## 2.0.4
 
 ### Patch Changes

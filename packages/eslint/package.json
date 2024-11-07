@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/eslint",
   "type": "module",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "antfu's style eslint config but with some modifications compatible with naily.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {
