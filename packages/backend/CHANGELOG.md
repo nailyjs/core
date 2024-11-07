@@ -1,5 +1,11 @@
 # @nailyjs/backend
 
+## 2.0.4
+
+### Patch Changes
+
+- 88aadc7: fix: no handler in node adapter
+
 ## 2.0.3
 
 ### Patch Changes
