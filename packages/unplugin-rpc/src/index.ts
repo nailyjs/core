@@ -37,11 +37,21 @@ export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
     name: 'naily:unplugin-rpc',
 
     vite: {
+      config(config) {
+        if (!config || !config.build || !config.build.outDir) {
+          config = config || {}
+          config.build = config.build || {}
+          if (!config.build.outDir)
+            config.build.outDir = 'dist/frontend'
+        }
+      },
+
       async configureServer(server) {
         const viteDevServer = await useViteDevServer(options || {}, server).run()
 
         if (fs.existsSync(path.join(cwd(), 'naily.config.ts')))
           server.watcher.add(path.join(cwd(), 'naily.config.ts'))
+
         server.watcher.add(watchDirs).on('change', async (filePath) => {
           const isWatchedFile = createFilter(watchDirs)(filePath)
           if (!isWatchedFile || filePath !== path.join(cwd(), 'naily.config.ts'))
@@ -49,7 +59,6 @@ export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
           await viteDevServer.run()
         })
       },
-
       closeBundle() {
         if (options?.buildOnViteCloseBundle === true)
           buildServer(options).then(() => exit(0))
