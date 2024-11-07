@@ -16,10 +16,9 @@ export class DevelopmentStarter implements Setupable {
     private readonly logoWriter: LogoWriter,
     private readonly developmentRunnerService: DevelopmentRunnerService,
     private readonly watcherService: WatcherService,
+    @Value('naily.cli.development.using')
+    private readonly _using: 'tsup' | 'vite',
   ) {}
-
-  @Value('naily.cli.development.using')
-  private readonly _using: 'tsup' | 'vite'
 
   private refreshScreen(): void {
     console.clear()

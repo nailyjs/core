@@ -1,19 +1,22 @@
 import type * as tsup from 'tsup'
 
-export interface TsupDevelopmentConfiguration {
+export interface TsupConfiguration {
   using?: 'tsup'
   tsup?: tsup.Options
 }
 
-export interface CliDevelopmentConfiguration extends TsupDevelopmentConfiguration {
+export interface CliDevelopmentConfiguration extends TsupConfiguration {
   runnerEntry?: string
   watchPaths?: string | string[]
 }
+
+export interface CliBuildConfiguration extends TsupConfiguration {}
 
 export interface CliConfiguration {
   /** Path to the logo file. the file must a txt file. */
   banner?: `${string}.txt` | false
   development?: CliDevelopmentConfiguration
+  build?: CliBuildConfiguration
 }
 
 declare global {
