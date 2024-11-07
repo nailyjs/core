@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.8
+
+### Patch Changes
+
+- cba1aab: fix(swc): unplugin internal swc plugin
+
 ## 2.0.7
 
 ### Patch Changes
