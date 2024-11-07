@@ -1,9 +1,11 @@
-import child_process from 'node:child_process'
-import { exit } from 'node:process'
+import path from 'node:path'
+import { cwd, exit } from 'node:process'
 import { Value } from '@nailyjs/config'
 import { ClassWrapper, Container, Service, Setupable } from '@nailyjs/ioc'
+import { DevelopmentRunnerService } from './development-runner.service'
 import { EntryAnalyzerService } from './entry-analyzer.service'
 import { TsupService } from './tsup.service'
+import { WatcherService } from './watcher.service'
 import { LogoWriter } from './write-logo'
 
 @Service()
@@ -12,10 +14,28 @@ export class DevelopmentStarter implements Setupable {
     private readonly tsupService: TsupService,
     private readonly entryAnalyzerService: EntryAnalyzerService,
     private readonly logoWriter: LogoWriter,
+    private readonly developmentRunnerService: DevelopmentRunnerService,
+    private readonly watcherService: WatcherService,
   ) {}
 
   @Value('naily.cli.development.using')
   private readonly _using: 'tsup' | 'vite'
+
+  private refreshScreen(): void {
+    console.clear()
+    this.logoWriter.write()
+  }
+
+  private killer: () => void = () => true
+  private async run(): Promise<void> {
+    await this.tsupService.setup()
+    this.refreshScreen()
+    const outDir = this.tsupService.getOutDir()
+    // it is a entry point of the application, so must convert it to output
+    const runnerEntry = this.tsupService.getRunnerEntry()
+    const runnerEntryOutput = this.entryAnalyzerService.analyzeRunnerEntryToGetOutput(runnerEntry, outDir)
+    this.killer = this.developmentRunnerService.createProcess(runnerEntryOutput)
+  }
 
   async setup(): Promise<void> {
     if (typeof this._using === 'string' && this._using !== 'tsup') {
@@ -23,14 +43,13 @@ export class DevelopmentStarter implements Setupable {
       return exit(0)
     }
 
-    await this.tsupService.setup()
-    const outDir = this.tsupService.getOutDir()
-    // it is a entry point of the application, so must convert it to output
-    const runnerEntry = this.tsupService.getRunnerEntry()
-    const runnerEntryOutput = this.entryAnalyzerService.analyzeRunnerEntryToGetOutput(runnerEntry, outDir)
-    console.clear()
-    this.logoWriter.write()
-    child_process.spawn('node', [runnerEntryOutput], { stdio: 'inherit' })
+    await this.run()
+    this.watcherService.getWatcher().on('all', async (ev, changedPath) => {
+      console.log(`File ${path.relative(cwd(), changedPath)} has been ${ev}`)
+      this.killer()
+      this.refreshScreen()
+      await this.run()
+    })
   }
 
   static getInstance(container: Container): DevelopmentStarter {

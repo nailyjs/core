@@ -32,6 +32,8 @@
   "dependencies": {
     "@nailyjs/config": "workspace:*",
     "@nailyjs/ioc": "workspace:*",
+    "@nailyjs/winston": "workspace:*",
+    "chokidar": "^4.0.1",
     "commander": "^12.1.0",
     "defu": "^6.1.4",
     "gitly": "^3.0.2",

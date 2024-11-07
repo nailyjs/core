@@ -7,6 +7,7 @@ export interface TsupDevelopmentConfiguration {
 
 export interface CliDevelopmentConfiguration extends TsupDevelopmentConfiguration {
   runnerEntry?: string
+  watchPaths?: string | string[]
 }
 
 export interface CliConfiguration {
