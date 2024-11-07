@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.6
+
+### Patch Changes
+
+- 6fda324: feat: add build server hook & add swc
+
 ## 2.0.5
 
 ### Patch Changes
