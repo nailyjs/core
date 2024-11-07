@@ -6,6 +6,7 @@ import * as transformer from './transform'
 export class NodeAdapter implements IBackendAdapter {
   private handler: (req: http.IncomingMessage, res: http.ServerResponse) => any
   private server = http.createServer(async (req, res) => {
+    if (!this.handler) return res.end('No handler')
     return await this.handler(req, res)
   })
 
