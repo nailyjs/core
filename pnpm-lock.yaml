@@ -380,6 +380,9 @@ importers:
       '@swc/core':
         specifier: ^1.9.1
         version: 1.9.1
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       unplugin:
         specifier: ^1.15.0
         version: 1.15.0

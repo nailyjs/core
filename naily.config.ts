@@ -25,7 +25,6 @@ export default defineConfig({
     typeorm: {
       type: 'sqlite',
       database: path.join(cwd(), './node_modules/.cache/naily/typeorm.db'),
-      name: 'default',
       synchronize: true,
       logging: true,
     },

@@ -8,5 +8,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   format: ['cjs', 'esm'],
-  noExternal: ['unplugin-swc'],
+  external: ['vite', 'defu'],
 })
