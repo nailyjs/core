@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.6
+
+### Patch Changes
+
+- af9211c: fix: rpc with typeorm's bug, add cli features
+
 ## 2.0.5
 
 ### Patch Changes
