@@ -5,19 +5,17 @@ import { Service } from '@nailyjs/ioc'
 
 @Service()
 export class DevelopmentRunnerService {
-  createProcess(filePath: string): () => boolean {
+  createProcess(filePath: string): (signal?: NodeJS.Signals | number) => boolean {
     const resolvedFilePath = path.resolve(filePath)
     const forked = child_process.spawn('node', [resolvedFilePath])
 
     const forkStdout = forked.stdout?.pipe(stdout)
     const forkStderr = forked.stderr?.pipe(stderr)
 
-    function killer(signal: NodeJS.Signals | number = 2): boolean {
+    return function killer(signal: NodeJS.Signals | number = 2): boolean {
       forkStdout?.unpipe(stdout)
       forkStderr?.unpipe(stderr)
       return forked.kill(signal)
     }
-
-    return killer
   }
 }
