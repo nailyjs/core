@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.9
+
+### Patch Changes
+
+- c83367b: feat(unplugin-rpc): add rpc factory function to load module
+
 ## 2.0.8
 
 ### Patch Changes
