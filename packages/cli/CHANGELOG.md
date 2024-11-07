@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.10
+
+### Patch Changes
+
+- b9e8903: feat(cli): add build options
+
 ## 2.0.9
 
 ### Patch Changes
