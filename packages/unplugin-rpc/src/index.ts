@@ -1,10 +1,33 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { cwd } from 'node:process'
+import { cwd, exit } from 'node:process'
 import { createFilter } from '@rollup/pluginutils'
 import { createUnplugin, UnpluginFactory } from 'unplugin'
+import { build, mergeConfig, UserConfig } from 'vite'
+import { swc } from './core/swc'
 import { useViteDevServer } from './core/vite-server-adapter'
 import { Options } from './types'
+
+export async function buildServer(options?: Options | undefined): Promise<void> {
+  const serverEntry = options?.serverEntry || path.join(cwd(), './backend/main.ts')
+  const viteOptions = options?.viteOptions || {}
+
+  await build(mergeConfig({
+    build: {
+      ssr: serverEntry,
+      ssrManifest: true,
+      outDir: 'dist/backend',
+    },
+
+    ssr: {
+      noExternal: true,
+    },
+
+    plugins: [
+      swc(),
+    ],
+  } as UserConfig, viteOptions))
+}
 
 export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
   if (meta.framework !== 'vite') throw new Error(`[unplugin-rpc] Unsupported framework: ${meta.framework}, current only support vite.`)
@@ -25,6 +48,11 @@ export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
             return
           await viteDevServer.run()
         })
+      },
+
+      closeBundle() {
+        if (options?.buildOnViteCloseBundle === true)
+          buildServer(options).then(() => exit(0))
       },
     },
   }
