@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.7
+
+### Patch Changes
+
+- fa8c1c6: fix(cli): fix dev
+
 ## 2.0.6
 
 ### Patch Changes
