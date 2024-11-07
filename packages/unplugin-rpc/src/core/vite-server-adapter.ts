@@ -6,6 +6,7 @@ import { Container } from '@nailyjs/ioc'
 import { RpcBootstrap, RpcControllerScanner, RpcHandlerContext } from '@nailyjs/rpc'
 import { ViteDevServer } from 'vite'
 import { Options } from '../types'
+import { ViteRpcContextFn } from './factory'
 
 class ViteDevHttpAdapter implements IBackendAdapter {
   constructor(
@@ -20,9 +21,20 @@ class ViteDevHttpAdapter implements IBackendAdapter {
 
   private async loadEntryModule(): Promise<RpcBootstrap> {
     const mod = await this.server.ssrLoadModule(this.serverEntry, { fixStacktrace: true })
-    if (!(this.entryExport in mod) || typeof mod[this.entryExport] !== 'object')
-      throw new Error(`Cannot find export "${this.entryExport}" in ${this.serverEntry}`)
-    return mod[this.entryExport] as RpcBootstrap
+    const entryExport: ViteRpcContextFn = mod[this.entryExport]
+    if (!entryExport)
+      throw new Error(`[unplugin-rpc] Entry export '${this.entryExport}' not found in file '${this.serverEntry}'.`)
+    if (typeof entryExport !== 'function')
+      throw new Error(`[unplugin-rpc] Update v2.0.9, please rewrite your entry file export point to 'ViteRpc' function. For example:
+export const app = ViteRpc((ctx) => {
+  // ctx.use(...)
+
+  if (import.meta.env.PROD)
+    ctx.run(3000).then(() => console.log('Server is running on http://localhost:3000'))
+})`)
+    const bootstrap = new RpcBootstrap()
+    await entryExport(bootstrap)
+    return bootstrap
   }
 
   private container = new Container()
