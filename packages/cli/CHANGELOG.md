@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.6
+
+### Patch Changes
+
+- 440f628: feat(cli): add export
+
 ## 2.0.5
 
 ### Patch Changes
