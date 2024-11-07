@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.9
+
+### Patch Changes
+
+- 826a378: feat(cli): add build command
+
 ## 2.0.8
 
 ### Patch Changes
