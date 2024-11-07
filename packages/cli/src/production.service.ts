@@ -25,7 +25,7 @@ export class ProductionStarter implements Setupable {
     }
 
     this.refreshScreen()
-    return this.tsupService.setup()
+    return this.tsupService.setup('build')
   }
 
   static getInstance(container: Container): ProductionStarter {

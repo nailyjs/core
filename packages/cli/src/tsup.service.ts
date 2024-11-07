@@ -11,10 +11,13 @@ export class TsupService implements Setupable {
   constructor(
     private readonly entryAnalyzerService: EntryAnalyzerService,
     private readonly packageFileService: PackageFileService,
+
     @Value('naily.cli.development.tsup')
     private readonly _devTsup: tsup.Options,
+
     @Value('naily.cli.build.tsup')
     private readonly _buildTsup: tsup.Options,
+
     @Value('naily.cli.development.runnerEntry')
     private readonly _runnerEntry: string,
   ) {}
@@ -39,22 +42,22 @@ export class TsupService implements Setupable {
     }
   }
 
-  getMergedConfiguration(): tsup.Options {
-    return defu(this._devTsup, this.getDefaultConfiguration())
+  getMergedConfiguration(mode: 'build' | 'dev'): tsup.Options {
+    return defu(mode === 'dev' ? this._devTsup : this._buildTsup, this.getDefaultConfiguration())
   }
 
-  getOutDir(): string {
-    return path.resolve(this.getMergedConfiguration().outDir || 'dist')
+  getOutDir(mode: 'build' | 'dev' = 'dev'): string {
+    return path.resolve(this.getMergedConfiguration(mode).outDir || 'dist')
   }
 
-  getRunnerEntry(): string {
+  getRunnerEntry(mode: 'build' | 'dev'): string {
     if (this._runnerEntry) return path.resolve(this._runnerEntry)
-    const mergedConfiguration = this.getMergedConfiguration()
+    const mergedConfiguration = this.getMergedConfiguration(mode)
     if (Array.isArray(mergedConfiguration.entry)) return path.resolve(mergedConfiguration.entry[0] || '')
     else return path.resolve(Object.values(mergedConfiguration.entry)[0] || '')
   }
 
-  async setup(): Promise<void> {
-    return await tsup.build(this.getMergedConfiguration())
+  async setup(mode: 'build' | 'dev'): Promise<void> {
+    return await tsup.build(this.getMergedConfiguration(mode))
   }
 }

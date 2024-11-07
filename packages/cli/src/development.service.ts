@@ -27,11 +27,11 @@ export class DevelopmentStarter implements Setupable {
 
   private killer: () => boolean = () => true
   private async run(): Promise<void> {
-    await this.tsupService.setup()
+    await this.tsupService.setup('dev')
     this.refreshScreen()
-    const outDir = this.tsupService.getOutDir()
+    const outDir = this.tsupService.getOutDir('dev')
     // it is a entry point of the application, so must convert it to output
-    const runnerEntry = this.tsupService.getRunnerEntry()
+    const runnerEntry = this.tsupService.getRunnerEntry('dev')
     const runnerEntryOutput = this.entryAnalyzerService.analyzeRunnerEntryToGetOutput(runnerEntry, outDir)
     this.killer = this.developmentRunnerService.createProcess(runnerEntryOutput)
   }
