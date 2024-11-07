@@ -1,5 +1,13 @@
 # @nailyjs/cli
 
+## 2.0.8
+
+### Patch Changes
+
+- 7e286cd: feat(cli): try to fix
+- 4f15e67: fix(cli): dev mode
+- 755335c: feat(cli): update killer
+
 ## 2.0.7
 
 ### Patch Changes
