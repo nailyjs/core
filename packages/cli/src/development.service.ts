@@ -26,7 +26,7 @@ export class DevelopmentStarter implements Setupable {
     this.logoWriter.write()
   }
 
-  private killer: () => void = () => true
+  private killer: () => boolean = () => true
   private async run(): Promise<void> {
     await this.tsupService.setup()
     this.refreshScreen()

@@ -185,9 +185,6 @@ importers:
       '@nailyjs/ioc':
         specifier: workspace:*
         version: link:../ioc
-      '@nailyjs/winston':
-        specifier: workspace:*
-        version: link:../winston
       chokidar:
         specifier: ^4.0.1
         version: 4.0.1
