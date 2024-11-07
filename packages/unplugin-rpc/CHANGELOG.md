@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.11
+
+### Patch Changes
+
+- fd75b1a: fix(unplugin-rpc): noExternal
+
 ## 2.0.10
 
 ### Patch Changes
