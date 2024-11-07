@@ -34,7 +34,13 @@ export class DevelopmentStarter implements Setupable {
     // it is a entry point of the application, so must convert it to output
     const runnerEntry = this.tsupService.getRunnerEntry()
     const runnerEntryOutput = this.entryAnalyzerService.analyzeRunnerEntryToGetOutput(runnerEntry, outDir)
-    this.killer = this.developmentRunnerService.createProcess(runnerEntryOutput)
+    await new Promise((resolve) => {
+      const timer = setTimeout(() => {
+        this.killer = this.developmentRunnerService.createProcess(runnerEntryOutput)
+        resolve(true)
+        clearTimeout(timer)
+      }, 1000)
+    })
   }
 
   async setup(): Promise<void> {
