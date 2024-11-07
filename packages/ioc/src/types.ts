@@ -65,3 +65,6 @@ export interface PostConstructErrorHandler extends ErrorHandler {
 export type InjectionTokenable<T extends Record<string | symbol | number, any>> = T & {
   injectionToken: string
 }
+export interface Setupable {
+  setup(...args: any[]): any | Promise<any>
+}

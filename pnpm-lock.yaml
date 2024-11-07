@@ -84,6 +84,21 @@ importers:
         specifier: ^2.1.2
         version: 2.1.4(@types/node@22.8.4)(@vitest/ui@2.1.4)
 
+  fixtures/backend-app:
+    dependencies:
+      '@nailyjs/backend':
+        specifier: workspace:*
+        version: link:../../packages/backend
+      '@nailyjs/cli':
+        specifier: workspace:*
+        version: link:../../packages/cli
+      '@nailyjs/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@nailyjs/ioc':
+        specifier: workspace:*
+        version: link:../../packages/ioc
+
   fixtures/vite:
     dependencies:
       '@nailyjs/backend':
@@ -173,6 +188,9 @@ importers:
       commander:
         specifier: ^12.1.0
         version: 12.1.0
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       gitly:
         specifier: ^3.0.2
         version: 3.0.2
@@ -182,13 +200,16 @@ importers:
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(@swc/core@1.7.42)(jiti@2.4.0)(postcss@8.4.47)(tsx@4.19.2)(typescript@5.6.3)(yaml@2.6.0)
+      vite:
+        specifier: ^5.4.10
+        version: 5.4.10(@types/node@22.8.4)
     devDependencies:
       '@types/prompts':
         specifier: ^2.4.9
         version: 2.4.9
-      tsup:
-        specifier: ^8.3.0
-        version: 8.3.5(@swc/core@1.7.42)(jiti@2.4.0)(postcss@8.4.47)(tsx@4.19.2)(typescript@5.6.3)(yaml@2.6.0)
 
   packages/config:
     dependencies:

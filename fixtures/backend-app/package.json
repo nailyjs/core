@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "type": "module",
+  "main": "./src/main.ts",
+  "scripts": {
+    "dev": "naily dev"
+  },
+  "dependencies": {
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/cli": "workspace:*",
+    "@nailyjs/config": "workspace:*",
+    "@nailyjs/ioc": "workspace:*"
+  }
+}
