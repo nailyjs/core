@@ -12,7 +12,7 @@ export class DevelopmentRunnerService {
     const forkStdout = forked.stdout?.pipe(stdout)
     const forkStderr = forked.stderr?.pipe(stderr)
 
-    function killer(signal: NodeJS.Signals | number = 0): boolean {
+    function killer(signal: NodeJS.Signals | number = 2): boolean {
       forkStdout?.unpipe(stdout)
       forkStderr?.unpipe(stderr)
       return forked.kill(signal)

@@ -2,7 +2,6 @@
   "name": "backend",
   "type": "module",
   "private": true,
-  "main": "./src/main.ts",
   "scripts": {
     "dev": "naily dev"
   },
