@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.7
+
+### Patch Changes
+
+- 7ea5987: feat: release unplugin-rpc
+
 ## 2.0.6
 
 ### Patch Changes
