@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.13
+
+### Patch Changes
+
+- 9ecf221: fix(swc): remove
+
 ## 2.0.12
 
 ### Patch Changes
