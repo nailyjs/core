@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import pathExists from 'path-exists'
+import { pathExists } from './path-exists'
 
 const RESOLVE_EXTENSIONS = ['.tsx', '.ts', '.mts', '.jsx', '.js', '.mjs', '.cjs']
 

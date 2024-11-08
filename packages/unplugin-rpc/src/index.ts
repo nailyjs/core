@@ -5,19 +5,16 @@ import { createFilter } from '@rollup/pluginutils'
 import { createUnplugin, UnpluginFactory } from 'unplugin'
 import { buildServer } from './core/build'
 import { hmrLogger } from './core/hmr-logger'
-import { swcUnplugin } from './core/swc'
 import { useViteDevServer } from './core/vite-server-adapter'
 import { Options } from './types'
 
 export * from './core/build'
-export * from './core/factory'
 export * from './core/swc'
 export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
   if (meta.framework !== 'vite') throw new Error(`[unplugin-rpc] Unsupported framework: ${meta.framework}, current only support vite.`)
   const watchDirs = options?.watchDirs || ['./backend/**/*']
 
   return [
-    swcUnplugin,
     {
       name: 'naily:unplugin-rpc',
 
