@@ -389,6 +389,9 @@ importers:
       kleur:
         specifier: ^4.1.5
         version: 4.1.5
+      load-tsconfig:
+        specifier: ^0.2.5
+        version: 0.2.5
       unplugin:
         specifier: ^1.15.0
         version: 1.15.0

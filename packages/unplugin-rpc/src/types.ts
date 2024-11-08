@@ -1,6 +1,26 @@
 import type { UserConfig } from 'vite'
+import { SwcOptions } from './core/swc'
 
 export type ExcludeDefault<T extends string> = T extends 'default' ? never : T
+
+export interface BuildOptions {
+  /**
+   * Build server on Vite close bundle.
+   *
+   * e.g. If you are using `vite-ssg`, you should set this to `false` and build the server in `ssgOptions.onFinished` hook.
+   *
+   * @default 'closeBundle'
+   */
+  on: 'closeBundle' | false
+  /**
+   * Build server vite options.
+   */
+  viteOptions?: UserConfig
+  /**
+   * Override build swc options.
+   */
+  swcOptions?: SwcOptions
+}
 
 export interface Options<EntryExport extends string = string> {
   /** @default './backend/main.ts' */
@@ -15,15 +35,7 @@ export interface Options<EntryExport extends string = string> {
    */
   watchDirs?: string[] | string
   /**
-   * Build server vite options.
+   * Build options.
    */
-  viteOptions?: UserConfig
-  /**
-   * Build server on Vite close bundle.
-   *
-   * e.g. If you are using `vite-ssg`, you should set this to `false` and build the server in `ssgOptions.onFinished`.
-   *
-   * @default true
-   */
-  buildOnViteCloseBundle?: boolean
+  build?: BuildOptions
 }
