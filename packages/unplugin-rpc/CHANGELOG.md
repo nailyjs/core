@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.12
+
+### Patch Changes
+
+- 4f0d735: fix(unplugin-swc): add internal swc, change config
+
 ## 2.0.11
 
 ### Patch Changes
