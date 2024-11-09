@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.10
+
+### Patch Changes
+
+- 1b357c4: fix(typeorm): createDataSourceWrapper
+
 ## 2.0.9
 
 ### Patch Changes
