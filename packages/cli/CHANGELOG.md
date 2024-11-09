@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.14
+
+### Patch Changes
+
+- 74a299b: fix: typeorm hmr
+
 ## 2.0.13
 
 ### Patch Changes
