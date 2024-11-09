@@ -18,7 +18,6 @@ export class DataSourceService {
   ) {}
 
   private createDataSourceWrapper(options: DataSourceOptions, container: Container): ConstantWrapper<DataSource> {
-    if (container.getContainer().has(DataSource)) return container.getContainer().get(DataSource) as ConstantWrapper<DataSource>
     // eslint-disable-next-line ts/ban-ts-comment
     // @ts-expect-error
     return container.createConstantWrapper(DataSource, new DataSource(options || {})).save()
