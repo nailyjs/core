@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.8
+
+### Patch Changes
+
+- 02f9bb8: feat: add transient param
+
 ## 2.0.7
 
 ### Patch Changes
