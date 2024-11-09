@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.16
+
+### Patch Changes
+
+- d597c18: fix: hmr
+
 ## 2.0.15
 
 ### Patch Changes
