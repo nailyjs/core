@@ -44,6 +44,12 @@ export class ViteService implements Compiler {
           name: 'naily:rpc',
           configureServer: async (server) => {
             if (this.rpcOptions) await useViteDevServer(this.rpcOptions, server).run()
+            server.watcher.on('all', (ev, filePath) => {
+              if (createFilter((this.rpcOptions as Omit<Options<string>, 'build'>).watchDirs || ['./backend/**/*'])(filePath)) {
+                server.ws.send({ type: 'full-reload' })
+                server.restart(true)
+              }
+            })
           },
 
           handleHotUpdate: async (ctx) => {
@@ -52,6 +58,8 @@ export class ViteService implements Compiler {
             // 过滤掉不在 watchDirs 中的文件
               .filter(file => createFilter((this.rpcOptions as Omit<Options<string>, 'build'>).watchDirs || ['./backend/**/*'])(file.file))
             if (moduleFilePaths.length === 0) return
+            ctx.server.moduleGraph.invalidateAll()
+            ctx.server.ws.send({ type: 'full-reload' })
             await ctx.server.restart(true)
 
             if (ctx.server.config.clearScreen !== false) console.clear()
