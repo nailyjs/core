@@ -407,9 +407,6 @@ importers:
       load-tsconfig:
         specifier: ^0.2.5
         version: 0.2.5
-      typeorm:
-        specifier: ^0.3.20
-        version: 0.3.20(ioredis@5.4.1)(sqlite3@5.1.7)
       unplugin:
         specifier: ^1.15.0
         version: 1.15.0

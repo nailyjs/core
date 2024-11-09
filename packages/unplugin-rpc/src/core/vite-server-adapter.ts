@@ -42,7 +42,10 @@ export function useViteDevServer(options: Options, server: ViteDevServer): ViteD
           // 目前暂无法修复这个问题，如果有人知道如何修复，欢迎 PR
           if (!(e instanceof EntityMetadataNotFoundError))
             console.error(e)
-          server.restart(true)
+
+          server.moduleGraph.invalidateAll()
+          await server.restart(true)
+          server.moduleGraph.invalidateAll()
         }
       })
       return this
