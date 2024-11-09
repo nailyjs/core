@@ -27,7 +27,7 @@ export class DataSourceService {
     const map = container.getContainer()
     if (map.has(DataSource) && transient !== false) {
       const inMapDataSource = (map.get(DataSource) as ConstantWrapper<DataSource>).getValue()
-      if (inMapDataSource) inMapDataSource.destroy()
+      if (inMapDataSource && inMapDataSource.isInitialized) inMapDataSource.destroy()
       map.delete(DataSource)
     }
 
