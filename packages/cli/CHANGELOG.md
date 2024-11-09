@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.12
+
+### Patch Changes
+
+- 3f06920: feat: add vite server & release
+
 ## 2.0.11
 
 ### Patch Changes
