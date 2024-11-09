@@ -2,8 +2,7 @@ import path from 'node:path'
 import { cwd } from 'node:process'
 import { HandlerRequest, IBackendAdapter } from '@nailyjs/backend'
 import { sendResponse, transformIncomingMessageToRequest } from '@nailyjs/backend/node-adapter'
-import { Container } from '@nailyjs/ioc'
-import { RpcBootstrap, RpcControllerScanner, RpcHandlerContext } from '@nailyjs/rpc'
+import { RpcBootstrap, RpcHandlerContext } from '@nailyjs/rpc'
 import { ViteDevServer } from 'vite'
 import { Options } from '../types'
 
@@ -28,13 +27,13 @@ class ViteDevHttpAdapter implements IBackendAdapter {
   setupHandle(): void {
     this.server.middlewares.use(async (req, res, next) => {
       const bootstrap = await this.loadEntryModule()
-      await bootstrap.getPluginRunner().runBeforeRun()
 
       if (req.method === 'GET')
         return next()
       if (!req.url.startsWith(bootstrap.getBaseURL()))
         return next()
 
+      await bootstrap.getPluginRunner().runBeforeRun()
       // 每次请求都重新实例化 RpcHandlerContext
       const handlerContext = this.createContext(bootstrap)
       const request = await transformIncomingMessageToRequest(req).getRequest()
@@ -43,8 +42,8 @@ class ViteDevHttpAdapter implements IBackendAdapter {
     })
   }
 
-  private createContext(container: Container): RpcHandlerContext {
-    const controllerScanner = new RpcControllerScanner(container)
+  private createContext(bootstrap: RpcBootstrap): RpcHandlerContext {
+    const controllerScanner = bootstrap.getRpcControllerScanner()
     return new RpcHandlerContext(controllerScanner.getRpcControllerWrapper())
   }
 }

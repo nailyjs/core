@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "naily dev"
+    "dev": "vite"
   },
   "dependencies": {
     "@nailyjs/backend": "workspace:*",
