@@ -66,7 +66,6 @@ export class ViteService implements Compiler {
         },
       ],
     })
-
     viteServer.watcher.add(path.join(cwd(), 'naily.config.ts')).on('all', (_ev, filePath) => {
       if (filePath === path.join(cwd(), 'naily.config.ts')) {
         this.refreshScreen()
