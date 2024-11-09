@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.20
+
+### Patch Changes
+
+- ec42902: fix: hmr
+
 ## 2.0.19
 
 ### Patch Changes
