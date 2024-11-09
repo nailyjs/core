@@ -1,5 +1,12 @@
 # @nailyjs/cli
 
+## 2.0.19
+
+### Patch Changes
+
+- Updated dependencies [8dd9016]
+  - unplugin-rpc@2.0.17
+
 ## 2.0.18
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.17
+
+### Patch Changes
+
+- 8dd9016: fix: hmr
+
 ## 2.0.16
 
 ### Patch Changes
