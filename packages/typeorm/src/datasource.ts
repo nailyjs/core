@@ -24,9 +24,9 @@ export class DataSourceService {
     return container.createConstantWrapper(DataSource, new DataSource(options || {})).save()
   }
 
-  async getDataSource(container: Container): Promise<DataSource> {
+  async getDataSource(container: Container, transient: boolean = false): Promise<DataSource> {
     const map = container.getContainer()
-    if (map.has(DataSource)) return (map.get(DataSource) as ConstantWrapper<DataSource>).getValue()
+    if (map.has(DataSource) && transient !== false) return (map.get(DataSource) as ConstantWrapper<DataSource>).getValue()
 
     if (this._customDataSourceService && typeof this._customDataSourceService.configure === 'function') {
       const configuredDataSource = await this._customDataSourceService.configure(this._typeOrmConfiguration)
