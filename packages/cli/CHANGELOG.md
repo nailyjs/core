@@ -1,5 +1,13 @@
 # @nailyjs/cli
 
+## 2.0.17
+
+### Patch Changes
+
+- 51daa19: fix: try to fix typeorm
+- Updated dependencies [51daa19]
+  - unplugin-rpc@2.0.15
+
 ## 2.0.16
 
 ### Patch Changes
