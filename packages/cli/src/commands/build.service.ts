@@ -1,11 +1,11 @@
 import { exit } from 'node:process'
 import { Value } from '@nailyjs/config'
 import { ClassWrapper, Container, Service, Setupable } from '@nailyjs/ioc'
-import { TsupService } from './tsup.service'
-import { LogoWriter } from './write-logo'
+import { TsupService } from '../compilers/tsup.service'
+import { LogoWriter } from '../write-logo'
 
 @Service()
-export class ProductionStarter implements Setupable {
+export class BuildStarter implements Setupable {
   constructor(
     private readonly tsupService: TsupService,
     private readonly logoWriter: LogoWriter,
@@ -28,9 +28,9 @@ export class ProductionStarter implements Setupable {
     return this.tsupService.setup('build')
   }
 
-  static getInstance(container: Container): ProductionStarter {
-    const wrapper = container.getContainer().get(ProductionStarter) as ClassWrapper<ProductionStarter>
+  static getInstance(container: Container): BuildStarter {
+    const wrapper = container.getContainer().get(BuildStarter) as ClassWrapper<BuildStarter>
     if (wrapper && wrapper.wrapperType === 'class') return wrapper.getClassFactory().getOrCreateInstance()
-    return container.createClassWrapper(ProductionStarter).getClassFactory().getOrCreateInstance()
+    return container.createClassWrapper(BuildStarter).save().getClassFactory().getOrCreateInstance()
   }
 }

@@ -1,15 +1,23 @@
 import type * as tsup from 'tsup'
+import type { UserConfig } from 'vite'
+import { Options } from 'unplugin-rpc/types'
 
-export interface TsupConfiguration {
+export interface CliDevelopmentBaseConfiguration {}
+
+export interface TsupConfiguration extends CliDevelopmentBaseConfiguration {
   using?: 'tsup'
   tsup?: tsup.Options
-}
-
-export interface CliDevelopmentConfiguration extends TsupConfiguration {
   runnerEntry?: string
   watchPaths?: string | string[]
 }
 
+export interface ViteConfiguration extends CliDevelopmentBaseConfiguration {
+  using?: 'vite'
+  vite?: UserConfig
+  rpc?: false | Omit<Options, 'build'>
+}
+
+export type CliDevelopmentConfiguration = TsupConfiguration | ViteConfiguration
 export interface CliBuildConfiguration extends TsupConfiguration {}
 
 export interface CliConfiguration {
@@ -17,6 +25,15 @@ export interface CliConfiguration {
   banner?: `${string}.txt` | false
   development?: CliDevelopmentConfiguration
   build?: CliBuildConfiguration
+}
+
+export interface CliIntelliSense extends CliConfiguration {
+  development?: {
+    using?: 'tsup' | 'vite'
+    vite?: UserConfig
+    tsup?: tsup.Options
+    rpc?: false | Omit<Options, 'build'>
+  }
 }
 
 declare global {
@@ -28,7 +45,7 @@ declare global {
       }
 
       interface NailyUserIntelliSense {
-        cli?: CliConfiguration
+        cli?: CliIntelliSense
       }
     }
   }

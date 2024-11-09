@@ -8,7 +8,7 @@ export interface C12Service {
 
 @Service(C12Service)
 export class C12ServiceImpl implements C12Service {
-  getConfiguration(): ReturnType<typeof loadConfig> {
+  async getConfiguration(): ReturnType<typeof loadConfig> {
     return loadConfig({
       name: 'naily',
       packageJson: true,

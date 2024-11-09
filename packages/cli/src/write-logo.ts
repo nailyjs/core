@@ -23,7 +23,7 @@ export class LogoWriter {
       if (fs.existsSync(logoPath)) return console.log(fs.readFileSync(logoPath, 'utf-8'))
     }
 
-    const defaultLogoPath = path.join(__dirname, '../logo.txt')
+    const defaultLogoPath = path.resolve(__dirname, '../logo.txt')
     if (fs.existsSync(defaultLogoPath)) console.log(fs.readFileSync(defaultLogoPath, 'utf-8'))
     else console.log('Naily CLI')
   }

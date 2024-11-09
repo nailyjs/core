@@ -1,5 +1,5 @@
 import { ConfigPlugin } from '@nailyjs/config'
-import { CliBootstrap } from './index'
+import { CliBootstrap } from './cli-bootstrap'
 
 new CliBootstrap()
   .use(ConfigPlugin())

@@ -63,12 +63,12 @@ class ConfigPluginImpl implements IocPlugin {
     const map = container.getContainer()
     const jexlExecutor = this.getJexlExecutor(container)
     const c12Service = this.getC12Service(container)
-    const { config } = await c12Service.getConfiguration()
+    const c12Config = await c12Service.getConfiguration()
 
     for (const [_injectionToken, wrapper] of map) {
       if (wrapper.wrapperType !== 'class') continue
-      this.applyValueParameterMetadata(wrapper, jexlExecutor, config)
-      this.applyValuePropertyMetadata(wrapper, jexlExecutor, config)
+      this.applyValueParameterMetadata(wrapper, jexlExecutor, c12Config.config)
+      this.applyValuePropertyMetadata(wrapper, jexlExecutor, c12Config.config)
     }
   }
 }

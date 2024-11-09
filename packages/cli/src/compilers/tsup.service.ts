@@ -1,16 +1,21 @@
 import path from 'node:path'
 import { Value } from '@nailyjs/config'
-import { Service, Setupable } from '@nailyjs/ioc'
+import { Service } from '@nailyjs/ioc'
 import defu from 'defu'
 import * as tsup from 'tsup'
-import { EntryAnalyzerService } from './entry-analyzer.service'
-import { PackageFileService } from './package-file.service'
+import { DevelopmentRunnerService } from '../development-runner.service'
+import { EntryAnalyzerService } from '../entry-analyzer.service'
+import { PackageFileService } from '../package-file.service'
+import { LogoWriter } from '../write-logo'
+import { Compiler } from './compiler.protocol'
 
 @Service()
-export class TsupService implements Setupable {
+export class TsupService implements Compiler {
   constructor(
     private readonly entryAnalyzerService: EntryAnalyzerService,
     private readonly packageFileService: PackageFileService,
+    private readonly developmentRunnerService: DevelopmentRunnerService,
+    private readonly logoWriter: LogoWriter,
 
     @Value('naily.cli.development.tsup')
     private readonly _devTsup: tsup.Options,
@@ -42,11 +47,11 @@ export class TsupService implements Setupable {
     }
   }
 
-  getMergedConfiguration(mode: 'build' | 'dev'): tsup.Options {
+  private getMergedConfiguration(mode: 'build' | 'dev'): tsup.Options {
     return defu(mode === 'dev' ? this._devTsup : this._buildTsup, this.getDefaultConfiguration())
   }
 
-  getOutDir(mode: 'build' | 'dev' = 'dev'): string {
+  private getOutDir(mode: 'build' | 'dev' = 'dev'): string {
     return path.resolve(this.getMergedConfiguration(mode).outDir || 'dist')
   }
 
@@ -59,5 +64,27 @@ export class TsupService implements Setupable {
 
   async setup(mode: 'build' | 'dev'): Promise<void> {
     return await tsup.build(this.getMergedConfiguration(mode))
+  }
+
+  private refreshScreen(): void {
+    console.clear()
+    this.logoWriter.write()
+  }
+
+  private tsupProcessKiller: () => boolean = () => true
+  async runDevelopmentMode(): Promise<void> {
+    await this.setup('dev')
+    this.refreshScreen()
+    const outDir = this.getOutDir('dev')
+    // it is a entry point of the application, so must convert it to output
+    const runnerEntry = this.getRunnerEntry('dev')
+    const runnerEntryOutput = this.entryAnalyzerService.analyzeRunnerEntryToGetOutput(runnerEntry, outDir)
+    this.tsupProcessKiller = this.developmentRunnerService.createProcess(runnerEntryOutput)
+  }
+
+  async onWatch(): Promise<void> {
+    this.tsupProcessKiller()
+    this.refreshScreen()
+    await this.runDevelopmentMode()
   }
 }

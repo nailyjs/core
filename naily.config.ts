@@ -4,6 +4,12 @@ import { defineConfig } from './packages/config/src/helper'
 
 export default defineConfig({
   naily: {
+    cli: {
+      development: {
+        using: 'vite',
+      },
+    },
+
     eslint: {
       type: 'lib',
       rules: {

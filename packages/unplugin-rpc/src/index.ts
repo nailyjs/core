@@ -1,15 +1,12 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { cwd, exit } from 'node:process'
-import { createFilter } from '@rollup/pluginutils'
 import { createUnplugin, UnpluginFactory } from 'unplugin'
 import { buildServer } from './core/build'
-import { hmrLogger } from './core/hmr-logger'
 import { useViteDevServer } from './core/vite-server-adapter'
 import { Options } from './types'
 
-export * from './core/build'
-export * from './core/swc'
+export * from './core'
 export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
   if (meta.framework !== 'vite') throw new Error(`[unplugin-rpc] Unsupported framework: ${meta.framework}, current only support vite.`)
   const watchDirs = options?.watchDirs || ['./backend/**/*']
@@ -29,35 +26,28 @@ export const unpluginFactory: UnpluginFactory<Options> = (options, meta) => {
         },
 
         async configureServer(server) {
-          const viteDevServer = await useViteDevServer(options || {}, server).run()
-
+          await useViteDevServer(options || {}, server).run()
           if (fs.existsSync(path.join(cwd(), 'naily.config.ts')))
             server.watcher.add(path.join(cwd(), 'naily.config.ts'))
-
-          server.watcher.add(watchDirs).on('change', async (filePath) => {
-            const isWatchedFile = createFilter(watchDirs)(filePath)
-            if (!isWatchedFile || filePath !== path.join(cwd(), 'naily.config.ts'))
-              return
-            await viteDevServer.run()
-          })
+          server.watcher.add(watchDirs)
         },
 
-        handleHotUpdate(ctx) {
-          const moduleFilePaths = ctx.modules.map(mod => mod.file)
-            // 过滤掉空文件
-            .filter(file => file)
-            // 过滤掉不在 watchDirs 中的文件
-            .filter(file => createFilter(watchDirs)(file)) as string[]
+        // handleHotUpdate(ctx) {
+        //   const moduleFilePaths = ctx.modules.map(mod => mod.file)
+        //     // 过滤掉空文件
+        //     .filter(file => file)
+        //     // 过滤掉不在 watchDirs 中的文件
+        //     .filter(file => createFilter(watchDirs)(file)) as string[]
 
-          if (moduleFilePaths.length === 0)
-            return
+        //   if (moduleFilePaths.length === 0)
+        //     return
 
-          ctx.server.moduleGraph.invalidateAll()
-          ctx.server.ws.send({ type: 'full-reload' })
-          if (ctx.server.config.clearScreen !== false) console.clear()
-          hmrLogger(moduleFilePaths.map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
-          return []
-        },
+        //   ctx.server.moduleGraph.invalidateAll()
+        //   ctx.server.ws.send({ type: 'full-reload' })
+        //   if (ctx.server.config.clearScreen !== false) console.clear()
+        //   hmrLogger(moduleFilePaths.map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
+        //   // return []
+        // },
 
         closeBundle() {
           if (((options || {}).build || {}).on === 'closeBundle')

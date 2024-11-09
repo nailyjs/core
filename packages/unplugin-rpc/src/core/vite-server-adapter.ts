@@ -19,7 +19,7 @@ class ViteDevHttpAdapter implements IBackendAdapter {
   }
 
   private async loadEntryModule(): Promise<RpcBootstrap> {
-    const mod = await this.server.ssrLoadModule(this.serverEntry, { fixStacktrace: true })
+    const mod = await this.server.ssrLoadModule(this.serverEntry)
     if (!(this.entryExport in mod) || typeof mod[this.entryExport] !== 'object')
       throw new Error(`Cannot find export "${this.entryExport}" in ${this.serverEntry}`)
     return mod[this.entryExport] as RpcBootstrap
@@ -27,7 +27,7 @@ class ViteDevHttpAdapter implements IBackendAdapter {
 
   private container = new Container()
 
-  async setupHandle(handlerContext: IHandlerContext): Promise<void> {
+  setupHandle(handlerContext: IHandlerContext): void {
     this.server.middlewares.use(async (req, res, next) => {
       const bootstrap = await this.loadEntryModule()
       await bootstrap.getPluginRunner().runBeforeRun()
@@ -50,7 +50,7 @@ class ViteDevHttpAdapter implements IBackendAdapter {
     const controllerScanner = new RpcControllerScanner(this.container)
     // 第一次启动时，需要手动调用 setupHandle 来设置 handler
     const context = new RpcHandlerContext(controllerScanner.getRpcControllerWrapper())
-    await this.setupHandle(context)
+    this.setupHandle(context)
   }
 }
 

@@ -1,11 +1,13 @@
 {
   "name": "rpc",
+  "type": "module",
   "private": true,
   "scripts": {
-    "dev": "nodemon -w '../../packages/unplugin-rpc/src/**/*.ts' -e .ts -x vite"
+    "dev": "naily dev"
   },
   "dependencies": {
     "@nailyjs/backend": "workspace:*",
+    "@nailyjs/cli": "workspace:*",
     "@nailyjs/config": "workspace:*",
     "@nailyjs/ioc": "workspace:*",
     "@nailyjs/rpc": "workspace:*",

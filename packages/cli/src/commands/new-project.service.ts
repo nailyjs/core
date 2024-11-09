@@ -2,11 +2,12 @@ import child_process from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import { exit, stderr, stdout } from 'node:process'
-import { Setupable } from '@nailyjs/ioc'
+import { Container, Service, Setupable } from '@nailyjs/ioc'
 import git from 'gitly'
 import ora from 'ora'
 import prompts from 'prompts'
 
+@Service()
 export class NewProjectCreator implements Setupable {
   private async resolveProjectPath(): Promise<string> {
     const projectPath = await prompts({
@@ -91,5 +92,9 @@ export class NewProjectCreator implements Setupable {
         exit(0)
       })
     }
+  }
+
+  static getInstance(container: Container): NewProjectCreator {
+    return container.createClassWrapper(NewProjectCreator).save().getClassFactory().getOrCreateInstance()
   }
 }

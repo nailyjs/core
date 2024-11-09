@@ -91,7 +91,8 @@
     "ioredis": "database",
     "elasticsearch": "database",
     "winston": "log",
-    "schedule": "ci"
+    "schedule": "ci",
+    "compilers": "typescript"
   },
   "material-icon-theme.activeIconPack": "nest",
   "material-icon-theme.files.associations": {

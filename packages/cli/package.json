@@ -32,16 +32,20 @@
   "dependencies": {
     "@nailyjs/config": "workspace:*",
     "@nailyjs/ioc": "workspace:*",
+    "c12": "^2.0.1",
     "chokidar": "^4.0.1",
     "commander": "^12.1.0",
+    "connect": "^3.7.0",
     "defu": "^6.1.4",
     "gitly": "^3.0.2",
     "ora": "^8.1.1",
     "prompts": "^2.4.2",
     "tsup": "^8.3.5",
+    "unplugin-rpc": "workspace:*",
     "vite": "^5.4.10"
   },
   "devDependencies": {
+    "@types/connect": "^3.4.38",
     "@types/prompts": "^2.4.9"
   }
 }

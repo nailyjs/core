@@ -28,7 +28,7 @@ describe('config module', () => {
       getTestService(): TestService {
         const testServiceWrapper = this.getContainer().get(TestService)
         if (testServiceWrapper && testServiceWrapper.wrapperType === 'class') return testServiceWrapper.getClassFactory().getOrCreateInstance()
-        return this.createClassWrapper(TestService).getClassFactory().getOrCreateInstance()
+        return this.createClassWrapper(TestService).save().getClassFactory().getOrCreateInstance()
       }
 
       async run(): Promise<any> {
