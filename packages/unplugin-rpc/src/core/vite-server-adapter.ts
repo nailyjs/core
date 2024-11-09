@@ -1,52 +1,11 @@
 import path from 'node:path'
 import { cwd } from 'node:process'
-import { HandlerRequest, IBackendAdapter } from '@nailyjs/backend'
+import { HandlerRequest } from '@nailyjs/backend'
 import { sendResponse, transformIncomingMessageToRequest } from '@nailyjs/backend/node-adapter'
 import { RpcBootstrap, RpcHandlerContext } from '@nailyjs/rpc'
+import { EntityMetadataNotFoundError } from 'typeorm'
 import { ViteDevServer } from 'vite'
 import { Options } from '../types'
-
-class ViteDevHttpAdapter implements IBackendAdapter {
-  constructor(
-    private readonly server: ViteDevServer,
-    private readonly serverEntry: string,
-    private readonly entryExport: string,
-  ) {}
-
-  async listen(port: number, callback: () => void): Promise<void> {
-    return this.server.listen(port).then(callback)
-  }
-
-  private async loadEntryModule(): Promise<RpcBootstrap> {
-    const mod = await this.server.ssrLoadModule(this.serverEntry)
-    if (!(this.entryExport in mod) || typeof mod[this.entryExport] !== 'object')
-      throw new Error(`Cannot find export "${this.entryExport}" in ${this.serverEntry}`)
-    return mod[this.entryExport] as RpcBootstrap
-  }
-
-  setupHandle(): void {
-    this.server.middlewares.use(async (req, res, next) => {
-      const bootstrap = await this.loadEntryModule()
-
-      if (req.method === 'GET')
-        return next()
-      if (!req.url.startsWith(bootstrap.getBaseURL()))
-        return next()
-
-      await bootstrap.getPluginRunner().runBeforeRun()
-      // 每次请求都重新实例化 RpcHandlerContext
-      const handlerContext = this.createContext(bootstrap)
-      const request = await transformIncomingMessageToRequest(req).getRequest()
-      const response = await handlerContext.handle(request as HandlerRequest)
-      return await sendResponse(response, res).send()
-    })
-  }
-
-  private createContext(bootstrap: RpcBootstrap): RpcHandlerContext {
-    const controllerScanner = bootstrap.getRpcControllerScanner()
-    return new RpcHandlerContext(controllerScanner.getRpcControllerWrapper())
-  }
-}
 
 interface ViteDevServerReturn {
   run(): Promise<this>
@@ -58,8 +17,35 @@ export function useViteDevServer(options: Options, server: ViteDevServer): ViteD
 
   const ctx: ViteDevServerReturn = {
     async run(): Promise<ViteDevServerReturn> {
-      new ViteDevHttpAdapter(server, serverEntry, entryExport).setupHandle()
-      return ctx
+      server.middlewares.use(async (req, res, next) => {
+        const mod = await server.ssrLoadModule(serverEntry)
+        if (!(entryExport in mod) || typeof mod[entryExport] !== 'object')
+          throw new Error(`Cannot find export "${entryExport}" in ${serverEntry}`)
+        const bootstrap: RpcBootstrap = mod[entryExport]
+
+        if (req.method === 'GET')
+          return next()
+        if (!req.url.startsWith(bootstrap.getBaseURL()))
+          return next()
+
+        await bootstrap.getPluginRunner().runBeforeRun()
+        // 每次请求都重新实例化 RpcHandlerContext
+        const request = await transformIncomingMessageToRequest(req).getRequest()
+
+        const handlerContext = new RpcHandlerContext(bootstrap.getRpcControllerScanner().getRpcControllerWrapper())
+        try {
+          const response = await handlerContext.handle(request as HandlerRequest)
+          return await sendResponse(response, res).send()
+        }
+        catch (e) {
+          // EntityMetadataNotFoundError 这个错误会在每次修改实体类后触发，这里直接重启服务
+          // 目前暂无法修复这个问题，如果有人知道如何修复，欢迎 PR
+          if (!(e instanceof EntityMetadataNotFoundError))
+            console.error(e)
+          server.restart(true)
+        }
+      })
+      return this
     },
   }
   return ctx
