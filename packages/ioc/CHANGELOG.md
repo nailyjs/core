@@ -1,5 +1,11 @@
 # @nailyjs/ioc
 
+## 2.0.4
+
+### Patch Changes
+
+- a5a5a5a: feat: add starter service
+
 ## 2.0.3
 
 ### Patch Changes

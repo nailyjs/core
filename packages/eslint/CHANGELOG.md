@@ -1,5 +1,13 @@
 # @nailyjs/eslint
 
+## 2.0.6
+
+### Patch Changes
+
+- Updated dependencies [a5a5a5a]
+  - @nailyjs/ioc@2.0.4
+  - @nailyjs/config@2.0.5
+
 ## 2.0.5
 
 ### Patch Changes

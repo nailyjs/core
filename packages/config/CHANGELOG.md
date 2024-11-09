@@ -1,5 +1,12 @@
 # @nailyjs/config
 
+## 2.0.5
+
+### Patch Changes
+
+- Updated dependencies [a5a5a5a]
+  - @nailyjs/ioc@2.0.4
+
 ## 2.0.4
 
 ### Patch Changes
