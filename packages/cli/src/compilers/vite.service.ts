@@ -46,21 +46,21 @@ export class ViteService implements Compiler {
             if (this.rpcOptions) await useViteDevServer(this.rpcOptions, server).run()
           },
 
-          handleHotUpdate: (ctx) => {
+          handleHotUpdate: async (ctx) => {
             if (this.rpcOptions === false) return
-            const moduleFilePaths = ctx.modules.map(mod => mod.file)
-            // 过滤掉空文件
-              .filter(file => file)
+            const moduleFilePaths = ctx.modules
             // 过滤掉不在 watchDirs 中的文件
-              .filter(file => createFilter((this.rpcOptions as Omit<Options<string>, 'build'>).watchDirs || ['./backend/**/*'])(file)) as string[]
+              .filter(file => createFilter((this.rpcOptions as Omit<Options<string>, 'build'>).watchDirs || ['./backend/**/*'])(file.file))
+            if (moduleFilePaths.length === 0) return
 
-            if (moduleFilePaths.length === 0)
-              return
+            const serverEntry = this.rpcOptions.serverEntry || path.resolve('./backend/main.ts')
+            const moduleNode = await ctx.server.moduleGraph.getModuleByUrl(serverEntry)
+            await ctx.server.reloadModule(moduleNode)
+            await ctx.server.restart(true)
 
-            ctx.server.moduleGraph.invalidateAll()
-            ctx.server.ws.send({ type: 'full-reload' })
             if (ctx.server.config.clearScreen !== false) console.clear()
-            hmrLogger(moduleFilePaths.map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
+            hmrLogger(moduleFilePaths.map(file => file.file)
+              .map(file => path.isAbsolute(file) ? path.relative(cwd(), file) : file))
             return []
           },
         },
