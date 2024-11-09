@@ -26,13 +26,17 @@ export class DataSourceService {
 
   async getDataSource(container: Container, transient: boolean = false): Promise<DataSource> {
     const map = container.getContainer()
-    if (map.has(DataSource) && transient !== false) return (map.get(DataSource) as ConstantWrapper<DataSource>).getValue()
+    if (map.has(DataSource) && transient !== false) {
+      const inMapDataSource = (map.get(DataSource) as ConstantWrapper<DataSource>).getValue()
+      if (inMapDataSource) inMapDataSource.destroy()
+      map.delete(DataSource)
+    }
 
     if (this._customDataSourceService && typeof this._customDataSourceService.configure === 'function') {
       const configuredDataSource = await this._customDataSourceService.configure(this._typeOrmConfiguration)
-      return this.createDataSourceWrapper(configuredDataSource, container).getValue()
+      return this.createDataSourceWrapper(configuredDataSource, container).save().getValue()
     }
-    return this.createDataSourceWrapper(this._typeOrmConfiguration, container).getValue()
+    return this.createDataSourceWrapper(this._typeOrmConfiguration, container).save().getValue()
   }
 
   static getInstance(container: Container): DataSourceService {
