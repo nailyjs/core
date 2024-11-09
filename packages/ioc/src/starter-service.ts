@@ -9,3 +9,5 @@ export abstract class StartService {
     return container.createClassWrapper(this as any as Class).save().getClassFactory().getOrCreateInstance()
   }
 }
+
+export const StarterService = StartService
