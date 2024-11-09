@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { cwd } from 'node:process'
-import { IBackendAdapter, IHandlerContext } from '@nailyjs/backend'
+import { HandlerRequest, IBackendAdapter } from '@nailyjs/backend'
 import { sendResponse, transformIncomingMessageToRequest } from '@nailyjs/backend/node-adapter'
 import { Container } from '@nailyjs/ioc'
 import { RpcBootstrap, RpcControllerScanner, RpcHandlerContext } from '@nailyjs/rpc'
@@ -25,13 +25,10 @@ class ViteDevHttpAdapter implements IBackendAdapter {
     return mod[this.entryExport] as RpcBootstrap
   }
 
-  private container = new Container()
-
-  setupHandle(handlerContext: IHandlerContext): void {
+  setupHandle(): void {
     this.server.middlewares.use(async (req, res, next) => {
       const bootstrap = await this.loadEntryModule()
       await bootstrap.getPluginRunner().runBeforeRun()
-      this.container.replaceContainer(bootstrap.getContainer())
 
       if (req.method === 'GET')
         return next()
@@ -39,18 +36,16 @@ class ViteDevHttpAdapter implements IBackendAdapter {
         return next()
 
       // 每次请求都重新实例化 RpcHandlerContext
-      handlerContext = new RpcHandlerContext(new RpcControllerScanner(this.container).getRpcControllerWrapper())
+      const handlerContext = this.createContext(bootstrap)
       const request = await transformIncomingMessageToRequest(req).getRequest()
-      const response = await handlerContext.handle(request)
+      const response = await handlerContext.handle(request as HandlerRequest)
       return await sendResponse(response, res).send()
     })
   }
 
-  async runWithViteServer(): Promise<void> {
-    const controllerScanner = new RpcControllerScanner(this.container)
-    // 第一次启动时，需要手动调用 setupHandle 来设置 handler
-    const context = new RpcHandlerContext(controllerScanner.getRpcControllerWrapper())
-    this.setupHandle(context)
+  private createContext(container: Container): RpcHandlerContext {
+    const controllerScanner = new RpcControllerScanner(container)
+    return new RpcHandlerContext(controllerScanner.getRpcControllerWrapper())
   }
 }
 
@@ -64,7 +59,7 @@ export function useViteDevServer(options: Options, server: ViteDevServer): ViteD
 
   const ctx: ViteDevServerReturn = {
     async run(): Promise<ViteDevServerReturn> {
-      await new ViteDevHttpAdapter(server, serverEntry, entryExport).runWithViteServer()
+      new ViteDevHttpAdapter(server, serverEntry, entryExport).setupHandle()
       return ctx
     },
   }
