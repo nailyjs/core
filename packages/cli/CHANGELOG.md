@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.16
+
+### Patch Changes
+
+- 61195e9: feat: try to fix hmr
+
 ## 2.0.15
 
 ### Patch Changes
