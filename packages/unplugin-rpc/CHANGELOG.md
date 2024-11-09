@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.18
+
+### Patch Changes
+
+- f69bd44: fix(unplugin-rpc): fix typeorm problem
+
 ## 2.0.17
 
 ### Patch Changes
