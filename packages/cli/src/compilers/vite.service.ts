@@ -52,10 +52,6 @@ export class ViteService implements Compiler {
             // 过滤掉不在 watchDirs 中的文件
               .filter(file => createFilter((this.rpcOptions as Omit<Options<string>, 'build'>).watchDirs || ['./backend/**/*'])(file.file))
             if (moduleFilePaths.length === 0) return
-
-            const serverEntry = this.rpcOptions.serverEntry || path.resolve('./backend/main.ts')
-            const moduleNode = await ctx.server.moduleGraph.getModuleByUrl(serverEntry)
-            await ctx.server.reloadModule(moduleNode)
             await ctx.server.restart(true)
 
             if (ctx.server.config.clearScreen !== false) console.clear()
