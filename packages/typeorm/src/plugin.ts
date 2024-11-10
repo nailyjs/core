@@ -9,13 +9,7 @@ class TypeOrmPluginImpl implements BackendPlugin {
 
   async beforeRun(container: Container): Promise<void> {
     const service = DataSourceService.getInstance(container)
-    await service.getDataSource(container, this.transient)
-  }
-
-  async beforeHandle(_handlerContext: Request, container: Container): Promise<void> {
-    const service = DataSourceService.getInstance(container)
-    const dataSource = await service.getDataSource(container, this.transient)
-    if (!dataSource.isInitialized) await dataSource.initialize()
+    await service.getDataSource()
   }
 }
 

@@ -1,5 +1,5 @@
 import { Value } from '@nailyjs/config'
-import { Autowired, ClassWrapper, ConstantWrapper, Container, Injectable, Optional } from '@nailyjs/ioc'
+import { Autowired, ClassWrapper, Container, Injectable, Optional } from '@nailyjs/ioc'
 import { DataSource, type DataSourceOptions } from 'typeorm'
 
 export const CustomDataSource = '__naily_typeorm_custom_datasource__'
@@ -11,36 +11,31 @@ export interface CustomDataSource {
 export class DataSourceService {
   constructor(
     @Value('naily.typeorm')
-    private readonly _typeOrmConfiguration: DataSourceOptions,
+    private readonly typeorm: DataSourceOptions,
+    private readonly container: Container,
     @Optional()
     @Autowired(CustomDataSource)
     private readonly _customDataSourceService?: CustomDataSource,
   ) {}
 
-  private createDataSourceWrapper(options: DataSourceOptions, container: Container): ConstantWrapper<DataSource> {
-    // eslint-disable-next-line ts/ban-ts-comment
-    // @ts-expect-error
-    return container.createConstantWrapper(DataSource, new DataSource(options || {})).save()
+  async getDataSourceOptions(): Promise<DataSourceOptions> {
+    if (this._customDataSourceService && typeof this._customDataSourceService.configure === 'function') {
+      return await this._customDataSourceService.configure(this.typeorm)
+    }
+    return this.typeorm
   }
 
-  async getDataSource(container: Container, transient: boolean = false): Promise<DataSource> {
-    const map = container.getContainer()
-    if (map.has(DataSource) && transient !== false) {
-      const inMapDataSource = (map.get(DataSource) as ConstantWrapper<DataSource>).getValue()
-      if (inMapDataSource && inMapDataSource.isInitialized) inMapDataSource.destroy()
-      map.delete(DataSource)
-    }
-
-    if (this._customDataSourceService && typeof this._customDataSourceService.configure === 'function') {
-      const configuredDataSource = await this._customDataSourceService.configure(this._typeOrmConfiguration)
-      return this.createDataSourceWrapper(configuredDataSource, container).save().getValue()
-    }
-    return this.createDataSourceWrapper(this._typeOrmConfiguration, container).save().getValue()
+  async getDataSource(): Promise<DataSource> {
+    const options = await this.getDataSourceOptions()
+    const dataSource = new DataSource(options)
+    await dataSource.initialize()
+    this.container.createConstantWrapper(DataSource, dataSource).save()
+    return dataSource
   }
 
   static getInstance(container: Container): DataSourceService {
-    const dataSource = container.getContainer().get(DataSourceService) as ClassWrapper<CustomDataSource>
-    if (dataSource) return dataSource.getClassFactory().getOrCreateInstance()
-    return container.createClassWrapper(DataSourceService).save().getClassFactory().getOrCreateInstance()
+    const factoryWrapper = container.getContainer().get(DataSourceService) as ClassWrapper<DataSourceService>
+    if (!factoryWrapper || factoryWrapper.wrapperType !== 'class') throw new Error('DataSourceFactory not found')
+    return factoryWrapper.getClassFactory().getOrCreateInstance()
   }
 }
