@@ -1,5 +1,5 @@
 import type { Class, ClassWrapper } from '@nailyjs/ioc'
-import type { IBackendAdapter } from './types'
+import type { BackendPlugin, IBackendAdapter } from './types'
 import { AbstractBootstrap } from '@nailyjs/ioc'
 import { ControllerMethodExecutor } from './services/controller-method-executor'
 import { ControllerScanner } from './services/controller-scanner'
@@ -47,6 +47,11 @@ export class BackendBootstrap extends AbstractBootstrap {
     return this.createClassWrapper(ControllerMethodExecutor)
       .getClassFactory()
       .getOrCreateInstance()
+  }
+
+  public override use(plugin: BackendPlugin | BackendPlugin[]): this {
+    super.use(plugin)
+    return this
   }
 
   public override async run(port: number, callback?: () => any): Promise<any> {

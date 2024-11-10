@@ -16,4 +16,8 @@ export class PluginRunner {
     for (const plugin of this.pluginsContainer)
       if (plugin.beforeRun) await plugin.beforeRun(this.bootstrap)
   }
+
+  getPluginContainer(): readonly IocPlugin[] {
+    return this.pluginsContainer
+  }
 }

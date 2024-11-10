@@ -1,4 +1,4 @@
-import type { Class, ErrorHandler, InjectableOptions } from '@nailyjs/ioc'
+import type { Class, Container, ErrorHandler, InjectableOptions, IocPlugin } from '@nailyjs/ioc'
 import type { IHandlerContext } from './contexts/handler-context'
 import { RestFilterContext } from './contexts'
 
@@ -40,4 +40,7 @@ export interface HandlerParamMetadata {
 }
 export interface RestErrorHandler extends ErrorHandler {
   catch(error: any, ctx: RestFilterContext): any
+}
+export interface BackendPlugin extends IocPlugin {
+  beforeHandle?(handlerContext: Request, container: Container): void | Promise<void> | Promise<Response> | Response
 }

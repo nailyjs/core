@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { cwd } from 'node:process'
-import { HandlerRequest } from '@nailyjs/backend'
+import { BackendPlugin, HandlerRequest } from '@nailyjs/backend'
 import { sendResponse, transformIncomingMessageToRequest } from '@nailyjs/backend/node-adapter'
 import { RpcBootstrap, RpcHandlerContext } from '@nailyjs/rpc'
 import { EntityMetadataNotFoundError } from 'typeorm'
@@ -28,11 +28,20 @@ export function useViteDevServer(options: Options, server: ViteDevServer): ViteD
         if (!req.url.startsWith(bootstrap.getBaseURL()))
           return next()
 
-        await bootstrap.getPluginRunner().runBeforeRun()
+        const pluginRunner = bootstrap.getPluginRunner()
+        await pluginRunner.runBeforeRun()
+        const pluginContainer = pluginRunner.getPluginContainer() as readonly BackendPlugin[]
+
         // 每次请求都重新实例化 RpcHandlerContext
         const request = await transformIncomingMessageToRequest(req).getRequest()
 
         const handlerContext = new RpcHandlerContext(bootstrap.getRpcControllerScanner().getRpcControllerWrapper())
+        for (const plugin of pluginContainer) {
+          if (plugin.beforeHandle && typeof plugin.beforeHandle === 'function') {
+            const result = await plugin.beforeHandle(request, bootstrap)
+            if (result instanceof Response) return await sendResponse(result, res).send()
+          }
+        }
         try {
           const response = await handlerContext.handle(request as HandlerRequest)
           return await sendResponse(response, res).send()
