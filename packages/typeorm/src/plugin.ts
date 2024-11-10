@@ -1,6 +1,6 @@
-import { ClassWrapper, Container, IocPlugin } from '@nailyjs/ioc'
+import type { ClassWrapper, Container, IocPlugin } from '@nailyjs/ioc'
+import type { TypeOrmPluginOptions } from './types'
 import { DataSourceFactory } from './datasource.service'
-import { TypeOrmPluginOptions } from './types'
 
 export class TypeOrmPluginImpl implements IocPlugin {
   name: string = 'naily:typeorm-plugin'
