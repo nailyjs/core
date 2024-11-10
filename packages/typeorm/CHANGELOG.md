@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.17
+
+### Patch Changes
+
+- 806179c: feat(typeorm): split classes & interfaces
+
 ## 2.0.16
 
 ### Patch Changes
