@@ -1,7 +1,7 @@
 {
   "name": "unplugin-rpc",
   "type": "module",
-  "version": "2.0.21",
+  "version": "2.0.22",
   "description": "Bring naily.js JSON-RPC 2.0 to your vite project and more.",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {
@@ -55,6 +55,7 @@
     "@rollup/pluginutils": "^5.1.3",
     "@swc/core": "^1.9.1",
     "defu": "^6.1.4",
+    "importx-tsup": "^0.5.2",
     "kleur": "^4.1.5",
     "load-tsconfig": "^0.2.5",
     "typeorm": "^0.3.20",

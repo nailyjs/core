@@ -1,5 +1,11 @@
 # unplugin-rpc
 
+## 2.0.22
+
+### Patch Changes
+
+- 5fd73a0: feat(unplugin-rpc): add preview server
+
 ## 2.0.21
 
 ### Patch Changes
