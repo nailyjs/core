@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.18
+
+### Patch Changes
+
+- 6043fe6: fix(typeorm): remove typeorm/browser
+
 ## 2.0.17
 
 ### Patch Changes
