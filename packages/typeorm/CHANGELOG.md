@@ -1,5 +1,12 @@
 # @nailyjs/typeorm
 
+## 2.0.19
+
+### Patch Changes
+
+- 06a1e94: fix(typeorm): treeshake
+- 4242f4e: fix(typeorm): treeshake
+
 ## 2.0.18
 
 ### Patch Changes
