@@ -1,5 +1,15 @@
 # @nailyjs/typeorm
 
+## 2.0.12
+
+### Patch Changes
+
+- c207ec7: feat: add new beforeHandle hook
+- Updated dependencies [c207ec7]
+  - @nailyjs/backend@2.0.7
+  - @nailyjs/ioc@2.0.5
+  - @nailyjs/config@2.0.6
+
 ## 2.0.11
 
 ### Patch Changes

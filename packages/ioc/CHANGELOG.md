@@ -1,5 +1,11 @@
 # @nailyjs/ioc
 
+## 2.0.5
+
+### Patch Changes
+
+- c207ec7: feat: add new beforeHandle hook
+
 ## 2.0.4
 
 ### Patch Changes

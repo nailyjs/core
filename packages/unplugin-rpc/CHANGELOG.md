@@ -1,5 +1,15 @@
 # unplugin-rpc
 
+## 2.0.21
+
+### Patch Changes
+
+- c207ec7: feat: add new beforeHandle hook
+- Updated dependencies [c207ec7]
+  - @nailyjs/backend@2.0.7
+  - @nailyjs/ioc@2.0.5
+  - @nailyjs/rpc@2.0.7
+
 ## 2.0.20
 
 ### Patch Changes
