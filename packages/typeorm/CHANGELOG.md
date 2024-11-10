@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.13
+
+### Patch Changes
+
+- 8180263: fix: beforeRun
+
 ## 2.0.12
 
 ### Patch Changes
