@@ -1,5 +1,4 @@
-import { MixedList } from 'typeorm'
-import { EntitySchema } from 'typeorm/browser'
+import type { EntitySchema, MixedList } from 'typeorm'
 
 // eslint-disable-next-line ts/no-unsafe-function-type
 export type Entities = MixedList<Function | string | EntitySchema>
