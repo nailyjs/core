@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.16
+
+### Patch Changes
+
+- 8741685: refactor(typeorm): refactor all plugin
+
 ## 2.0.15
 
 ### Patch Changes
