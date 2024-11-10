@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.14
+
+### Patch Changes
+
+- 3d9e23d: fix: hmr
+
 ## 2.0.13
 
 ### Patch Changes
