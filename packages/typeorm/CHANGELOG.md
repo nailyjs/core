@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.20
+
+### Patch Changes
+
+- a84817e: feat(typeorm): add global types
+
 ## 2.0.19
 
 ### Patch Changes

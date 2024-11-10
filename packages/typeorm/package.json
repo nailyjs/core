@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/typeorm",
   "type": "module",
-  "version": "2.0.19",
+  "version": "2.0.20",
   "description": "TypeORM module for naily.js.",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "keywords": [
