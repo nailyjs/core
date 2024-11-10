@@ -1,7 +1,6 @@
 import { Value } from '@nailyjs/config'
 import { Autowired, Container, Injectable, Optional } from '@nailyjs/ioc'
-import { DataSource } from 'typeorm'
-import { DataSourceOptions } from 'typeorm/browser'
+import { DataSource, DataSourceOptions } from 'typeorm'
 import { CustomDataSource } from './custom.protocol'
 import { Entities } from './types'
 
