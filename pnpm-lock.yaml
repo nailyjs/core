@@ -101,6 +101,12 @@ importers:
       '@nailyjs/typeorm':
         specifier: workspace:*
         version: link:../../packages/typeorm
+      '@nailyjs/zod':
+        specifier: workspace:*
+        version: link:../../packages/zod
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
 
   fixtures/vite:
     dependencies:
@@ -401,6 +407,9 @@ importers:
       defu:
         specifier: ^6.1.4
         version: 6.1.4
+      importx-tsup:
+        specifier: ^0.5.2
+        version: 0.5.2(@swc/core@1.9.1)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.6.0)
       kleur:
         specifier: ^4.1.5
         version: 4.1.5
@@ -435,6 +444,25 @@ importers:
       winston:
         specifier: ^3.16.0
         version: 3.16.0
+    devDependencies:
+      tsup:
+        specifier: ^8.3.0
+        version: 8.3.5(@swc/core@1.9.1)(jiti@2.4.0)(postcss@8.4.47)(tsx@4.19.2)(typescript@5.6.3)(yaml@2.6.0)
+
+  packages/zod:
+    dependencies:
+      '@nailyjs/backend':
+        specifier: workspace:*
+        version: link:../backend
+      '@nailyjs/ioc':
+        specifier: workspace:*
+        version: link:../ioc
+      reflect-metadata:
+        specifier: ^0.2.2
+        version: 0.2.2
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       tsup:
         specifier: ^8.3.0
@@ -2806,6 +2834,9 @@ packages:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
 
+  importx-tsup@0.5.2:
+    resolution: {integrity: sha512-Xry9J0pPKOHh7wzlz9zVbpbP3ianTAG2u3tVV4MXJkmjreyz/UxMzfMyL7HVoOKapcam70LO0ZF4PXJCwJ6fCg==}
+
   imurmurhash@0.1.4:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
@@ -4493,6 +4524,37 @@ packages:
       terser:
         optional: true
 
+  vite@5.4.11:
+    resolution: {integrity: sha512-c7jFQRklXua0mTzneGW9QVyxFjUgwcihC4bXEtujIo2ouWCe1Ajt/amn2PCxYnhYfd5k09JX3SB7OYWFKYqj8Q==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      sass-embedded: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+
   vitest@2.1.4:
     resolution: {integrity: sha512-eDjxbVAJw1UJJCHr5xr/xM86Zx+YxIEXGAR+bmnEID7z9qWfoxpHw0zdobz+TQAFOLT+nEXz3+gx6nUJ7RgmlQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -4639,6 +4701,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -5786,13 +5851,13 @@ snapshots:
       chai: 5.1.2
       tinyrainbow: 1.2.0
 
-  '@vitest/mocker@2.1.4(vite@5.4.10(@types/node@22.8.4))':
+  '@vitest/mocker@2.1.4(vite@5.4.11(@types/node@22.8.4))':
     dependencies:
       '@vitest/spy': 2.1.4
       estree-walker: 3.0.3
       magic-string: 0.30.12
     optionalDependencies:
-      vite: 5.4.10(@types/node@22.8.4)
+      vite: 5.4.11(@types/node@22.8.4)
 
   '@vitest/pretty-format@2.1.4':
     dependencies:
@@ -6053,6 +6118,11 @@ snapshots:
   bundle-name@4.1.0:
     dependencies:
       run-applescript: 7.0.0
+
+  bundle-require@5.0.0(esbuild@0.23.1):
+    dependencies:
+      esbuild: 0.23.1
+      load-tsconfig: 0.2.5
 
   bundle-require@5.0.0(esbuild@0.24.0):
     dependencies:
@@ -7132,6 +7202,23 @@ snapshots:
     dependencies:
       parent-module: 1.0.1
       resolve-from: 4.0.0
+
+  importx-tsup@0.5.2(@swc/core@1.9.1)(postcss@8.4.47)(typescript@5.6.3)(yaml@2.6.0):
+    dependencies:
+      bundle-require: 5.0.0(esbuild@0.23.1)
+      debug: 4.3.7(supports-color@5.5.0)
+      esbuild: 0.23.1
+      jiti: 2.4.0
+      pathe: 1.1.2
+      tsup: 8.3.5(@swc/core@1.9.1)(jiti@2.4.0)(postcss@8.4.47)(tsx@4.19.2)(typescript@5.6.3)(yaml@2.6.0)
+      tsx: 4.19.2
+    transitivePeerDependencies:
+      - '@microsoft/api-extractor'
+      - '@swc/core'
+      - postcss
+      - supports-color
+      - typescript
+      - yaml
 
   imurmurhash@0.1.4: {}
 
@@ -8963,7 +9050,7 @@ snapshots:
       cac: 6.7.14
       debug: 4.3.7(supports-color@5.5.0)
       pathe: 1.1.2
-      vite: 5.4.10(@types/node@22.8.4)
+      vite: 5.4.11(@types/node@22.8.4)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -9000,10 +9087,19 @@ snapshots:
       '@types/node': 22.8.4
       fsevents: 2.3.3
 
+  vite@5.4.11(@types/node@22.8.4):
+    dependencies:
+      esbuild: 0.21.5
+      postcss: 8.4.47
+      rollup: 4.24.3
+    optionalDependencies:
+      '@types/node': 22.8.4
+      fsevents: 2.3.3
+
   vitest@2.1.4(@types/node@22.8.4)(@vitest/ui@2.1.4):
     dependencies:
       '@vitest/expect': 2.1.4
-      '@vitest/mocker': 2.1.4(vite@5.4.10(@types/node@22.8.4))
+      '@vitest/mocker': 2.1.4(vite@5.4.11(@types/node@22.8.4))
       '@vitest/pretty-format': 2.1.4
       '@vitest/runner': 2.1.4
       '@vitest/snapshot': 2.1.4
@@ -9019,7 +9115,7 @@ snapshots:
       tinyexec: 0.3.1
       tinypool: 1.0.1
       tinyrainbow: 1.2.0
-      vite: 5.4.10(@types/node@22.8.4)
+      vite: 5.4.11(@types/node@22.8.4)
       vite-node: 2.1.4(@types/node@22.8.4)
       why-is-node-running: 2.3.0
     optionalDependencies:
@@ -9176,5 +9272,7 @@ snapshots:
       yargs-parser: 21.1.1
 
   yocto-queue@0.1.0: {}
+
+  zod@3.23.8: {}
 
   zwitch@2.0.4: {}

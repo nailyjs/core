@@ -22,6 +22,15 @@ export interface BuildOptions {
   swcOptions?: SwcOptions
 }
 
+export interface PreviewOptions {
+  /** @default '/rpc' */
+  baseURL?: string
+  /** @default path.resolve('./dist/backend/main.js') */
+  serverEntry?: string
+  /** @default true */
+  forceColor?: boolean
+}
+
 export interface Options<EntryExport extends string = string> {
   /** @default './backend/main.ts' */
   serverEntry?: string
@@ -38,4 +47,5 @@ export interface Options<EntryExport extends string = string> {
    * Build options.
    */
   build?: BuildOptions
+  preview?: PreviewOptions
 }

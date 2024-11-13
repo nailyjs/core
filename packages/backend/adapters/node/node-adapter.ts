@@ -5,10 +5,15 @@ import * as transformer from './transform'
 
 export class NodeAdapter implements IBackendAdapter {
   private handler: (req: http.IncomingMessage, res: http.ServerResponse) => any
-  private server = http.createServer(async (req, res) => {
-    if (!this.handler) return res.end('No handler')
-    return await this.handler(req, res)
-  })
+  private server: http.Server
+
+  setServer(server: http.Server): void {
+    this.server = server
+  }
+
+  getHandler(): (req: http.IncomingMessage, res: http.ServerResponse) => any {
+    return this.handler
+  }
 
   setupHandle(ctx: IHandlerContext): void | Promise<void> {
     this.handler = async (req, res) => {
@@ -21,6 +26,10 @@ export class NodeAdapter implements IBackendAdapter {
 
   listen(port: number, callback: () => void): Promise<void> {
     return new Promise<void>((resolve) => {
+      this.server = http.createServer(async (req, res) => {
+        if (!this.handler) return res.end('No handler')
+        return await this.handler(req, res)
+      })
       this.server.listen(port, () => {
         if (callback) callback()
         resolve()

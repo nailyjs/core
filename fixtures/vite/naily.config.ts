@@ -14,9 +14,7 @@ export default defineConfig({
     cli: {
       development: {
         using: 'vite',
-        rpc: {
-          serverEntry: './backend/main.ts',
-        },
+        rpc: {},
       },
     },
   },

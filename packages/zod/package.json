@@ -1,0 +1,34 @@
+{
+  "name": "@nailyjs/zod",
+  "type": "module",
+  "version": "2.0.5",
+  "description": "Zod validation in naily.js",
+  "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "watch": "tsup -w",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@nailyjs/backend": "workspace:*",
+    "@nailyjs/ioc": "workspace:*",
+    "reflect-metadata": "^0.2.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsup": "^8.3.0"
+  }
+}

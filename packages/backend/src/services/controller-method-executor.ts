@@ -39,7 +39,6 @@ export class ControllerMethodExecutor {
 
   async setup(): Promise<void> {
     const controllers = this.controllerScanner.scanRestController()
-    for (const controller of controllers)
-      await this.setupHandlers(controller)
+    for (const controller of controllers) await this.setupHandlers(controller)
   }
 }

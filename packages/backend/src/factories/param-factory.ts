@@ -33,7 +33,7 @@ export function createRestControllerParamDecorator(options: CreateRestController
         if (decorator) decorator(target, propertyKey, parameterIndex)
       }
       Reflect.defineMetadata(RestfulControllerHandlerParameterWatermark, [
-        ...(Reflect.getMetadata(RestfulControllerHandlerParameterWatermark, target.constructor) || []),
+        ...(Reflect.getMetadata(RestfulControllerHandlerParameterWatermark, target.constructor === Function ? target : target.constructor) || []),
         decorateContext.getMetadata(),
       ] as HandlerParamMetadata[], target.constructor === Function ? target : target.constructor)
     }) as ParameterDecorator

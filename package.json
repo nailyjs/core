@@ -24,6 +24,7 @@
     "build:es": "pnpm -F @nailyjs/elasticsearch build",
     "build:winston": "pnpm -F @nailyjs/winston build",
     "build:schedule": "pnpm -F @nailyjs/schedule build",
+    "build:zod": "pnpm -F @nailyjs/zod build",
     "play:rpc": "pnpm -F rpc dev",
 
     "lint": "eslint .",

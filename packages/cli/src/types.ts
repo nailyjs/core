@@ -14,7 +14,9 @@ export interface TsupConfiguration extends CliDevelopmentBaseConfiguration {
 export interface ViteConfiguration extends CliDevelopmentBaseConfiguration {
   using?: 'vite'
   vite?: UserConfig
-  rpc?: false | Omit<Options, 'build'>
+  rpc?: false | Omit<Options, 'build' | 'entryExport' | 'serverEntry'>
+  entryExport?: string
+  serverEntry?: string
 }
 
 export type CliDevelopmentConfiguration = TsupConfiguration | ViteConfiguration
@@ -33,6 +35,8 @@ export interface CliIntelliSense extends CliConfiguration {
     vite?: UserConfig
     tsup?: tsup.Options
     rpc?: false | Omit<Options, 'build'>
+    entryExport?: string
+    serverEntry?: string
   }
 }
 

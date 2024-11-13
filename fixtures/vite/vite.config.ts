@@ -12,7 +12,11 @@ export default defineConfig({
 
     Inspect(),
 
-    NailyRpc(),
+    NailyRpc({
+      build: {
+        on: 'closeBundle',
+      },
+    }),
 
     swc.vite({
       jsc: {
