@@ -1,5 +1,15 @@
 # @nailyjs/cli
 
+## 2.0.26
+
+### Patch Changes
+
+- 1c261d4: feat: add files field in all package.json
+- Updated dependencies [1c261d4]
+  - unplugin-rpc@2.0.24
+  - @nailyjs/config@2.0.7
+  - @nailyjs/ioc@2.0.6
+
 ## 2.0.25
 
 ### Patch Changes

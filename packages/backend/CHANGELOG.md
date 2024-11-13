@@ -1,5 +1,13 @@
 # @nailyjs/backend
 
+## 2.0.9
+
+### Patch Changes
+
+- 1c261d4: feat: add files field in all package.json
+- Updated dependencies [1c261d4]
+  - @nailyjs/ioc@2.0.6
+
 ## 2.0.8
 
 ### Patch Changes

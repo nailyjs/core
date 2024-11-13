@@ -1,5 +1,15 @@
 # unplugin-rpc
 
+## 2.0.24
+
+### Patch Changes
+
+- 1c261d4: feat: add files field in all package.json
+- Updated dependencies [1c261d4]
+  - @nailyjs/backend@2.0.9
+  - @nailyjs/ioc@2.0.6
+  - @nailyjs/rpc@2.0.9
+
 ## 2.0.23
 
 ### Patch Changes
