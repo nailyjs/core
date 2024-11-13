@@ -5,4 +5,4 @@
 "@nailyjs/zod": patch
 ---
 
-feat(update): add features
+feat(update): add zod package for validation, update features
