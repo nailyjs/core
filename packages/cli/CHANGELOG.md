@@ -1,5 +1,13 @@
 # @nailyjs/cli
 
+## 2.0.25
+
+### Patch Changes
+
+- 65cb31c: feat(update): add zod package for validation, update features
+- Updated dependencies [65cb31c]
+  - unplugin-rpc@2.0.23
+
 ## 2.0.24
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @nailyjs/backend
 
+## 2.0.8
+
+### Patch Changes
+
+- 65cb31c: feat(update): add zod package for validation, update features
+
 ## 2.0.7
 
 ### Patch Changes

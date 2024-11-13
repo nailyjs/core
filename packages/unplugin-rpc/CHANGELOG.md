@@ -1,5 +1,14 @@
 # unplugin-rpc
 
+## 2.0.23
+
+### Patch Changes
+
+- 65cb31c: feat(update): add zod package for validation, update features
+- Updated dependencies [65cb31c]
+  - @nailyjs/backend@2.0.8
+  - @nailyjs/rpc@2.0.8
+
 ## 2.0.22
 
 ### Patch Changes

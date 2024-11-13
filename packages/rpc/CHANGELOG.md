@@ -1,5 +1,12 @@
 # @nailyjs/rpc
 
+## 2.0.8
+
+### Patch Changes
+
+- Updated dependencies [65cb31c]
+  - @nailyjs/backend@2.0.8
+
 ## 2.0.7
 
 ### Patch Changes
