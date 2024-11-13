@@ -22,7 +22,8 @@
   },
   "files": [
     "dist",
-    "logo.txt"
+    "logo.txt",
+    "src"
   ],
   "scripts": {
     "build": "tsup",

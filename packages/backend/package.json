@@ -23,7 +23,9 @@
     "access": "public"
   },
   "files": [
-    "dist"
+    "adapters",
+    "dist",
+    "src"
   ],
   "scripts": {
     "build": "tsup",
