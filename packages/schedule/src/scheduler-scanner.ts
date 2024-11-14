@@ -1,5 +1,5 @@
 import { ClassWrapper } from '@nailyjs/ioc'
-import { CronMetadata, CronWatermark, IntervalMetadata, TimeoutMetadata, TimeoutWatermark } from './decorators'
+import { CronMetadata, CronWatermark, IntervalMetadata, IntervalWatermark, TimeoutMetadata, TimeoutWatermark } from './decorators'
 import { IntervalMetadataWrapper } from './wrappers'
 import { CronMetadataWrapper } from './wrappers/cron-metadata-wrapper'
 import { TimeoutMetadataWrapper } from './wrappers/timeout-metadata-wrapper'
@@ -32,7 +32,7 @@ export class SchedulerScanner {
   }
 
   getIntervalTasks(): IntervalMetadataWrapper[] {
-    const tasks: IntervalMetadata[] = this.wrapper.getMetadata(TimeoutWatermark) || []
+    const tasks: IntervalMetadata[] = this.wrapper.getMetadata(IntervalWatermark) || []
     return tasks.map(task => new IntervalMetadataWrapper(this, task))
   }
 

@@ -1,5 +1,6 @@
 export * from './cron-expression'
 export * from './decorators'
+export * from './plugin'
 export * from './scheduler.registry'
 export * from './scheduler-executor'
 export * from './scheduler-scanner'

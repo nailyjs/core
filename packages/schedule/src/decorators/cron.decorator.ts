@@ -1,13 +1,8 @@
-import { CronJob, CronJobParams } from 'cron'
+import { CronJobParams } from 'cron'
 import 'reflect-metadata'
 
 export type CronTime = CronJobParams['cronTime']
 export const CronWatermark = '__naily_schedule_cron__'
-
-CronJob.from({
-  cronTime: '',
-  onTick: () => {},
-})
 
 export interface BaseCronOptions {
   unrefTimeout?: boolean
