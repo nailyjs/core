@@ -1,5 +1,11 @@
 # @nailyjs/schedule
 
+## 2.0.7
+
+### Patch Changes
+
+- e2cf0d0: fix(schedule): watermark
+
 ## 2.0.6
 
 ### Patch Changes
