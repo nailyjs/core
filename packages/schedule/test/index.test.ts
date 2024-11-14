@@ -21,6 +21,7 @@ describe('schedule test', () => {
         await this.getPluginRunner().runBeforeRun()
       }
     }
+
     await new Bootstrap().use(SchedulePlugin()).run()
   })
 })
