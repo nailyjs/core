@@ -6,5 +6,5 @@
     "module": "ES2022",
     "moduleResolution": "Bundler"
   },
-  "include": ["src"]
+  "include": ["src", "test", "../../shims.d.ts"]
 }
