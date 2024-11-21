@@ -29,6 +29,8 @@
     "Tokenable",
     "tsup",
     "typeorm",
+    "uncli",
+    "unproject",
     "Wrapperable"
   ],
 
