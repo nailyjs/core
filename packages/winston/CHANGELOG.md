@@ -1,5 +1,11 @@
 # @nailyjs/winston
 
+## 2.0.7
+
+### Patch Changes
+
+- 470b561: feat: update zod & winston
+
 ## 2.0.6
 
 ### Patch Changes
