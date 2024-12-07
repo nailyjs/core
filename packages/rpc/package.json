@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/rpc",
   "type": "module",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "Powerful JSON RPC 2.0 backend for Node.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {
