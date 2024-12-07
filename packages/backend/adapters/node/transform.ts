@@ -140,23 +140,10 @@ export function sendResponse(response: Response, serverResponse: ServerResponse<
     return headers
   }
 
-  function readBody(body: ReadableStream<Uint8Array>): Promise<string> {
-    if (!body) return Promise.resolve('')
-
-    const reader = body.getReader()
-    let result = ''
-    return reader.read().then(function processText({ done, value }) {
-      if (done) {
-        return result
-      }
-      result += new TextDecoder().decode(value)
-      return reader.read().then(processText)
-    })
-  }
-
   async function send(): Promise<ServerResponse<IncomingMessage>> {
     serverResponse.writeHead(response.status, response.statusText, readHeaders(response))
-    return serverResponse.end(await readBody(response.body))
+    const blob = await response.blob()
+    return serverResponse.end(Buffer.from(await blob.arrayBuffer()))
   }
 
   return {

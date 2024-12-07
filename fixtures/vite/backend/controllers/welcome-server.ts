@@ -10,4 +10,8 @@ export class WelcomeServerImpl implements WelcomeServer {
   async sayHello(): Promise<User[]> {
     return this.dataSource.getRepository(User).find()
   }
+
+  async testResponse(url: string): Promise<Response> {
+    return fetch(url)
+  }
 }

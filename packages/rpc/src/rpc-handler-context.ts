@@ -51,6 +51,7 @@ export class RpcHandlerContext implements IHandlerContext {
     if (typeof params !== 'object') return this.handle404()
     if (!Array.isArray(params)) params = Object.values(params)
     const response = await methodFunc.bind(controllerInstance)(...params)
+    if (response instanceof Response) return response
 
     return new Response(JSON.stringify({
       jsonrpc: '2.0',
