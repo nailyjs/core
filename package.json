@@ -25,6 +25,7 @@
     "build:winston": "pnpm -F @nailyjs/winston build",
     "build:schedule": "pnpm -F @nailyjs/schedule build",
     "build:zod": "pnpm -F @nailyjs/zod build",
+    "build:electron": "pnpm -F @nailyjs/electron build",
     "play:rpc": "pnpm -F rpc dev",
     "lint": "eslint .",
     "postinstall": "npx simple-git-hooks && pnpm build",

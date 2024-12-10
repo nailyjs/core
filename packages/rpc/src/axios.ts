@@ -1,8 +1,9 @@
 import type { AxiosInstance } from 'axios'
 import type { RpcServerRequest } from './types'
 import axios from 'axios'
+import { randomUUID } from './utils'
 
-export interface RpcClientReturn {
+export interface AxiosRpcClientReturn {
   request<T extends Record<string, any>>(injectionToken: string | symbol): RpcServerRequest<T>
 }
 
@@ -11,7 +12,7 @@ export interface AxiosClientOptions {
   ssr?: boolean
 }
 
-export function createAxiosClient({ urlOrAxiosInstance = '/', ssr = true }: AxiosClientOptions): RpcClientReturn {
+export function createAxiosClient({ urlOrAxiosInstance = '/', ssr = true }: AxiosClientOptions): AxiosRpcClientReturn {
   function request<T extends Record<string, (...args: any[]) => any>>(symbol: string | symbol): RpcServerRequest<T> {
     function createProxy(path: (string | symbol)[] = []): RpcServerRequest<T> {
       // eslint-disable-next-line ts/ban-ts-comment
@@ -29,11 +30,12 @@ export function createAxiosClient({ urlOrAxiosInstance = '/', ssr = true }: Axio
             },
             data: {
               jsonrpc: '2.0',
-              id: crypto.randomUUID(),
+              id: randomUUID(),
               method: `${symbol.toString()}.${path.join('.')}`,
               params: argArray,
             },
           })
+
           return result.data.result
         },
 

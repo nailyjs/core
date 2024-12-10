@@ -2,9 +2,8 @@ import { defineConfig } from 'tsup'
 
 export default defineConfig({
   entry: {
-    'index': './src/index.ts',
-    'node-adapter': './adapters/node/index.ts',
-    'electron-adapter': './adapters/electron/index.ts',
+    index: './src/index.ts',
+    rpc: './src/rpc.ts',
   },
   dts: true,
   sourcemap: true,

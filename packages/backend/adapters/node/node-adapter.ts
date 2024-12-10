@@ -7,10 +7,6 @@ export class NodeAdapter implements IBackendAdapter {
   private handler: (req: http.IncomingMessage, res: http.ServerResponse) => any
   private server: http.Server
 
-  setServer(server: http.Server): void {
-    this.server = server
-  }
-
   getHandler(): (req: http.IncomingMessage, res: http.ServerResponse) => any {
     return this.handler
   }

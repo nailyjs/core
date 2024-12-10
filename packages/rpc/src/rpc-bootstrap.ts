@@ -34,9 +34,9 @@ export class RpcBootstrap extends BackendBootstrap {
   }
 
   public override async run(port: number, callback?: () => any): Promise<any> {
-    const executor = this.getRpcMethodExecutor()
-    executor.setBackendAdapter(this.getBackendAdapter())
-    executor.setup()
+    this.getRpcMethodExecutor()
+      .setBackendAdapter(this.getBackendAdapter())
+      .setup()
 
     return await this.getBackendAdapter()
       .listen(port, callback)

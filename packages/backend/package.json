@@ -14,6 +14,11 @@
       "types": "./dist/node-adapter.d.ts",
       "import": "./dist/node-adapter.js",
       "require": "./dist/node-adapter.cjs"
+    },
+    "./electron-adapter": {
+      "types": "./dist/electron-adapter.d.ts",
+      "import": "./dist/electron-adapter.js",
+      "require": "./dist/electron-adapter.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -34,6 +39,7 @@
     "prepublishOnly": "tsup"
   },
   "dependencies": {
+    "@nailyjs/electron": "workspace:*",
     "@nailyjs/ioc": "workspace:*",
     "reflect-metadata": "^0.2.2"
   },

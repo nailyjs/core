@@ -4,6 +4,7 @@ export default defineConfig({
   entry: {
     index: './src/index.ts',
     axios: './src/axios.ts',
+    electron: './src/electron.ts',
   },
   dts: true,
   sourcemap: true,
