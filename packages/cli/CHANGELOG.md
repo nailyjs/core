@@ -1,5 +1,11 @@
 # @nailyjs/cli
 
+## 2.0.29
+
+### Patch Changes
+
+- unplugin-rpc@2.0.27
+
 ## 2.0.28
 
 ### Patch Changes

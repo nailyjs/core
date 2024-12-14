@@ -1,5 +1,14 @@
 # @nailyjs/electron
 
+## 2.0.12
+
+### Patch Changes
+
+- 9056131: fix: setupHandle
+- b27586d: fix: body
+  - @nailyjs/backend@2.0.12
+  - @nailyjs/rpc@2.0.12
+
 ## 2.0.11
 
 ### Patch Changes

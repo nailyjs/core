@@ -1,5 +1,11 @@
 # @nailyjs/zod
 
+## 2.0.11
+
+### Patch Changes
+
+- @nailyjs/backend@2.0.12
+
 ## 2.0.10
 
 ### Patch Changes
