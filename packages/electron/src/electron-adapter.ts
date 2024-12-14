@@ -33,7 +33,7 @@ export class ElectronAdapter implements IBackendAdapter {
     ipcMain.handle(this.handlerToken, async (e, data) => {
       const request = new HandlerRequest(this.baseURL, {
         method: 'POST',
-        body: data,
+        body: JSON.stringify(data),
       })
       const response = await handlerContext.handle(request)
       return await response.text()
