@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/electron",
   "type": "module",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "Electron support for naily.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {
@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "watch": "tsup -w"
+    "watch": "tsup -w",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@nailyjs/backend": "workspace:*",

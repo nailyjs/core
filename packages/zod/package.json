@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/zod",
   "type": "module",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "description": "Zod validation in naily.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {

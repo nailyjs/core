@@ -1,5 +1,12 @@
 # @nailyjs/backend
 
+## 2.0.13
+
+### Patch Changes
+
+- Updated dependencies [67c4af5]
+  - @nailyjs/electron@2.0.13
+
 ## 2.0.12
 
 ### Patch Changes

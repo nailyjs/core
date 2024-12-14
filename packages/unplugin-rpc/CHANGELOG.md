@@ -1,5 +1,12 @@
 # unplugin-rpc
 
+## 2.0.28
+
+### Patch Changes
+
+- @nailyjs/backend@2.0.13
+- @nailyjs/rpc@2.0.13
+
 ## 2.0.27
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @nailyjs/electron
 
+## 2.0.13
+
+### Patch Changes
+
+- 67c4af5: fix: release
+  - @nailyjs/backend@2.0.13
+  - @nailyjs/rpc@2.0.13
+
 ## 2.0.12
 
 ### Patch Changes
