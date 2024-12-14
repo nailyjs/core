@@ -31,9 +31,18 @@ export class ElectronAdapter implements IBackendAdapter {
 
   setupHandle(handlerContext: IHandlerContext): void | Promise<void> {
     ipcMain.handle(this.handlerToken, async (e, data) => {
+      let result: any = data
+      try {
+        result = JSON.stringify(data)
+      }
+      // eslint-disable-next-line unused-imports/no-unused-vars
+      catch (_) {
+        result = data
+      }
+
       const request = new HandlerRequest(this.baseURL, {
         method: 'POST',
-        body: JSON.stringify(data),
+        body: result,
       })
       const response = await handlerContext.handle(request)
       return await response.text()
