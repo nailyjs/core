@@ -1,5 +1,13 @@
 # @nailyjs/electron
 
+## 2.0.14
+
+### Patch Changes
+
+- 4e0932c: feat: update rpc
+  - @nailyjs/backend@2.0.14
+  - @nailyjs/rpc@2.0.14
+
 ## 2.0.13
 
 ### Patch Changes
