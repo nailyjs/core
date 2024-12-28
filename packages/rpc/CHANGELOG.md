@@ -1,5 +1,13 @@
 # @nailyjs/rpc
 
+## 2.0.15
+
+### Patch Changes
+
+- 8bcc496: feat: update ssr for rpc
+  - @nailyjs/electron@2.0.15
+  - @nailyjs/backend@2.0.15
+
 ## 2.0.14
 
 ### Patch Changes

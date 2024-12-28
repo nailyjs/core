@@ -1,5 +1,11 @@
 # @nailyjs/typeorm
 
+## 2.0.28
+
+### Patch Changes
+
+- @nailyjs/backend@2.0.15
+
 ## 2.0.27
 
 ### Patch Changes

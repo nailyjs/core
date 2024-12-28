@@ -1,5 +1,13 @@
 # @nailyjs/electron
 
+## 2.0.15
+
+### Patch Changes
+
+- Updated dependencies [8bcc496]
+  - @nailyjs/rpc@2.0.15
+  - @nailyjs/backend@2.0.15
+
 ## 2.0.14
 
 ### Patch Changes
