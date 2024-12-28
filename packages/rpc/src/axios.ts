@@ -12,6 +12,20 @@ export interface AxiosClientOptions {
   ssr?: boolean
 }
 
+export function createEmptyReadonlyProxy(): Record<any, any> {
+  return new Proxy(() => {}, {
+    get() {
+      return createEmptyReadonlyProxy()
+    },
+    apply() {
+      return createEmptyReadonlyProxy()
+    },
+    construct() {
+      return createEmptyReadonlyProxy()
+    },
+  })
+}
+
 export function createAxiosClient({ urlOrAxiosInstance = '/', ssr = true }: AxiosClientOptions): AxiosRpcClientReturn {
   function request<T extends Record<string, (...args: any[]) => any>>(symbol: string | symbol): RpcServerRequest<T> {
     function createProxy(path: (string | symbol)[] = []): RpcServerRequest<T> {
@@ -20,7 +34,7 @@ export function createAxiosClient({ urlOrAxiosInstance = '/', ssr = true }: Axio
       return new Proxy(async () => {}, {
         async apply(target, thisArg, argArray) {
           // If not in client environment, return a dummy async function
-          if (ssr === true) return Promise.resolve()
+          if (ssr === true) return createEmptyReadonlyProxy()
 
           const result = await (typeof urlOrAxiosInstance === 'object' ? urlOrAxiosInstance : axios)({
             method: 'POST',
