@@ -12,7 +12,7 @@ export class RpcHandlerContext implements IHandlerContext {
     return new Response(JSON.stringify({
       jsonrpc: '2.0',
       error: {
-        code: 404,
+        code: -32601,
         message: 'Method not found',
       },
       id: randomUUID(),
@@ -27,7 +27,7 @@ export class RpcHandlerContext implements IHandlerContext {
     return new Response(JSON.stringify({
       jsonrpc: '2.0',
       error: {
-        code: 500,
+        code: -32000,
         message: 'Internal server error',
       },
       id: randomUUID(),
@@ -42,8 +42,8 @@ export class RpcHandlerContext implements IHandlerContext {
     try {
       return await request.json() || {}
     }
+    // eslint-disable-next-line unused-imports/no-unused-vars
     catch (error) {
-      ;(() => error)()
       return {}
     }
   }
