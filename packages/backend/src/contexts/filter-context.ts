@@ -1,11 +1,6 @@
 import type { IHandlerRequest } from '../handler-request'
 import { ErrorHandlerContext, ErrorHandlerContextType } from '@nailyjs/ioc'
 
-export interface IFilterContext {
-  getRequest(): IHandlerRequest
-  sendResponse(response: Response): void
-}
-
 declare module '@nailyjs/ioc' {
   interface ErrorHandlerContextType {
     readonly RestFilterContext: unique symbol
