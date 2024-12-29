@@ -1,5 +1,11 @@
 # @nailyjs/backend
 
+## 2.0.17
+
+### Patch Changes
+
+- @nailyjs/electron@2.0.17
+
 ## 2.0.16
 
 ### Patch Changes

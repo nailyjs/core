@@ -1,5 +1,13 @@
 # @nailyjs/rpc
 
+## 2.0.17
+
+### Patch Changes
+
+- b92f386: feat: exports
+  - @nailyjs/electron@2.0.17
+  - @nailyjs/backend@2.0.17
+
 ## 2.0.16
 
 ### Patch Changes
