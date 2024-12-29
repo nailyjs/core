@@ -1,7 +1,7 @@
 {
   "name": "@nailyjs/backend",
   "type": "module",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "description": "Backend module for naily.js",
   "author": "Naily Zero <zero@naily.cc> (https://naily.cc)",
   "exports": {

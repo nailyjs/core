@@ -1,5 +1,12 @@
 # @nailyjs/zod
 
+## 2.0.15
+
+### Patch Changes
+
+- Updated dependencies [b6844d8]
+  - @nailyjs/backend@2.0.16
+
 ## 2.0.14
 
 ### Patch Changes

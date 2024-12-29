@@ -1,5 +1,14 @@
 # @nailyjs/rpc
 
+## 2.0.16
+
+### Patch Changes
+
+- b6844d8: feat: remove IFilterContext from backend, add filter support for rpc package
+- Updated dependencies [b6844d8]
+  - @nailyjs/backend@2.0.16
+  - @nailyjs/electron@2.0.16
+
 ## 2.0.15
 
 ### Patch Changes
