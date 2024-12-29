@@ -1,5 +1,13 @@
 # @nailyjs/rpc
 
+## 2.0.18
+
+### Patch Changes
+
+- 188cea5: chore: setResponse to sendResponse, add success and error sender
+  - @nailyjs/electron@2.0.18
+  - @nailyjs/backend@2.0.18
+
 ## 2.0.17
 
 ### Patch Changes
